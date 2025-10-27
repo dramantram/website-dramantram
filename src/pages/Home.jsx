@@ -75,7 +75,7 @@ const Home = () => {
       </section>
 
       {/* Specialization Section */}
-      <section>
+      <section className="specialization-sec">
         {/* UPPER Section */}
         <section className="svc-band">
           <div className="svc-inner">
@@ -184,9 +184,8 @@ const Home = () => {
           {/* MIDDLE: Heading + copy + CTA */}
           <div className="ai-col ai-mid">
             <h2 className="ai-head">
-              A locally set up
-              <br />
-              global creative
+              A locally set up <br />
+              global creative {""}
               <br />
               agency
             </h2>

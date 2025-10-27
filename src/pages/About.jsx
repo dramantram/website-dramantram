@@ -102,8 +102,8 @@ const About = () => {
           {/* Left Section */}
           <div className="col-lg-6 col-12 philosophies-left">
             <h2>
-              Our <br />
-              Philosophies
+              Our
+              <br /> Philosophies
             </h2>
             <div className="philosophies-text">
               <p>BOLD</p>
@@ -137,14 +137,14 @@ const About = () => {
 
       {/* Teams Section */}
       <div className="team-section">
-        <div className="container-fluid">
+        <div className="container-fluid container-fluid-custom">
           <div className="row g-0">
             {/* Left Sidebar */}
             <div className="col-lg-2 team-sidebar">
               <div className="sidebar-content">
                 <h1 className="team-title">
                   Our
-                  <br />
+                  <br /> {""}
                   Team
                 </h1>
                 <p className="team-description">
@@ -158,7 +158,7 @@ const About = () => {
                 </p>
                 <a href="#" className="join-team-link">
                   Join Our Talented Team
-                  <span className="arrow">›</span>
+                  <span className="ab-arrow">›</span>
                 </a>
               </div>
             </div>

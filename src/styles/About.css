@@ -10,8 +10,9 @@
       rgba(120, 0, 0, 0.35) 25%,
       rgba(0, 0, 0, 0) 55%
     ),
-    #000; /* Optional: Add gradient background for more styling */
+    #000;
   color: white;
+  position: relative;
 }
 
 .discussion-container::after {
@@ -50,6 +51,8 @@
   flex: 1;
   max-width: 50%;
   padding-right: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 .discussion-left h2 {
@@ -61,7 +64,7 @@
 }
 
 .discussion-left h2 span {
-  color: #ffe600; /* Highlight the "Entrepreneurship" part */
+  color: #ffe600;
 }
 
 .discussion-left p {
@@ -91,29 +94,27 @@
   background-color: #f7c800;
 }
 
-/* Discussion Right (Image) */
 .discussion-right {
   flex: 1;
   max-width: 50%;
   margin-right: 0px;
+  position: relative;
+  z-index: 2;
 }
 
 .discussion-right img {
   width: 90%;
   height: auto;
-  border-radius: 10px; /* Optional: Add rounded corners */
+  border-radius: 10px;
 }
 
 /* Philosophy */
-
-/* Container styling */
 .philosophies-container {
   color: black;
   position: relative;
   padding-top: 0px;
 }
 
-/* Add subtle divider lines between columns */
 .philosophies-container .row {
   position: relative;
 }
@@ -128,18 +129,15 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Leftmost vertical line */
 .philosophies-container .row::before {
-  left: 2.5%; /* aligns with Bootstrap’s gutter (approx col-1 space) */
+  left: 2.5%;
   height: 800px;
 }
 
-/* Rightmost vertical line */
 .philosophies-container .row::after {
   right: 2.5%;
 }
 
-/* Each column gets its own internal divider (except last) */
 .philosophies-left {
   position: relative;
   border-right: 2px solid rgba(0, 0, 0, 0.1);
@@ -149,7 +147,6 @@
   padding-bottom: 50px;
 }
 
-/* Adjust left column content */
 .philosophies-left h2 {
   font-size: 42px;
   margin-bottom: 80px;
@@ -167,7 +164,6 @@
   font-family: "Russo One", sans-serif;
 }
 
-/* Right Section 1 */
 .philosophies-right {
   padding-left: 30px;
   padding-right: 30px;
@@ -184,7 +180,6 @@
   padding-right: 15px;
 }
 
-/* Right Section 2 */
 .philosophies-right-2 {
   font-size: 19px;
   line-height: 1.7;
@@ -260,7 +255,7 @@
   transform: translateX(5px);
 }
 
-.arrow {
+.ab-arrow {
   margin-left: 8px;
   font-size: 1.5rem;
 }
@@ -332,7 +327,102 @@
   color: #0077b5;
 }
 
+/* Responsive Styles */
+
+/* Tablet and below (max-width: 991px) */
 @media (max-width: 991px) {
+  /* Discussion Section */
+  .discussion-container {
+    padding: 30px 20px;
+  }
+
+  .discussion-left,
+  .discussion-right {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .discussion-left h2 {
+    font-size: 2rem;
+    margin-left: 20px;
+  }
+
+  .discussion-left p {
+    font-size: 18px;
+    line-height: 24px;
+    margin-left: 20px;
+    padding-right: 20px;
+    margin-top: 30px;
+  }
+
+  .btn-connect {
+    margin-left: 20px;
+  }
+
+  .discussion-right {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .discussion-right img {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  /* Philosophies Section */
+  .philosophies-container .row::before {
+    height: auto;
+  }
+
+  .philosophies-left {
+    border-right: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+
+  .philosophies-left h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+  }
+
+  .philosophies-text p {
+    font-size: 28px;
+    margin-left: 20px;
+  }
+
+  .philosophies-right {
+    border-right: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+  }
+
+  .philosophies-right p {
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .philosophies-right-2 {
+    padding: 30px 20px;
+  }
+
+  .phy-p-r,
+  .phy-p-rr {
+    margin-top: 0;
+    font-size: 22px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .phy-p-rr {
+    margin-top: 20px;
+  }
+
+  /* Team Section */
   .team-sidebar {
     min-height: auto;
     padding: 40px 30px;
@@ -348,7 +438,100 @@
   }
 }
 
+/* Mobile (max-width: 767px) */
 @media (max-width: 767px) {
+  /* Discussion Section */
+  .discussion-container {
+    padding: 20px 15px;
+  }
+
+  .discussion-container .row {
+    flex-direction: column;
+  }
+
+  .discussion-left {
+    order: 1;
+  }
+
+  .discussion-right {
+    order: 2;
+  }
+
+  .discussion-left h2 {
+    font-size: 1.75rem;
+    margin-left: 10px;
+  }
+
+  .discussion-left p {
+    font-size: 16px;
+    line-height: 22px;
+    margin-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+  }
+
+  .btn-connect {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .discussion-right {
+    margin-top: 30px;
+  }
+
+  .discussion-right img {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Philosophies Section */
+  .philosophies-container .row::before,
+  .philosophies-container .row::after {
+    display: none;
+  }
+
+  .philosophies-left {
+    border-left: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 30px 15px;
+  }
+
+  .philosophies-left h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+  }
+
+  .philosophies-text p {
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  .philosophies-right {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 15px;
+  }
+
+  .philosophies-right p {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .philosophies-right-2 {
+    padding: 20px 15px;
+  }
+
+  .phy-p-r,
+  .phy-p-rr {
+    font-size: 18px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* Team Section */
   .team-card {
     min-height: 400px;
   }
@@ -357,4 +540,70 @@
     width: 160px;
     height: 160px;
   }
+
+  .team-sidebar {
+    padding: 30px 20px;
+  }
+
+  .team-title {
+    font-size: 2rem;
+  }
+
+  .team-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .discussion-left h2 {
+    font-size: 1.5rem;
+  }
+
+  .discussion-left p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .btn-connect {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    height: 40px;
+  }
+
+  .discussion-right {
+    padding-top: 40px;
+  }
+
+  .discussion-right img {
+    width: 100%;
+  }
+
+  .philosophies-left h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .philosophies-text p {
+    font-size: 20px;
+  }
+
+  .phy-p-r,
+  .phy-p-rr {
+    font-size: 16px;
+  }
+
+  .team-title {
+    font-size: 1.75rem;
+  }
+
+  .team-image {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.container-fluid-custom {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }

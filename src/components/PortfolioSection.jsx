@@ -64,7 +64,14 @@ const PortfolioSection = () => {
           <Col md={11} className="ms-auto right-lower">
             <Row className="g-4">
               {portfolioItemsRow2.map((item) => (
-                <Col key={item.id} xs={2} sm={4} lg={3}>
+                <Col
+                  key={item.id}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  className="item-row-2"
+                >
                   <PortfolioItem imageSrc={item.imageSrc} />
                 </Col>
               ))}

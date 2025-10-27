@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import ServicesPage from "./pages/ServicesPage.jsx";
 import Contact from "./pages/Contact.jsx";
-// import Portfolio from "./pages/Portfolio.jsx";
+import PortfolioPage from "./pages/PortfolioPage.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +17,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<ServicesPage />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/portfolio" element={<PortfolioPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

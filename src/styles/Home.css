@@ -1,70 +1,63 @@
-/* Home Page CSS */
+/* Home Page CSS - Fully Responsive */
 
-/* Import your fonts first */
+/* Import fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kalam:wght@300;400;700&family=Russo+One&display=swap");
 
-/* Set the overall background on the body */
+/* ===== INTRO SECTION ===== */
 .intro-section {
   background-color: black;
 }
 
-/* This is your content wrapper with the dark reddish-brown background */
 .main-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  /* Apply the hex code background here */
+  min-height: 100vh;
   background-color: #28120c;
-  color: #fff; /* Ensures all child text is white by default */
+  color: #fff;
   background-image: radial-gradient(
     circle at bottom left,
     rgb(184, 0, 0),
     rgba(255, 0, 0, 0) 60%
-  ); /* Red gradient bottom-left */
-  background-position: bottom left; /* Position the start of the gradient */
-  background-size: 600px 450px; /* Make it fill the area */
+  );
+  background-position: bottom left;
+  background-size: 600px 450px;
   background-repeat: no-repeat;
+  padding: 20px;
 }
 
-/* The left and right sides will inherit the main-content background */
 .left-side,
 .right-side {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* This will center your SVG */
+  align-items: center;
   padding: 20px;
-  /* DO NOT set a background color here, let it inherit from .main-content */
 }
 
 .right-side {
-  align-items: flex-start; /* Corrected to align text to the left */
+  align-items: flex-start;
 }
-
-/* Other CSS rules */
 
 h1 {
   font-family: "Russo One", sans-serif;
-  /* No need to set a background color here */
 }
 
-/* Corrected selectors to target your text */
 .headText {
-  /* This is the class for your <p> tag */
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-size: 1.5rem; /* Example size */
+  font-size: clamp(1rem, 3vw, 1.5rem);
   line-height: 1.2;
+  margin-bottom: 10px;
 }
 
 .heading {
-  /* This is the class for your <h1> tag */
   font-family: "Russo One", sans-serif;
   font-weight: 400;
-  font-size: 3rem; /* Example size */
+  font-size: clamp(1.5rem, 5vw, 3rem);
   margin-top: 10px;
+  line-height: 1.2;
 }
 
 .btn-connect {
@@ -75,21 +68,53 @@ h1 {
   border: none !important;
   border-left: 1px solid rgb(251, 255, 0) !important;
   border-radius: 0 !important;
-  padding: 10px;
-  padding-left: 20px;
+  padding: 10px 20px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  display: inline-block;
 }
 
+/* Intro Section Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+    background-size: 400px 300px;
+  }
+
+  .left-side,
+  .right-side {
+    width: 100%;
+    align-items: center;
+  }
+
+  .right-side {
+    align-items: center;
+    text-align: center;
+  }
+
+  .headText br,
+  .heading br {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    background-size: 300px 250px;
+    padding: 30px 15px;
+  }
+  .btn-connect {
+    height: 50px;
+    /* padding-top: -20px; */
+  }
+  .intro-section {
+    padding: 0px 0px;
+  }
+}
+
+/* ===== PORTFOLIO SECTION ===== */
 .portfolio {
-  /* Apply the hex code background here */
-  /* color: #000000; /* Ensures all child text is white by default */
-  /* background-image: radial-gradient(
-    circle at top left,
-    rgb(184, 0, 0),
-    rgba(255, 0, 0, 0) 60% 
-  ); /* Red gradient bottom-left */
-  /*background-position: top left;  Position the start of the gradient 
-  background-size: 600px 450px;  Make it fill the area 
-  background-repeat: no-repeat; */
   background-color: black;
   background-image: radial-gradient(
     circle at top left,
@@ -98,15 +123,35 @@ h1 {
   );
   background-size: 600px 450px;
   background-repeat: no-repeat;
+  padding: 40px 20px;
 }
 
+@media (max-width: 768px) {
+  .portfolio {
+    background-size: 400px 300px;
+    padding: 30px 15px;
+  }
+}
+
+/* ===== CLIENTS SECTION ===== */
 .clients {
   background-color: black;
-  padding: 50px;
+  padding: 0px 20px;
 }
 
-/* SPECIALIZATION Section UPPER */
-/* ----- Section base ----- */
+@media (max-width: 768px) {
+  .clients {
+    padding: 0px 15px;
+  }
+}
+
+/* ===== SPECIALIZATION UPPER SECTION ===== */
+
+.specialization-sec {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
 .svc-band {
   position: relative;
   width: 100%;
@@ -115,12 +160,10 @@ h1 {
   overflow: hidden;
 }
 
-/* red glow + hairline vertical grid using layered backgrounds */
 .svc-band::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* Red glow centered slightly right like the reference */
   background: radial-gradient(
       100% 200% at 50% 0%,
       rgba(180, 0, 0, 0.6) 0%,
@@ -132,7 +175,6 @@ h1 {
   z-index: 0;
 }
 
-/* ultra thin column lines at 0%, 25%, 50%, 75%, 100% */
 .svc-band::after {
   content: "";
   position: absolute;
@@ -165,66 +207,60 @@ h1 {
   z-index: 1;
 }
 
-/* ----- Inner layout: 4 equal columns, 1 row (tall band) ----- */
 .svc-inner {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
-  min-height: 220px; /* matches screenshot height */
-  padding: 22px 24px; /* edge breathing room like reference */
+  min-height: 220px;
+  padding: 22px 24px;
+  gap: 20px;
 }
 
-/* LEFT title spans first two columns */
 .svc-title {
   grid-column: 1 / span 2;
   margin: 0;
   font-family: "Russo One", system-ui, -apple-system, Segoe UI, Roboto,
     sans-serif;
   font-weight: 800;
-  font-size: 32px; /* tuned to reference scale */
+  font-size: clamp(20px, 4vw, 32px);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #d9d9d9; /* metallic light grey */
+  color: #d9d9d9;
   text-align: center;
-  /* margin-top: -50px; */
 }
 
-/* RIGHT container spans col 3-4 */
 .svc-right {
   grid-column: 3 / span 2;
   display: grid;
-  /* grid-template-columns: 1.2fr 1fr 1fr; copy + two metrics */
-  /* column-gap: 28px; */
   align-items: start;
   margin-left: 20px;
 }
 
-/* paragraph column */
 .svc-copy {
   margin: 0;
   color: #cfcfcf;
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   line-height: 1.45;
   max-width: 100ch;
   font-style: "inter";
 }
 
-/* metrics columns */
 .svc-metrics {
   grid-column: 3 / span 2;
   display: grid;
   grid-template-columns: repeat(2, max-content);
   column-gap: 50px;
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 .metric .num {
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 28px);
   font-weight: 800;
-  color: #e23226; /* vivid red like screenshot */
+  color: #e23226;
   letter-spacing: 0.01em;
   line-height: 1.1;
   font-family: "russo one";
@@ -232,47 +268,48 @@ h1 {
 
 .metric .label {
   margin-top: 4px;
-  font-size: 16px;
+  font-size: clamp(13px, 2vw, 16px);
   color: #dcdcdc;
 }
 
-/* ----- Responsive tweaks ----- */
+/* Service Band Responsive */
 @media (max-width: 992px) {
   .svc-inner {
     grid-template-columns: 1fr;
-    row-gap: 16px;
+    row-gap: 20px;
     min-height: unset;
     padding: 28px 20px;
   }
+
   .svc-title {
     grid-column: 1 / -1;
-    font-size: 28px;
+    text-align: left;
   }
+
   .svc-right {
     grid-column: 1 / -1;
-    grid-template-columns: 1fr;
-    row-gap: 16px;
+    margin-left: 0;
   }
+
   .svc-metrics {
-    grid-column: 1;
-    column-gap: 28px;
+    grid-column: 1 / -1;
+    column-gap: 30px;
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .svc-copy br {
+    display: none;
   }
 }
 
 @media (max-width: 520px) {
-  .svc-title {
-    font-size: 24px;
-  }
-  .metric .num {
-    font-size: 24px;
-  }
-  .svc-copy {
-    font-size: 13px;
+  .svc-metrics {
+    column-gap: 20px;
   }
 }
 
-/* SPECIALIZATION Section LOWER */
-/* Base */
+/* ===== SPECIALIZATION LOWER SECTION ===== */
 .cap-wrap {
   background: #000;
   color: #fff;
@@ -280,31 +317,12 @@ h1 {
   overflow: hidden;
 }
 
-/* Subtle red glow on top band (optional; matches your UI tone) */
-.cap-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 120px;
-  /* background: radial-gradient(
-    120% 120% at 60% 0%,
-    rgba(170, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0) 70%
-  ); */
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 3-column grid + hairline borders */
 .cap-grid {
   position: relative;
-  z-index: 0; /* lines sit behind; content sits above */
+  z-index: 0;
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr; /* your 4-col layout */
+  grid-template-columns: 2fr 2fr 2fr;
   min-height: 520px;
-  /* remove these solid borders if you want overlay lines to handle them */
-  /* border-top: 1px solid rgba(255,255,255,0.07);
-     border-bottom: 1px solid rgba(255,255,255,0.07); */
 }
 
 .cap-grid::before,
@@ -318,7 +336,7 @@ h1 {
 .cap-grid::before {
   background: linear-gradient(#ffffff10, #ffffff10) top / 100% 0.25px no-repeat,
     linear-gradient(#ffffff10, #ffffff10) bottom / 100% 0.25px no-repeat;
-  z-index: 1; /* below content */
+  z-index: 1;
 }
 
 .cap-grid::after {
@@ -349,32 +367,30 @@ h1 {
 
 .cap-col {
   position: relative;
-  z-index: 2; /* ensures overlap over the lines */
+  z-index: 2;
   padding: 40px 32px;
-  /* IMPORTANT: no per-column borders anymore */
-  /* border-left: 1px solid rgba(255,255,255,0.07);  <-- remove */
 }
 
-/* LEFT image */
 .cap-left {
   overflow: visible;
   margin-left: 50px;
 }
+
 .cap-hero {
-  width: 150%; /* bigger than its column */
+  width: 150%;
   max-width: none;
-  margin-left: -16px; /* shift across the nearest vertical line */
+  margin-left: -16px;
   border-radius: 12px;
   display: block;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
 }
 
-/* MIDDLE menu */
 .cap-mid {
   display: flex;
   align-items: flex-start;
   margin-left: 250px;
 }
+
 .cap-menu {
   display: flex;
   flex-direction: column;
@@ -382,12 +398,13 @@ h1 {
   gap: 20px;
   padding-top: 6px;
 }
+
 .cap-menu-item {
   all: unset;
   width: 100%;
   cursor: pointer;
   color: #8e8e8e;
-  font-size: 22px;
+  font-size: clamp(16px, 3vw, 22px);
   line-height: 1.35;
   letter-spacing: 0.01em;
   position: relative;
@@ -395,40 +412,44 @@ h1 {
   display: inline-flex;
   align-items: center;
 }
+
 .cap-menu-item:hover {
   color: #bdbdbd;
 }
+
 .cap-menu-item.is-active {
   color: #ffffff;
   font-weight: 600;
 }
+
 .cap-underline {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 68px; /* underline length like screenshot */
+  width: 68px;
   height: 3px;
-  background: #cf2f28; /* red accent */
+  background: #cf2f28;
   border-radius: 2px;
 }
 
-/* RIGHT copy */
 .cap-right {
   display: grid;
-  grid-template-rows: 1fr auto; /* copy takes space, CTA sticks bottom */
+  grid-template-rows: 1fr auto;
   row-gap: 0px;
   margin-left: 130px;
 }
+
 .cap-copy h3 {
   margin: 0 0 18px;
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   font-weight: 600;
   color: #e6e6e6;
 }
+
 .cap-strong {
   color: #ffffff;
   font-family: "inter";
-  font-size: 18;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 500;
 }
 
@@ -439,13 +460,12 @@ h1 {
   display: grid;
   gap: 8px;
   color: #d8d8d8;
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   line-height: 1.4;
   max-width: 36ch;
   font-family: "inter";
 }
 
-/* CTA at bottom with yellow bar and chevron */
 .cap-cta {
   position: relative;
   display: inline-flex;
@@ -453,56 +473,123 @@ h1 {
   gap: 10px;
   text-decoration: none;
   color: #dcdcdc;
-  padding-left: 18px; /* space for accent bar */
-  margin-top: 8px;
+  padding-left: 18px;
+  margin-top: 0px;
+  font-size: clamp(14px, 2vw, 16px);
 }
+
 .cap-cta:hover {
   color: #fff;
 }
+
 .cap-cta-accent {
   position: absolute;
   left: 0;
   height: 35px;
   width: 3px;
-  background: #f6d400; /* yellow accent */
+  background: #f6d400;
   border-radius: 2px;
 }
+
 .cap-chev {
   font-size: 18px;
   line-height: 1;
   transform: translateY(1px);
 }
 
-/* Responsive */
+.explore-btn {
+  display: inline;
+}
+
+/* Capabilities Section Responsive */
+@media (max-width: 1200px) {
+  .cap-left {
+    margin-left: 20px;
+  }
+
+  .cap-mid {
+    margin-left: 100px;
+  }
+
+  .cap-right {
+    margin-left: 50px;
+  }
+}
+
 @media (max-width: 1100px) {
   .cap-grid {
     grid-template-columns: 1fr 1fr;
+    min-height: auto;
   }
+
+  .cap-left {
+    grid-column: 1 / -1;
+    margin-left: 0;
+  }
+
+  .cap-hero {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .cap-mid {
+    margin-left: 0;
+  }
+
   .cap-right {
     border-top: 1px solid rgba(255, 255, 255, 0.07);
-  }
-  .cap-col:nth-child(3) {
-    border-left: 0;
+    margin-left: 0;
   }
 }
+
 @media (max-width: 820px) {
   .cap-grid {
     grid-template-columns: 1fr;
   }
+
   .cap-col {
     border-left: 0 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 30px 20px;
   }
+
   .cap-col:first-child {
     border-top: 0;
   }
+
   .cap-hero {
     border-radius: 10px;
   }
+
+  .cap-menu {
+    gap: 15px;
+  }
+
+  .cap-strong br {
+    display: none;
+  }
 }
 
-/* Agency Intro Section */
-/* Canvas */
+@media (max-width: 480px) {
+  .cap-col {
+    padding: 20px 15px;
+  }
+
+  .cap-menu {
+    gap: 12px;
+  }
+
+  .cap-bullets {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .cap-cta {
+    margin-top: 40px;
+  }
+}
+
+/* ===== AGENCY INTRO SECTION ===== */
 .ai-wrap {
   background: #fff;
   color: #000;
@@ -510,17 +597,15 @@ h1 {
   overflow: hidden;
 }
 
-/* 3 equal visual lanes with left wider; hairlines are decorative */
 .ai-grid {
   position: relative;
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr; /* left a bit wider */
+  grid-template-columns: 1.2fr 1fr 1fr;
   min-height: 520px;
   padding: 56px 40px;
   z-index: 0;
 }
 
-/* Top/bottom hairlines */
 .ai-grid::before {
   content: "";
   position: absolute;
@@ -531,7 +616,6 @@ h1 {
   pointer-events: none;
 }
 
-/* Ultra-thin vertical lines at 33% & 66% */
 .ai-grid::after {
   content: "";
   position: absolute;
@@ -555,23 +639,23 @@ h1 {
   pointer-events: none;
 }
 
-/* Columns sit above lines so they can overlap if needed */
 .ai-col {
   position: relative;
   z-index: 2;
 }
 
-/* LEFT */
 .ai-left {
   align-self: center;
   margin-left: 50px;
 }
+
 .ai-kicker {
   margin: 0 0 16px;
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   color: #3c3c3c;
   font-family: "Raleway";
 }
+
 .ai-stack {
   list-style: none;
   padding: 0;
@@ -579,42 +663,44 @@ h1 {
   display: grid;
   gap: 14px;
 }
+
 .ai-stack li {
   font-family: "Russo One", system-ui, -apple-system, Segoe UI, Roboto,
     sans-serif;
   font-weight: 800;
   letter-spacing: 0.5px;
-  color: #d9d9d9; /* light grey like shot */
-  font-size: 40px;
+  color: #d9d9d9;
+  font-size: clamp(24px, 5vw, 40px);
   line-height: 1;
   text-transform: uppercase;
 }
 
-/* MIDDLE */
 .ai-mid {
   align-self: center;
   padding-left: 40px;
 }
+
 .ai-head {
   margin: 0 0 20px;
-  font-size: 42px;
+  font-size: clamp(28px, 5vw, 42px);
   line-height: 1.1;
   font-weight: 400;
   font-family: "Inter";
 }
+
 .ai-copy {
   margin: 0 0 14px;
   max-width: 42ch;
   color: #4a4a4a;
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   line-height: 1.45;
 }
+
 .ai-copy.small {
   color: #555;
   font-family: "Inter";
 }
 
-/* CTA with tiny red bar + chevron */
 .ai-cta {
   margin-top: 10px;
   display: inline-flex;
@@ -624,7 +710,9 @@ h1 {
   text-decoration: none;
   position: relative;
   padding-left: 16px;
+  font-size: clamp(14px, 2vw, 16px);
 }
+
 .ai-cta-accent {
   position: absolute;
   left: 0;
@@ -633,63 +721,93 @@ h1 {
   background: #e03a2f;
   border-radius: 2px;
 }
+
 .ai-chev {
   color: #e03a2f;
   font-size: 18px;
   transform: translateY(1px);
 }
+
 .ai-cta:hover .ai-chev {
   transform: translateX(2px) translateY(1px);
 }
 
-/* RIGHT metrics */
 .ai-right {
   align-self: center;
   padding-left: 40px;
   display: grid;
   gap: 26px;
 }
+
 .ai-metric .num {
   color: #e03a2f;
   font-weight: 800;
-  font-size: 32px;
+  font-size: clamp(24px, 4vw, 32px);
   line-height: 1.1;
   font-family: "Russo One";
 }
+
 .ai-metric .num .unit {
-  font-size: 22px;
+  font-size: clamp(18px, 3vw, 22px);
   font-weight: 800;
 }
+
 .ai-metric .lbl {
   color: #3a3a3a;
-  font-size: 15px;
+  font-size: clamp(13px, 2vw, 15px);
   margin-top: 4px;
   font-family: "Inter";
 }
 
-/* Responsiveness */
+/* Agency Intro Responsive */
 @media (max-width: 1024px) {
   .ai-grid {
     grid-template-columns: 1fr;
-    row-gap: 28px;
+    row-gap: 40px;
     padding: 40px 24px;
+    min-height: auto;
   }
+
   .ai-grid::after {
-    background: none; /* hide vertical lines on mobile (optional) */
+    background: none;
   }
+
+  .ai-left {
+    margin-left: 0;
+  }
+
   .ai-mid,
   .ai-right {
     padding-left: 0;
   }
-  .ai-stack li {
-    font-size: 34px;
-  }
-  .ai-head {
-    font-size: 36px;
+
+  .ai-head br {
+    display: none;
   }
 }
 
-/* Testimonials Section */
+@media (max-width: 768px) {
+  .ai-grid {
+    padding: 30px 20px;
+    row-gap: 30px;
+  }
+
+  .ai-stack {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-grid {
+    padding: 25px 15px;
+  }
+
+  .ai-right {
+    gap: 20px;
+  }
+}
+
+/* ===== TESTIMONIALS SECTION ===== */
 .testimonial-section {
   background: radial-gradient(
     circle at bottom right,
@@ -699,10 +817,12 @@ h1 {
   min-height: 100vh;
   color: white;
   background-color: black;
+  padding: 40px 0;
 }
 
 .container-fluid {
   padding: 0;
+  max-width: 100%;
 }
 
 .row {
@@ -710,14 +830,13 @@ h1 {
 }
 
 .left-section {
-  /* padding: ; */
   background-color: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-left: 50px;
+  padding: 40px 50px;
 }
 
 .content-wrapper {
@@ -725,7 +844,7 @@ h1 {
 }
 
 .main-heading {
-  font-size: 42px;
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: 1px;
@@ -736,7 +855,7 @@ h1 {
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   line-height: 1.6;
   margin-bottom: 25px;
   font-weight: 300;
@@ -744,7 +863,7 @@ h1 {
 }
 
 .description {
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   line-height: 1.6;
   margin-bottom: 50px;
   font-weight: 300;
@@ -757,20 +876,9 @@ h1 {
   margin-top: 60px;
 }
 
-.quote-mark {
-  font-size: 120px;
-  font-family: "Russo One";
-  line-height: 0.8;
-  opacity: 0.3;
-}
-
-.testimonial-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding: 20px;
+.quote-marks img {
+  max-width: 100%;
+  height: auto;
 }
 
 .testimonial-card {
@@ -779,21 +887,14 @@ h1 {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  max-width: 300px; /* Adjust based on how wide you want your cards to be */
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.1);
-  /* border-radius: 10px; */
+  min-height: 100vh;
 }
 
-.testimonial-card:nth-child(2) {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.testimonial-card:nth-child(3) {
-  background-color: rgba(0, 0, 0, 0);
-}
-
+.testimonial-card:nth-child(2),
+.testimonial-card:nth-child(3),
 .testimonial-card:nth-child(4) {
   background-color: rgba(0, 0, 0, 0);
 }
@@ -805,7 +906,7 @@ h1 {
 }
 
 .card-name {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-family: "Raleway", sans-serif;
   margin-bottom: 10px;
   line-height: 1.3;
@@ -813,7 +914,7 @@ h1 {
 }
 
 .card-role {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
   font-family: "Inter", sans-serif;
   margin-bottom: 30px;
   line-height: 1.3;
@@ -822,7 +923,7 @@ h1 {
 }
 
 .card-title {
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
   line-height: 1.5;
   margin-bottom: 20px;
   opacity: 0.8;
@@ -836,7 +937,7 @@ h1 {
 
 .card-image img {
   width: 100%;
-  max-width: 200px; /* Adjust the image size */
+  max-width: 200px;
   height: auto;
   border-radius: 5px;
   object-fit: cover;
@@ -844,91 +945,156 @@ h1 {
 
 .card-quote {
   font-style: italic;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
   line-height: 1.5;
   opacity: 0.9;
   padding-left: 50px;
   padding-right: 30px;
 }
 
-/* Responsiveness */
-@media (max-width: 1024px) {
+/* Testimonials Responsive */
+@media (max-width: 1200px) {
   .left-section {
-    padding: 40px 24px;
+    padding: 40px 30px;
   }
-  .main-heading {
-    font-size: 36px;
-  }
-  .subtitle {
-    font-size: 12px;
-  }
-  .description {
-    font-size: 12px;
-  }
-  .quote-mark {
-    font-size: 100px;
-  }
-  .card-name {
-    font-size: 1.3rem;
-  }
-  .card-title {
-    font-size: 0.9rem;
-  }
+
+  .card-name,
+  .card-role,
+  .card-image-wrapper,
   .card-quote {
-    font-size: 0.9rem;
+    padding-left: 30px;
+  }
+
+  .card-quote {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .left-section {
+    min-height: auto;
+    padding: 60px 30px;
+  }
+
+  .content-wrapper {
+    max-width: 100%;
+  }
+
+  .main-heading br {
+    display: none;
+  }
+
+  .subtitle br,
+  .description br {
+    display: none;
+  }
+
+  .testimonial-card {
+    min-height: auto;
+    padding: 40px 20px;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card-content {
+    margin-top: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .left-section {
-    padding: 40px 24px;
+    padding: 50px 20px;
   }
-  .main-heading {
-    font-size: 30px;
+
+  .quote-marks {
+    margin-top: 40px;
+    gap: 20px;
   }
-  .subtitle {
-    font-size: 10px;
+
+  .testimonial-card {
+    padding: 30px 15px;
   }
-  .description {
-    font-size: 10px;
-  }
-  .quote-mark {
-    font-size: 80px;
-  }
-  .card-name {
-    font-size: 1.1rem;
-  }
-  .card-title {
-    font-size: 0.8rem;
-  }
+
+  .card-name,
+  .card-role,
+  .card-image-wrapper,
   .card-quote {
-    font-size: 0.8rem;
+    padding-left: 20px;
+  }
+
+  .card-quote {
+    padding-right: 15px;
+  }
+
+  .card-image img {
+    max-width: 150px;
   }
 }
 
 @media (max-width: 576px) {
   .left-section {
-    padding: 40px 24px;
+    padding: 40px 15px;
   }
-  .main-heading {
-    font-size: 24px;
+
+  .testimonial-card {
+    padding: 25px 10px;
   }
-  .subtitle {
-    font-size: 8px;
-  }
-  .description {
-    font-size: 8px;
-  }
-  .quote-mark {
-    font-size: 60px;
-  }
-  .card-name {
-    font-size: 1rem;
-  }
-  .card-title {
-    font-size: 0.7rem;
-  }
+
+  .card-name,
+  .card-role,
+  .card-image-wrapper,
   .card-quote {
-    font-size: 0.7rem;
+    padding-left: 15px;
   }
+
+  .card-quote {
+    padding-right: 10px;
+  }
+
+  .quote-marks {
+    margin-top: 30px;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.fw-semibold {
+  font-weight: 600;
+}
+
+/* ===== GLOBAL RESPONSIVE HELPERS ===== */
+@media (max-width: 1400px) {
+  /* Extra breathing room for large tablets */
+  .svc-inner,
+  .cap-col,
+  .ai-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide line breaks on mobile for better flow */
+  br {
+    display: none;
+  }
+
+  /* Reduce vertical spacing */
+  section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Compact spacing for small phones */
+  section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/* Ensure images are responsive globally */
+img {
+  max-width: 100%;
+  height: auto;
 }
