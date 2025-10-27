@@ -1,0 +1,103 @@
+/* --- MAIN SECTION --- */
+.portfolio-section {
+  color: white;
+  font-family: "Inter", sans-serif;
+  padding-top: 80px;
+}
+
+/* --- LEFT COLUMN --- */
+.left-col {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 50px;
+}
+
+.intro-box {
+  background: linear-gradient(180deg, #190000 0%, #000 100%);
+  padding: 20px 30px;
+  color: white;
+  border-radius: 8px;
+}
+
+.intro-box h1 {
+  font-family: "Russo One", sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.intro-box p {
+  color: #bbb;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.connect-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding-left: 20px;
+  border-left: 2px solid #fbff00;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.connect-link:hover {
+  color: #fbff00;
+}
+
+/* --- PORTFOLIO GRID --- */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #000;
+  cursor: pointer;
+}
+
+.portfolio-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Overlay for hover effect */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  padding: 15px 20px;
+}
+
+.portfolio-item:hover .overlay {
+  transform: translateY(0);
+}
+
+.case-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.case-link span {
+  font-size: 1.3rem;
+}
+
+.right-lower {
+  margin-right: 65px;
+}

@@ -1,0 +1,129 @@
+/* src/components/Footer.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kalam:wght@300;400;700&family=Russo+One&display=swap");
+
+.footer-section {
+  background-color: black;
+  font-family: "Arial", sans-serif; /* Use your desired font */
+}
+
+.have-a-project-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  font-family: "Russo One", sans-serif;
+}
+
+.footer-logo {
+  width: 150px; /* Adjust as needed */
+  height: auto;
+}
+
+/* Form Styling */
+.form-label {
+  color: white;
+  /* border-bottom: 1px solid red; */
+  display: block;
+}
+
+.name-form {
+  background-color: transparent !important;
+  color: white !important;
+  border: none !important;
+  border-bottom: 1px solid rgb(255, 0, 0) !important;
+  border-radius: 0 !important;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  background-color: transparent !important;
+  color: white !important;
+  border: none !important;
+  border-bottom: 1px solid rgb(255, 255, 255) !important;
+  border-radius: 0 !important;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  box-shadow: none !important;
+  border-color: white !important;
+}
+
+/* Checkbox/Radio Styling */
+.form-check-label {
+  color: white;
+}
+
+/* Red line below checkbox/radio labels */
+.checkboxes-column .form-check {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  padding-bottom: 15px;
+  border-left: 1px solid white;
+}
+
+.form-check-input:checked {
+  background-color: red !important; /* Change the fill color to red */
+  border-color: red !important; /* Change the border color to red */
+  border-bottom: 1px solid red;
+}
+
+.checkboxes-column {
+  padding-bottom: 100px;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #ffc107; /* Bootstrap warning color */
+  border-color: #ffc107;
+  color: black;
+  font-weight: bold;
+}
+
+.services-head {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+}
+
+.duration-head {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  padding-bottom: 10px;
+}
+
+.checkboxes-column .d-flex {
+  padding-bottom: 10px; /* Add some padding below the line */
+  margin-bottom: 20px; /* Add space between each option */
+  border-bottom: 1px solid red; /* The red line underneath */
+  /* border-left: 1px solid rgb(255, 255, 255); */
+  padding-left: 20px;
+}
+
+.checkboxes-column .d-flex .form-label {
+  color: white; /* Ensure the text is white */
+  margin-bottom: 0; /* Remove the default margin below the label */
+  /* This needs to match the font from the image, looks like Inter-400 */
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.form-check-input {
+  /* You may need to remove or override default styles here */
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: red !important;
+  border-color: red !important;
+}
+
+.form-check-input:focus {
+  box-shadow: none !important;
+  border-color: red; /* Keep the border color red on focus */
+}
