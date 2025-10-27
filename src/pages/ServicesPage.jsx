@@ -101,6 +101,7 @@ const ServicesPage = () => {
         <PortfolioSection />
       </section>
 
+      {/* Dimaag Kharab Section */}
       {/* Comes With Section */}
       <ComesWith />
     </Layout>
