@@ -111,7 +111,7 @@ h1 {
     padding-bottom: 50px;
     padding-left: 15px;
     padding-right: 15px;
-    min-height: 50vh;
+    min-height: 50vh; /*70 or 100 when bg image is added*/
   }
 
   .heading {
