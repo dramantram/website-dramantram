@@ -216,4 +216,21 @@
   .footer-section::after {
     background: none; /* Remove the overlay on smaller screens */
   }
+  .submit-button {
+    margin-left: 43px; /* Center the button on small screens */
+    width: 200%; /* Make the button full width */
+  }
+
+  .duration-option {
+    padding-left: 0px;
+  }
+
+  .duration-head {
+    padding-left: 0px;
+  }
+
+  .checkboxes-column {
+    padding-bottom: 10px;
+    padding-top: 30px;
+  }
 }
