@@ -111,6 +111,10 @@
   border-radius: 0 !important;
 }
 
+.form-column {
+  padding-left: 0px !important; /* Adjust as needed for left padding */
+}
+
 .form-input,
 .form-select,
 .form-textarea {
@@ -210,6 +214,11 @@
 .form-check-input:focus {
   box-shadow: none !important;
   border-color: red; /* Keep the border color red on focus */
+}
+
+.services-form-mid {
+  /* padding-top: 50px; */
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {

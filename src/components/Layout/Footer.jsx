@@ -72,7 +72,7 @@ const Footer = ({ className }) => {
             <h5 className="mb-3 services-head">What Services Do You Need?</h5>
             <Form.Group className="mb-4">
               {/* Each radio button and its label are in a flexbox container */}
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between mt-5">
                 <Form.Label htmlFor="branding">Branding</Form.Label>
                 <Form.Check type="radio" name="services" id="branding" />
               </div>

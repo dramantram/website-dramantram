@@ -1,8 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kalam:wght@300;400;700&display=swap");
-
 /* Navbar background color */
 .navbar {
-  background-color: rgb(0, 0, 0) !important;
+  position: fixed;
+  top: 0; /* Ensures the navbar stays at the very top */
+  left: 0;
+  right: 0;
+  z-index: 1030; /* Keeps navbar above other content */
+  width: 100%; /* Full width */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.52
+  ) !important; /* Semi-transparent background */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar visible */
+.navbar-visible {
+  transform: translateY(0); /* Keep navbar at the top */
+}
+
+/* Navbar hidden when scrolling down */
+.navbar-hidden {
+  transform: translateY(-100%); /* Move navbar off-screen */
 }
 
 /* Nav Buttons */
@@ -31,4 +52,19 @@
 /* Move the "Contact Us" button to the right */
 .ms-auto {
   margin-left: auto;
+}
+
+/* Ensure no space at the top of the page */
+body {
+  margin-top: 0 !important; /* Remove any default margin/padding */
+}
+
+/* Scroll Stuff */
+
+.scroll-down {
+  transform: translate3d(0, -100%, 0);
+}
+
+.scroll-up {
+  filter: drop-shadow(0 -10px 20px rgb(45, 0, 0));
 }

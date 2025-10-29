@@ -54,7 +54,9 @@ const PortfolioSection = () => {
             <Row className="g-4">
               {portfolioItemsRow1.map((item) => (
                 <Col key={item.id} xs={12} sm={6} lg={4}>
-                  <PortfolioItem imageSrc={item.imageSrc} />
+                  <Link to={"/case-study"}>
+                    <PortfolioItem imageSrc={item.imageSrc} />
+                  </Link>
                 </Col>
               ))}
             </Row>
@@ -72,7 +74,9 @@ const PortfolioSection = () => {
                   lg={3}
                   className="item-row-2"
                 >
-                  <PortfolioItem imageSrc={item.imageSrc} />
+                  <Link to="/case-study">
+                    <PortfolioItem imageSrc={item.imageSrc} />
+                  </Link>
                 </Col>
               ))}
             </Row>

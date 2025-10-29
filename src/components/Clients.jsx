@@ -101,9 +101,7 @@ const ClientsSection = () => {
           <div className="cta-accent" />
           <div className="cta-inner">
             <h3 className="cta-head">
-              Check out the
-              <br />
-              full client list
+              Check out the <br /> full client list
             </h3>
             <a href="/clients" className="cta-link">
               <span>Complete List</span>
