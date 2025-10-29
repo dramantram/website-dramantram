@@ -24,11 +24,7 @@ const PortfolioPage = () => {
             <div className="col-12 col-md-3 portfolio-panel">
               <div className="portfolio-panel-inner">
                 <h2 className="hero-title">
-                  A locally set up
-                  <br />
-                  global creative
-                  <br />
-                  agency
+                  A locally set up <br /> global creative <br /> agency
                 </h2>
               </div>
             </div>
@@ -37,9 +33,8 @@ const PortfolioPage = () => {
             <div className="col-12 col-md-3 portfolio-panel">
               <div className="portfolio-panel-inner">
                 <p className="body-copy">
-                  Our secret is not our services but our
-                  <br />
-                  approach towards them.
+                  Our secret is not our services but our <br /> approach towards
+                  them.
                 </p>
                 <p className="body-strong">
                   Oops! Did we just disclose our secret?
