@@ -5,9 +5,9 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "../../styles/Footer.css";
 import logo from "../../assets/images/biglogo.png"; // Make sure you have a logo image
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
-    <footer className="footer-section text-white py-5">
+    <footer className={`footer-section text-white py-5`}>
       <Container>
         <Row className="align-items-center">
           {/* Left Column: Have a Project in Mind? */}
@@ -102,7 +102,7 @@ const Footer = () => {
 
           <Col md={3} className="checkboxes-column">
             <h5 className="mb-3 duration-head">When Do you Need It?</h5>
-            <Form.Group className="mb-4">
+            <Form.Group className="mb-4 duration-option">
               {/* Each radio button and its label are in a flexbox container */}
               <div className="d-flex justify-content-between">
                 <Form.Label htmlFor="asap">ASAP</Form.Label>

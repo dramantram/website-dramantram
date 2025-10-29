@@ -23,7 +23,7 @@
   background-position: bottom left;
   background-size: 600px 450px;
   background-repeat: no-repeat;
-  padding: 20px;
+  padding: 0px;
 }
 
 .left-side,
@@ -155,7 +155,7 @@ h1 {
 /* ===== CLIENTS SECTION ===== */
 .clients {
   background-color: black;
-  padding: 0px 20px;
+  padding: 0px 0px;
 }
 
 @media (max-width: 768px) {
@@ -836,7 +836,7 @@ h1 {
   min-height: 100vh;
   color: white;
   background-color: black;
-  padding: 40px 0;
+  padding: 0px 0;
 }
 
 .container-fluid {

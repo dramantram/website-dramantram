@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kalam:wght@300;400;700&display=swap");
+
+/* Navbar background color */
+.navbar-light {
+  background-color: rgb(255, 255, 255) !important;
+  border-bottom: 1.5px solid #717171;
+}
+
+/* Nav Buttons */
+.nav-link-light {
+  color: black !important;
+  font-family: "Inter";
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Hover effect for nav links */
+.nav-link-light:hover {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Contact Us Button */
+.btn {
+  color: rgb(0, 0, 0) !important;
+  background-color: #ffe600 !important;
+  font-family: "Inter";
+  font-weight: bolder;
+  font-style: normal;
+}
+
+/* Move the "Contact Us" button to the right */
+.ms-auto {
+  margin-left: auto;
+}

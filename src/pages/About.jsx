@@ -140,7 +140,7 @@ const About = () => {
         <div className="container-fluid container-fluid-custom">
           <div className="row g-0">
             {/* Left Sidebar */}
-            <div className="col-lg-2 team-sidebar">
+            <div className="col-lg-3 team-sidebar">
               <div className="sidebar-content">
                 <h1 className="team-title">
                   Our
@@ -164,7 +164,7 @@ const About = () => {
             </div>
 
             {/* Team Members Grid */}
-            <div className="col-lg-10">
+            <div className="col-lg-9">
               <div className="row g-0">
                 {teamMembers.map((member, index) => (
                   <div key={index} className="col-md-6 col-lg-4">

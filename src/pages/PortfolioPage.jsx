@@ -14,15 +14,15 @@ const PortfolioPage = () => {
           {/* TOP GRID */}
           <div className="row g-0 hero-grid">
             {/* Col 1 */}
-            <div className="col-12 col-md-3 panel panel--left">
-              <div className="panel-inner">
+            <div className="col-12 col-md-3 portfolio-panel portfolio-panel--left">
+              <div className="portfolio-panel-inner">
                 <h1 className="logo-word">PORTFOLIO</h1>
               </div>
             </div>
 
             {/* Col 2 */}
-            <div className="col-12 col-md-3 panel">
-              <div className="panel-inner">
+            <div className="col-12 col-md-3 portfolio-panel">
+              <div className="portfolio-panel-inner">
                 <h2 className="hero-title">
                   A locally set up
                   <br />
@@ -34,8 +34,8 @@ const PortfolioPage = () => {
             </div>
 
             {/* Col 3 */}
-            <div className="col-12 col-md-3 panel">
-              <div className="panel-inner">
+            <div className="col-12 col-md-3 portfolio-panel">
+              <div className="portfolio-panel-inner">
                 <p className="body-copy">
                   Our secret is not our services but our
                   <br />
@@ -48,8 +48,8 @@ const PortfolioPage = () => {
             </div>
 
             {/* Col 4 (dark taper) */}
-            <div className="col-12 col-md-3 panel panel--right">
-              <div className="panel-inner">
+            <div className="col-12 col-md-3 portfolio-panel portfolio-panel--right">
+              <div className="portfolio-panel-inner">
                 <Link className="btn-connect" to="/contact">
                   Let's Connect
                 </Link>

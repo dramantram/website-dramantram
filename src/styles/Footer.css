@@ -5,7 +5,84 @@
 .footer-section {
   background-color: black;
   font-family: "Arial", sans-serif; /* Use your desired font */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  /* background: radial-gradient(
+      100% 200% at 50% 0%,
+      rgba(180, 0, 0, 0.6) 0%,
+      rgba(120, 0, 0, 0.35) 25%,
+      rgba(0, 0, 0, 0) 55%
+    ),
+    #000; */
+  /* color: white; */
+  position: relative;
 }
+
+.footer-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 2px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent 25.4%,
+      rgba(255, 255, 255, 0.2) 25.4%,
+      rgba(255, 255, 255, 0.2) calc(25.4% + 1px),
+      transparent calc(25.4% + 1px),
+      transparent 50.03%,
+      rgba(255, 255, 255, 0.2) 50.03%,
+      rgba(255, 255, 255, 0.2) calc(50.03% + 1px),
+      transparent calc(50.03% + 1px),
+      transparent 74.57%,
+      rgba(255, 255, 255, 0.2) 74.57%,
+      rgba(255, 255, 255, 0.2) calc(74.57% + 1.5px),
+      transparent calc(74.57% + 1px),
+      transparent 100%
+    );
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* .footer-section.contact-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 2px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent 25.4z%,
+      rgba(255, 255, 255, 0.2) 25.4%,
+      rgba(255, 255, 255, 0.2) calc(25.4% + 1px),
+      transparent calc(25.4% + 1px),
+      transparent 50.03%,
+      rgba(255, 255, 255, 0.2) 50.03%,
+      rgba(255, 255, 255, 0.2) calc(50.03% + 1px),
+      transparent calc(50.03% + 1px),
+      transparent 74.57%,
+      rgba(255, 255, 255, 0.2) 74.57%,
+      rgba(255, 255, 255, 0.2) calc(74.57% + 1.5px),
+      transparent calc(74.57% + 1px),
+      transparent 100%
+    );
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+} */
 
 .have-a-project-text {
   font-size: 2.5rem;
@@ -80,6 +157,8 @@
   border-color: #ffc107;
   color: black;
   font-weight: bold;
+  margin-left: 50px;
+  max-width: 260px;
 }
 
 .services-head {
@@ -95,6 +174,11 @@
   font-style: normal;
   font-size: 40px;
   padding-bottom: 10px;
+  padding-left: 50px;
+}
+
+.duration-option {
+  padding-left: 50px;
 }
 
 .checkboxes-column .d-flex {
@@ -126,4 +210,10 @@
 .form-check-input:focus {
   box-shadow: none !important;
   border-color: red; /* Keep the border color red on focus */
+}
+
+@media (max-width: 768px) {
+  .footer-section::after {
+    background: none; /* Remove the overlay on smaller screens */
+  }
 }

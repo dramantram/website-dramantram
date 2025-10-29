@@ -13,7 +13,7 @@
 .hero-portfolio {
   position: relative;
   min-height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   overflow: hidden;
   color: var(--text);
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -53,23 +53,23 @@
 }
 
 .upper-container {
-  padding: 12px 24px !important;
+  padding: 12px 0px !important;
 }
 
-.panel {
+.portfolio-panel {
   position: relative;
   border-right: 1px solid var(--divider);
   display: flex;
   align-items: center;
   min-height: 60vh;
 }
-.panel--left {
+.portfolio-panel--left {
   border-left: 1px solid var(--divider);
 }
-.panel--right {
+.portfolio-panel--right {
   /* darker taper on the far right via overlay */
 }
-.panel-inner {
+.portfolio-panel-inner {
   width: 100%;
   padding: 64px clamp(16px, 4vw, 48px);
 }
