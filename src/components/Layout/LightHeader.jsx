@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const LightHeader = () => {
   return (
     <div>
-      <nav className="navbar navbar-light navbar-expand-lg sticky-top py-3">
+      <nav className="navbar navbar-light navbar-expand-lg py-3">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img

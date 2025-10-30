@@ -5,6 +5,7 @@ import About from "./pages/About.jsx";
 import ServicesPage from "./pages/ServicesPage.jsx";
 import Contact from "./pages/Contact.jsx";
 import PortfolioPage from "./pages/PortfolioPage.jsx";
+import CaseStudy from "./pages/CaseStudy.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/portfolio" element={<PortfolioPage />}></Route>
+        <Route path="/case-study/:slug" element={<CaseStudy />}></Route>
       </Routes>
     </BrowserRouter>
   );

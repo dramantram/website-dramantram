@@ -1,6 +1,7 @@
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
+import logo from "../../assets/images/header.png";
 
 const Header = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -49,7 +50,7 @@ const Header = () => {
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           <img
-            src="header.png"
+            src={logo}
             alt="Logo"
             width="250"
             height="22"

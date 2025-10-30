@@ -2,8 +2,18 @@
 
 /* Navbar background color */
 .navbar-light {
-  background-color: rgb(255, 255, 255) !important;
-  border-bottom: 1.5px solid #717171;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1030;
+
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px); /* subtle blur over background content */
+  border: none; /* remove any line */
+  box-shadow: none; /* no shadow */
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 /* Nav Buttons */

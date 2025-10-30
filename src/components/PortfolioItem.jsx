@@ -5,12 +5,12 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/PortfolioSection.css";
 
-const PortfolioItem = ({ imageSrc }) => {
+const PortfolioItem = ({ imageSrc, slug }) => {
   return (
     <div className="portfolio-item">
       <img src={imageSrc} alt="Portfolio" className="portfolio-img" />
       <div className="overlay">
-        <Link to="/case-study" className="case-link">
+        <Link to={`/case-study/${slug}`} className="case-link">
           Case Study <span>›</span>
         </Link>
       </div>

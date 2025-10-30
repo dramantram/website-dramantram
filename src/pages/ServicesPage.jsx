@@ -21,9 +21,9 @@ const ServicesPage = () => {
 
   return (
     <Layout>
-      <section className="brand-wrap container-fluid service-intro">
+      <section className="brand-wrap container-fluid service-intro pt-5">
         {/* TOP SECTION */}
-        <section className="row gx-0 brand-grid align-items-center mb-5">
+        <section className="row gx-0 brand-grid align-items-center mb-5 pt-5">
           {/* LEFT VISUAL */}
           <div className="col-lg-6 px-4 px-lg-5 brand-col d-flex flex-column align-items-start">
             <div className="mask-card w-100 mb-4">

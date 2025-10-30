@@ -16,9 +16,9 @@ import img6 from "../assets/portfolio/girl.png";
 import img7 from "../assets/portfolio/thoughts.png";
 
 const portfolioItemsRow1 = [
-  { id: 1, imageSrc: img1 },
-  { id: 2, imageSrc: img2 },
-  { id: 3, imageSrc: img3 },
+  { id: 1, imageSrc: img1, slug: "doosra" },
+  { id: 2, imageSrc: img2, slug: "caps-delivery" },
+  { id: 3, imageSrc: img3, slug: "united-nation" },
 ];
 
 const portfolioItemsRow2 = [
@@ -54,7 +54,7 @@ const PortfolioSection = () => {
             <Row className="g-4">
               {portfolioItemsRow1.map((item) => (
                 <Col key={item.id} xs={12} sm={6} lg={4}>
-                  <Link to={"/case-study"}>
+                  <Link to={`/case-study/${item.slug}`}>
                     <PortfolioItem imageSrc={item.imageSrc} />
                   </Link>
                 </Col>
