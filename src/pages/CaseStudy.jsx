@@ -1,6 +1,6 @@
 import React, { use, useMemo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import data from "../data/caseStudies.json";
+import data from "../data/CaseStudies.json";
 import "../styles/CaseStudyPage.css";
 import Layout from "../components/Layout/Layout";
 
