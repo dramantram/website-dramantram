@@ -8,11 +8,11 @@ import ComesWith from "../components/ComesWith";
 const PortfolioPage = () => {
   return (
     <Layout>
-      <section className="hero-portfolio">
+      <section className="hero-portfolio px-5">
         <div className="bg-grad" />
         <div className="container-fluid upper-container">
           {/* TOP GRID */}
-          <div className="row g-0 hero-grid">
+          <div className="row g-0 hero-grid col-md-12 ">
             {/* Col 1 */}
             <div className="col-12 col-md-3 portfolio-panel portfolio-panel--left">
               <div className="portfolio-panel-inner">
@@ -53,7 +53,7 @@ const PortfolioPage = () => {
           </div>
 
           {/* FILTER ROW */}
-          <div className="row g-0  p-0 filter-row">
+          <div className="row g-0 p-0 filter-row col-md-12">
             <div className="col-6 col-md-3">
               <button className="filter-pill">
                 <span>Service</span>
@@ -82,7 +82,7 @@ const PortfolioPage = () => {
         </div>
       </section>
 
-      <section className="portfolio">
+      <section className="portfolio px-5">
         <PortfolioSection />
       </section>
 

@@ -97,7 +97,7 @@ const ServicesPage = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section className="portfolio">
+      <section className="portfolio px-5">
         <PortfolioSection />
       </section>
 

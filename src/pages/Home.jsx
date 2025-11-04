@@ -65,19 +65,19 @@ const Home = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section className="portfolio">
+      <section className="portfolio px-5">
         <PortfolioSection />
       </section>
 
       {/* Clients Section */}
-      <section className="clients">
+      <section className="clients px-5">
         <ClientsSection />
       </section>
 
       {/* Specialization Section */}
       <section className="specialization-sec">
         {/* UPPER Section */}
-        <section className="svc-band">
+        <section className="svc-band px-5">
           <div className="svc-inner">
             {/* LEFT: Big heading */}
             <h2 className="svc-title">SERVICES WE SPECIALIZE IN</h2>
@@ -105,7 +105,7 @@ const Home = () => {
         </section>
 
         {/* LOWER Section */}
-        <section className="cap-wrap">
+        <section className="cap-wrap px-5">
           {/* hairline top + vertical grid lines */}
           <div className="cap-grid">
             {/* LEFT: Visual */}
@@ -237,7 +237,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="testimonial-section">
+      <section className="testimonial-section px-5">
         <div className="container-fluid">
           <div className="row g-0">
             {/* Left Section */}

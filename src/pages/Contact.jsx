@@ -9,7 +9,7 @@ const Contact = () => {
       city: "Delhi",
       image: "/DelhiOffice.png",
       address: `D108, 2nd Floor, 100 Feet Rd,
-Chhatarpur, New Delhi, Delhi 110074`,
+Chhatarpur, New Delhi, 110074`,
       email: "lkshashi@dramantram.com",
       phone: "+91 80109 73780 (LK Shashi)",
       // featured: true, // blue stroke + square

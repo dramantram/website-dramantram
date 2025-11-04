@@ -1,7 +1,5 @@
 // src/components/PortfolioSection.jsx
-
 import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PortfolioItem from "./PortfolioItem";
 import "../styles/PortfolioSection.css";
@@ -31,10 +29,10 @@ const portfolioItemsRow2 = [
 const PortfolioSection = () => {
   return (
     <div className="portfolio-section">
-      <Container fluid className="px-5">
-        <Row className="g-4 align-items-start">
-          {/* LEFT COLUMN */}
-          <Col md={3} className="left-col">
+      <div className="container-fluid ">
+        <div className="row g-4 align-items-start col-md-12">
+          {/* LEFT COLUMN (static) */}
+          <div className="col-md-3 left-col">
             <div className="intro-box">
               <h1>
                 Portfolio &<br /> Case Studies
@@ -47,42 +45,32 @@ const PortfolioSection = () => {
                 Let's Connect <span>›</span>
               </Link>
             </div>
-          </Col>
+          </div>
 
-          {/* RIGHT COLUMN Upper ROW*/}
-          <Col md={8}>
-            <Row className="g-4">
+          {/* RIGHT COLUMN (both grids inside to align perfectly) */}
+          <div className="col-md-9 right-col">
+            {/* UPPER ROW: 1/2/3 columns at xs/sm/md+ */}
+            <div className="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
               {portfolioItemsRow1.map((item) => (
-                <Col key={item.id} xs={12} sm={6} lg={4}>
+                <div key={item.id} className="col">
                   <Link to={`/case-study/${item.slug}`}>
                     <PortfolioItem imageSrc={item.imageSrc} />
                   </Link>
-                </Col>
+                </div>
               ))}
-            </Row>
-          </Col>
-
-          {/* RIGHT COLUMN LOWER ROW*/}
-          <Col md={11} className="ms-auto right-lower">
-            <Row className="g-4">
-              {portfolioItemsRow2.map((item) => (
-                <Col
-                  key={item.id}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  className="item-row-2"
-                >
-                  <Link to="/case-study">
-                    <PortfolioItem imageSrc={item.imageSrc} />
-                  </Link>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+            </div>
+          </div>
+        </div>
+        <div className="row g-4 mt-1 right-lower col-md-12 row-cols-md-4">
+          {portfolioItemsRow2.map((item) => (
+            <div key={item.id} className="col">
+              <Link to="/case-study">
+                <PortfolioItem imageSrc={item.imageSrc} />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

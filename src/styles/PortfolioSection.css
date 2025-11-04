@@ -6,6 +6,7 @@
   font-family: "Inter", sans-serif;
   padding-top: 80px;
   padding-bottom: 60px;
+  background: transparent;
 }
 
 /* --- LEFT COLUMN --- */
@@ -13,7 +14,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 50px;
+  margin-left: 0px !important;
 }
 
 .intro-box {
@@ -66,12 +67,13 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  background-color: #000;
   cursor: pointer;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .portfolio-img {
@@ -129,6 +131,13 @@
 }
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+@media (min-width: 768px) {
+  .col-md-12 {
+    flex: 0 0 auto;
+    width: auto !important;
+  }
+}
 
 /* Large Desktop (1400px and up) */
 @media (min-width: 1400px) {
@@ -279,51 +288,38 @@
   }
 }
 
-/* Mobile Large (480px - 575px) */
+/* Mobile - CRITICAL FIX FOR IMAGE SIZING */
 @media (max-width: 575px) {
-  .portfolio-section {
-    padding-top: 30px;
-    padding-bottom: 25px;
+  /* Remove the conflicting 100% width rule */
+  .portfolio-section .row.g-4 > .col,
+  .portfolio-section .row.g-4 > [class^="col-"],
+  .portfolio-section .row.g-4 > [class*=" col-"],
+  .portfolio-section .right-lower > .col,
+  .portfolio-section .right-lower > [class^="col-"],
+  .portfolio-section .right-lower > [class*=" col-"] {
+    /* Let Bootstrap's row-cols handle the sizing */
+    flex: unset !important;
+    max-width: unset !important;
   }
 
-  .intro-box {
-    padding: 18px 12px;
-    border-radius: 6px;
-  }
-
-  .intro-box h1 {
-    margin-bottom: 12px;
-  }
-
-  .intro-box p {
-    margin-bottom: 12px;
-  }
-
-  .connect-link {
-    padding-left: 12px;
-    border-left-width: 2px;
-  }
-
-  /* Portfolio items should stack nicely */
-  .portfolio-section .col {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
+  /* Ensure portfolio item fills its column */
   .portfolio-item {
-    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    min-height: 150px; /* Minimum height for mobile */
   }
 
-  .overlay {
-    padding: 10px 12px;
+  /* Ensure image fills the container */
+  .portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .case-link {
-    font-size: 0.85rem;
-  }
-
-  .case-link span {
-    font-size: 1.2em;
+  /* Specific fix for right-lower row */
+  .right-lower.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -373,6 +369,7 @@
 
   .portfolio-item {
     border-radius: 5px;
+    min-height: 140px;
   }
 
   .overlay {
@@ -382,26 +379,20 @@
   .case-link {
     font-size: 0.8rem;
   }
-
-  .item-row-2 {
-  }
 }
 
 /* ===== TOUCH DEVICE ENHANCEMENTS ===== */
 @media (hover: none) and (pointer: coarse) {
-  /* Show overlay by default on touch devices or make it tap-to-toggle */
   .portfolio-item .overlay {
     transform: translateY(0);
     background: rgba(0, 0, 0, 0.6);
   }
 
-  /* Reduce hover effects on touch */
   .portfolio-item:hover .portfolio-img {
     transform: none;
     opacity: 1;
   }
 
-  /* Make links more tappable */
   .connect-link,
   .case-link {
     padding: 10px;
@@ -410,8 +401,6 @@
 }
 
 /* ===== GRID FIXES FOR SPECIFIC LAYOUTS ===== */
-
-/* Ensure proper column behavior */
 @media (max-width: 991px) {
   .portfolio-section .left-col {
     order: 1;
@@ -426,29 +415,14 @@
   }
 }
 
-/* Fix for very small screens - ensure 2 columns minimum */
-@media (max-width: 575px) {
-  .portfolio-section .row.g-4 > .col {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-}
-
 /* Single column for very small devices if needed */
 @media (max-width: 360px) {
-  .portfolio-section .row.g-4 > .col {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
   .intro-box h1 {
     font-size: 1.5rem;
   }
 }
 
 /* ===== ACCESSIBILITY IMPROVEMENTS ===== */
-
-/* Focus states for keyboard navigation */
 .connect-link:focus,
 .case-link:focus {
   outline: 2px solid #fbff00;
@@ -458,12 +432,6 @@
 .portfolio-item:focus-within {
   outline: 2px solid #fbff00;
   outline-offset: 2px;
-}
-
-/* Ensure images don't break layout */
-.portfolio-img {
-  max-width: 100%;
-  height: auto;
 }
 
 /* Prevent layout shift */
@@ -483,5 +451,43 @@
   .portfolio-section .row {
     --bs-gutter-x: 0.5rem;
     --bs-gutter-y: 0.5rem;
+  }
+}
+
+/* --- GRID ALIGNMENT FIXES --- */
+.left-col {
+  margin-left: 0;
+}
+
+.right-lower {
+  margin-right: 0;
+}
+
+.portfolio-section .row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+}
+
+@media (max-width: 991px) {
+  .portfolio-section .row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+  }
+
+  .portfolio-section .left-col {
+    order: 1;
+  }
+  .portfolio-section .right-col {
+    order: 2;
+  }
+  .portfolio-section .right-lower {
+    order: 3;
+  }
+}
+
+@media (max-width: 575px) {
+  .portfolio-section .row {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 0.75rem;
   }
 }

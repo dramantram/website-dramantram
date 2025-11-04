@@ -68,6 +68,7 @@
 }
 .portfolio-panel--right {
   /* darker taper on the far right via overlay */
+  /* border-right: 1px solid var(--divider); */
 }
 .portfolio-panel-inner {
   width: 100%;
@@ -202,7 +203,7 @@
     border-bottom: 1px solid var(--divider);
   }
   .panel--left {
-    border-left: none;
+    border-left: 1px solid var(--divider);
   }
   .right-rail {
     width: 56px;
@@ -222,10 +223,14 @@
     height: 44px;
     margin-bottom: 8px;
   }
+  .portfolio-panel--left .portfolio-panel--right {
+    border-left: 1px solid var(--divider);
+  }
   .portfolio-panel {
     padding: 10px; /* Reduce padding */
     min-height: 40vh; /* Make panel smaller */
     flex: 1 1 100%; /* Ensure the panels take up full width */
+    border-left: 1px solid var(--divider);
   }
 
   .portfolio-panel-inner {
@@ -250,10 +255,10 @@
     line-height: 1.4; /* Increase line height for clarity */
   }
 
-  .portfolio-panel--left,
+  /* .portfolio-panel--left,
   .portfolio-panel--right {
-    border-left: none; /* Remove borders for mobile */
-  }
+    border-left: none;
+  } */
 
   .portfolio-panel--right {
     /* Adjust the alignment of the 'Let's Connect' section */
