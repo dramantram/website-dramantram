@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/Home.css"; // Your existing CSS
 import "../styles/Animations.css"; // <-- Import the animation CSS
@@ -48,6 +48,30 @@ const testimonials = [
 
 const Home = () => {
   const activeIndex = 0; // "Branding"
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    // Function to handle window resize
+    const handleResize = () => {
+      if (window.innerWidth <= 600) {
+        setIsSmallScreen(true);
+      } else {
+        setIsSmallScreen(false);
+      }
+    };
+
+    // Add event listener on mount
+    window.addEventListener("resize", handleResize);
+
+    // Check window width on initial load
+    handleResize();
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Layout>
@@ -246,7 +270,9 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="testimonial-section px-5">
+      <section
+        className={`testimonial-section ${!isSmallScreen ? "px-5" : ""}`}
+      >
         <div className="container-fluid">
           <div className="row g-0">
             {/* Left Section */}
@@ -254,10 +280,8 @@ const Home = () => {
               <div className="content-wrapper">
                 <h1 className="main-heading">
                   THE CENTRE
-                  <br />
-                  OF OUR
-                  <br />
-                  UNIVERSE
+                  <br /> OF OUR
+                  <br /> UNIVERSE
                 </h1>
                 <p className="subtitle">
                   More than who we are, what our client

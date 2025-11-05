@@ -252,4 +252,11 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  .services-head {
+    padding-left: 0px;
+  }
+  .mid-checkbox {
+    padding-left: 0px;
+  }
 }

@@ -773,6 +773,10 @@ h1 {
   .cap-strong br {
     display: none;
   }
+
+  .cap-grid::after {
+    background: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1208,7 +1212,11 @@ h1 {
 
 @media (max-width: 768px) {
   .left-section {
-    padding: 50px 20px;
+    padding: 20px 0px !important;
+  }
+
+  .testimonial-section {
+    padding: 0px 0px !important;
   }
 
   .quote-marks {

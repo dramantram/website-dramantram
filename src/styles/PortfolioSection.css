@@ -222,6 +222,7 @@
   .portfolio-section {
     padding-top: 50px;
     padding-bottom: 40px;
+    border: none;
   }
 
   .left-col {
@@ -382,6 +383,11 @@
 
   .case-link {
     font-size: 0.8rem;
+  }
+
+  .btn-connect-portfolio {
+    font-size: 0.9rem;
+    width: auto !important;
   }
 }
 
