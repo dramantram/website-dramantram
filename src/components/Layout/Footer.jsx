@@ -70,7 +70,7 @@ const Footer = ({ className }) => {
 
           <Col md={3} className="checkboxes-column">
             <h5 className="mb-3 services-head">What Services Do You Need?</h5>
-            <Form.Group className="mb-4">
+            <Form.Group className="mb-4 mid-checkbox">
               {/* Each radio button and its label are in a flexbox container */}
               <div className="d-flex justify-content-between mt-5">
                 <Form.Label htmlFor="branding">Branding</Form.Label>

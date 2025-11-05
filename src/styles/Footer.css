@@ -170,6 +170,11 @@
   font-weight: 400;
   font-style: normal;
   font-size: 40px;
+  padding-left: 40px;
+}
+
+.mid-checkbox {
+  padding-left: 20px;
 }
 
 .duration-head {

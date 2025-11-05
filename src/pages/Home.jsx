@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/Home.css"; // Your existing CSS
 import "../styles/Animations.css"; // <-- Import the animation CSS
@@ -9,6 +9,7 @@ import HomePetalsSVG from "../components/HomePetalsSVG";
 import { Link } from "react-router-dom";
 import PortfolioSection from "../components/PortfolioSection";
 import ClientsSection from "../components/Clients";
+import GlitchButton from "../components/GlitchButton";
 
 const packImg = "packaging.png";
 
@@ -51,15 +52,23 @@ const Home = () => {
   return (
     <Layout>
       {/* Intro Section */}
-      <section className="intro-section">
+      <section className="intro-section ">
         <div className="main-content">
           <div className="left-side"></div>
           <div className="right-side">
             <p className="headText">
               Your Creative, Media & <br /> Technology Transformation Partner
             </p>
-            <h1 className="heading">TRANSFORMING VISION TO VISUAL!</h1>
-            <Link className="btn-connect">Let's Connect</Link>
+            <h1 className="heading">
+              TRANSFORMING <br /> VISION TO VISUAL!
+            </h1>
+            <GlitchButton
+              className="btn-connect"
+              href="/contact" // Use href for an anchor tag link
+              targetText="Let's Connect"
+            >
+              Let's Connect
+            </GlitchButton>
           </div>
         </div>
       </section>
@@ -288,6 +297,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* <button class="sliding-border-button">Hover Me</button> */}
     </Layout>
   );
 };

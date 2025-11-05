@@ -6,6 +6,50 @@
 /* ===== INTRO SECTION ===== */
 .intro-section {
   background-color: black;
+
+  /* display: flex; */
+  /* justify-content: space-between; */
+  align-items: center;
+  /* background: radial-gradient(
+      100% 200% at 50% 0%,
+      rgba(180, 0, 0, 0.6) 0%,
+      rgba(120, 0, 0, 0.35) 25%,
+      rgba(0, 0, 0, 0) 55%
+    ),
+    #000; */
+  color: white;
+  position: relative;
+}
+
+.intro-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: /* linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 2px,
+      transparent 1px
+    ), */ linear-gradient(
+    to right,
+    transparent 0,
+    transparent 26.5%,
+    rgba(255, 255, 255, 0.06) 26.5%,
+    rgba(255, 255, 255, 0.06) calc(26.5% + 1px),
+    transparent calc(26.5% + 1px),
+    transparent 50.05%,
+    rgba(255, 255, 255, 0.06) 50.05%,
+    rgba(255, 255, 255, 0.06) calc(50.05% + 0.8px),
+    transparent calc(50.05% + 1px),
+    transparent 73.5%,
+    rgba(255, 255, 255, 0.06) 73.5%,
+    rgba(255, 255, 255, 0.06) calc(73.5% + 1px),
+    transparent calc(73.5% + 1px),
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .main-content {
@@ -62,6 +106,7 @@ h1 {
 
 .btn-connect {
   margin-top: 20px;
+  margin-left: -20px;
   background-color: transparent !important;
   color: white !important;
   text-decoration: none !important;
@@ -71,6 +116,98 @@ h1 {
   padding: 10px 20px;
   font-size: clamp(0.9rem, 2vw, 1rem);
   display: inline-block;
+  width: 358px;
+  height: 50px;
+
+  /* --- NEW GLITCH STYLES --- */
+  position: relative; /* Establish context for absolute pseudo-elements */
+  overflow: hidden; /* Important for the glitch effect layers */
+  transition: color 0.1s ease; /* Smooth text color transition if needed */
+}
+
+.btn-connect:hover {
+  cursor: pointer;
+  border-top: 2px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Base style for the glitch layers */
+.btn-connect::before,
+.btn-connect::after {
+  content: attr(data-text); /* Use the data-text attribute from the component */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Inherit base button styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  transition: transform 0.1s ease; /* Subtle layer movement transition */
+}
+
+.btn-connect::before {
+  color: rgb(255, 0, 208); /* One glitch color (e.g., magenta) */
+  z-index: -1; /* Place behind the main text */
+}
+
+.btn-connect::after {
+  color: rgb(0, 255, 255); /* Another glitch color (e.g., cyan) */
+  z-index: -2; /* Place behind the magenta layer */
+}
+
+/* Hover/Active Glitch Animations */
+.btn-connect.glitch-active::before {
+  /* Horizontal movement on hover */
+  transform: translate(2px, 2px);
+  /* Trigger the visual glitch animation */
+  animation: glitch-anim-1 0.3s steps(1) infinite alternate;
+}
+
+.btn-connect.glitch-active::after {
+  /* Opposite horizontal movement on hover */
+  transform: translate(-2px, -2px);
+  /* Trigger the visual glitch animation */
+  animation: glitch-anim-2 0.3s steps(1) infinite alternate;
+}
+
+/* Keyframes for the rapid, staggered visual glitch */
+@keyframes glitch-anim-1 {
+  0% {
+    transform: translate(4px, 4px);
+  }
+  25% {
+    transform: translate(-4px, -4px);
+  }
+  50% {
+    transform: translate(4px, -4px);
+  }
+  75% {
+    transform: translate(-4px, 4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    transform: translate(-4px, -4px);
+  }
+  25% {
+    transform: translate(4px, 4px);
+  }
+  50% {
+    transform: translate(-4px, 4px);
+  }
+  75% {
+    transform: translate(4px, -4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 /* Intro Section Responsive */
@@ -96,6 +233,10 @@ h1 {
   .headText br,
   .heading br {
     display: none;
+  }
+
+  .intro-section::after {
+    background: none;
   }
 }
 

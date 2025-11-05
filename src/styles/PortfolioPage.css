@@ -75,6 +75,33 @@
   padding: 64px clamp(16px, 4vw, 48px);
 }
 
+.btn-connect-portfolio {
+  margin-top: 20px;
+  margin-left: -20px;
+  background-color: transparent !important;
+  color: white !important;
+  text-decoration: none !important;
+  border: none !important;
+  border-left: 1px solid rgb(251, 255, 0) !important;
+  border-radius: 0 !important;
+  padding: 10px 20px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  display: inline-block;
+  width: 327px;
+  height: 45px;
+
+  /* --- NEW GLITCH STYLES --- */
+  position: relative; /* Establish context for absolute pseudo-elements */
+  overflow: hidden; /* Important for the glitch effect layers */
+  transition: color 0.1s ease; /* Smooth text color transition if needed */
+}
+
+.btn-connect-portfolio:hover {
+  cursor: pointer;
+  border-top: 2px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06) !important;
+}
+
 /* ---------- Right rail (Let’s Connect) ---------- */
 .right-rail {
   position: absolute;
@@ -128,10 +155,10 @@
 }
 
 .hero-title {
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.15;
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 42px);
+  font-size: clamp(28px, 3.2vw, 39px);
 }
 
 .body-copy {

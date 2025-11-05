@@ -79,7 +79,7 @@
   margin-top: 50px;
 }
 
-.btn-connect {
+.btn-connect-about {
   padding: 12px 24px;
   background-color: #ffe600;
   border: none;
@@ -91,7 +91,7 @@
   margin-left: 50px;
 }
 
-.btn-connect:hover {
+.btn-connect-about:hover {
   background-color: #f7c800;
 }
 

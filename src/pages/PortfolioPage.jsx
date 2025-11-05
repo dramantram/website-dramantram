@@ -4,6 +4,7 @@ import "../styles/PortfolioPage.css";
 import PortfolioSection from "../components/PortfolioSection";
 import { Link } from "react-router-dom";
 import ComesWith from "../components/ComesWith";
+import GlitchButton from "../components/GlitchButton";
 
 const PortfolioPage = () => {
   return (
@@ -45,8 +46,13 @@ const PortfolioPage = () => {
             {/* Col 4 (dark taper) */}
             <div className="col-12 col-md-3 portfolio-panel portfolio-panel--right">
               <div className="portfolio-panel-inner">
-                <Link className="btn-connect" to="/contact">
-                  Let's Connect
+                <Link className="" to="/contact">
+                  <GlitchButton
+                    className="glitch-button-portfolio btn-connect-portfolio"
+                    targetText="Let's Connect"
+                  >
+                    Let's Connect
+                  </GlitchButton>
                 </Link>
               </div>
             </div>

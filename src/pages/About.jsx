@@ -89,7 +89,7 @@ const About = () => {
               As smart one says, "a plan is only as <br /> good as its
               execution".
             </p>
-            <button className="btn-connect">
+            <button className="btn-connect-about">
               Let's Connect <span>›</span>
             </button>
           </div>
