@@ -32,12 +32,14 @@
   font-family: "Inter";
   font-weight: 300;
   font-style: normal;
+  /* text-decoration: underline red !important; */
+  transition: all 0.3s ease;
 }
 
 /* Hover effect for nav links */
 .nav-link:hover {
   font-weight: 600;
-  text-decoration: underline;
+  text-decoration: underline red;
 }
 
 /* Contact Us Button */
