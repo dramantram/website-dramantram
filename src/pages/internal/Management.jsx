@@ -1,0 +1,332 @@
+import React, { useState } from "react";
+import AdminLayout from "../../components/AdminLayout/AdminLayout";
+import "../../styles/Management.css";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+
+export default function Management() {
+  const [form, setForm] = useState({
+    case_study_name: "",
+    slug: "",
+    case_study_description: "",
+    client: "",
+    services: "",
+    complexity: "",
+    industry: "",
+    duration: "",
+    problem: "",
+    solution: "",
+    thumbnail_image: null,
+    thumbnail_text: "",
+    image1: null,
+    image2: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files, type } = e.target;
+    if (type === "file") {
+      setForm((s) => ({ ...s, [name]: files[0] || null }));
+      return;
+    }
+    setForm((s) => ({ ...s, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const caseStudyData = new FormData();
+      caseStudyData.append("case_study_name", form.case_study_name);
+      caseStudyData.append(
+        "case_study_description",
+        form.case_study_description
+      );
+      caseStudyData.append("client", form.client);
+      caseStudyData.append("services", form.services);
+      caseStudyData.append("complexity", form.complexity);
+      caseStudyData.append("industry", form.industry);
+      caseStudyData.append("duration", form.duration);
+      caseStudyData.append("problem", form.problem);
+      caseStudyData.append("solution", form.solution);
+      caseStudyData.append("thumbnail_image", form.thumbnail_image);
+      caseStudyData.append("thumbnail_text", form.thumbnail_text);
+      caseStudyData.append("image1", form.image1);
+      caseStudyData.append("image2", form.image2);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`,
+        caseStudyData
+      );
+      if (data?.success) {
+        toast.success(data?.message);
+        handleReset();
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong in creating product");
+    }
+  };
+
+  const handleReset = () =>
+    setForm({
+      case_study_name: "",
+      slug: "",
+      case_study_description: "",
+      client: "",
+      services: "",
+      complexity: "",
+      industry: "",
+      duration: "",
+      problem: "",
+      solution: "",
+      thumbnail_image: null,
+      thumbnail_text: "",
+      image1: null,
+      image2: null,
+    });
+
+  return (
+    <AdminLayout>
+      <div className="management-wrapper">
+        <div className="management-form-box">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 18,
+            }}
+          >
+            <h2 style={{ color: "#fff", fontSize: 20, margin: 0 }}>
+              Create Case Study
+            </h2>
+            <div
+              style={{
+                padding: "6px 10px",
+                borderRadius: 999,
+                background: "linear-gradient(90deg, #ff3b3b, #ff7b7b)",
+                color: "#000",
+                fontWeight: 600,
+                fontSize: 13,
+              }}
+            >
+              Admin
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="management-grid">
+            {/* CASE STUDY NAME */}
+            <div>
+              <label className="management-label">
+                <strong>Case Study Heading</strong>
+              </label>
+              <input
+                name="case_study_name"
+                value={form.case_study_name}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Case Study Name"
+              />
+            </div>
+
+            {/* CLIENT */}
+            <div>
+              <label className="management-label">
+                <strong>Client's Name</strong>
+              </label>
+              <input
+                name="client"
+                value={form.client}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Client name"
+              />
+            </div>
+
+            {/* SLUG */}
+            {/* <div>
+              <label className="management-label">
+                <strong>Slug</strong>{" "}
+                <span style={{ fontWeight: 400 }}>(e.g. united-nations)</span>
+              </label>
+              <input
+                name="slug"
+                value={form.slug}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="unique-slug"
+              />
+            </div> */}
+
+            {/* SERVICES */}
+            <div>
+              <label className="management-label">Services</label>
+              <input
+                name="services"
+                value={form.services}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="e.g. Design, Development"
+              />
+            </div>
+
+            {/* CASE STUDY DESCRIPTION (full width) */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <label className="management-label">Case Study Description</label>
+              <textarea
+                name="case_study_description"
+                value={form.case_study_description}
+                onChange={handleChange}
+                className="management-textarea"
+                rows={2}
+                placeholder="Short description / overview of the case study"
+              />
+            </div>
+
+            {/* THUMBNAIL TEXT */}
+            <div>
+              <label className="management-label">Thumbnail Text</label>
+              <input
+                name="thumbnail_text"
+                value={form.thumbnail_text}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Text shown on the case study card"
+              />
+            </div>
+
+            {/* COMPLEXITY */}
+            <div>
+              <label className="management-label">Complexity</label>
+              <select
+                name="complexity"
+                value={form.complexity}
+                onChange={handleChange}
+                className="management-select"
+              >
+                <option value="">Select complexity</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+
+            {/* INDUSTRY */}
+            <div>
+              <label className="management-label">Industry</label>
+              <input
+                name="industry"
+                value={form.industry}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="e.g. Healthcare"
+              />
+            </div>
+
+            {/* DURATION */}
+            <div>
+              <label className="management-label">Duration</label>
+              <input
+                name="duration"
+                value={form.duration}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="e.g. 3 months"
+              />
+            </div>
+
+            {/* PROBLEM (full width) */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <label className="management-label">Problem</label>
+              <textarea
+                name="problem"
+                value={form.problem}
+                onChange={handleChange}
+                className="management-textarea"
+                rows={4}
+                placeholder="Describe the problem faced"
+              />
+            </div>
+
+            {/* SOLUTION (full width) */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <label className="management-label">Solution</label>
+              <textarea
+                name="solution"
+                value={form.solution}
+                onChange={handleChange}
+                className="management-textarea"
+                rows={4}
+                placeholder="Solution summary"
+              />
+            </div>
+
+            {/* THUMBNAIL IMAGE */}
+            <div>
+              <label className="management-label">Thumbnail Image</label>
+              <input
+                name="thumbnail_image"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* IMAGE 1 */}
+            <div>
+              <label className="management-label">Image 1</label>
+              <input
+                name="image1"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* IMAGE 2 */}
+            <div>
+              <label className="management-label">Image 2</label>
+              <input
+                name="image2"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* ACTIONS (full width) */}
+            <div
+              style={{
+                gridColumn: "1 / -1",
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 12,
+                marginTop: 8,
+              }}
+            >
+              <button
+                type="button"
+                onClick={handleReset}
+                className="management-btn management-reset"
+                aria-label="Reset form"
+              >
+                Reset
+              </button>
+
+              <button
+                type="submit"
+                className="management-btn management-save"
+                aria-label="Create Case-Study"
+              >
+                Create Case-Study
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}

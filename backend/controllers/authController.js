@@ -56,7 +56,8 @@ export const registerController = async (req, res) => {
 // Login
 export const loginController = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.fields;
+
     // Validation
     if (!email || !password) {
       return res.status(404).send({
@@ -77,19 +78,20 @@ export const loginController = async (req, res) => {
     // Check password
     const match = await comparePassword(password, user.password);
     if (!match) {
-      res.status(200).send({
+      return res.status(200).send({
         success: false,
         message: "Invalid Password",
       });
     }
 
     // User token and cookie session
-    const token = await JWT.sign({ _id: user.id }, process.env.JWT_SECRET, {
+    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
+
     res.status(200).send({
       success: true,
-      message: "Login succesful",
+      message: "Login successful",
       user: {
         _id: user._id,
         name: user.name,

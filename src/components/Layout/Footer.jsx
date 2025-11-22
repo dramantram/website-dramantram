@@ -4,6 +4,7 @@ import React from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "../../styles/Footer.css";
 import logo from "../../assets/images/biglogo.png"; // Make sure you have a logo image
+import { Link } from "react-router-dom";
 
 const Footer = ({ className }) => {
   return (
@@ -131,6 +132,29 @@ const Footer = ({ className }) => {
             </Button>
           </Col>
         </Row>
+
+        {/* Employee/Admin Access Section */}
+        <div className="employee-access text-center mt-5 pt-4 border-top border-secondary">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-3"></div>
+              <div className="col-md-3">
+                {" "}
+                <p className="mb-1 emp-access-text">Already working with us?</p>
+              </div>
+              <div className="col-md-3">
+                <Link
+                  size="sm"
+                  className="employee-login-btn"
+                  to="/internal/login"
+                >
+                  Login as Admin
+                </Link>
+              </div>
+              <div className="col-md-3"></div>
+            </div>
+          </div>
+        </div>
       </Container>
     </footer>
   );
