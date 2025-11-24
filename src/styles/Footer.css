@@ -290,3 +290,9 @@
   box-shadow: 0 8px 20px rgba(255, 251, 0, 0.4);
   background-color: #fff200;
 }
+
+@media (max-width: 768px) {
+  .emp-access-text {
+    padding-bottom: 20px;
+  }
+}

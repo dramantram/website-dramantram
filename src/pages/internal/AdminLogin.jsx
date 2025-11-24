@@ -32,7 +32,7 @@ const AdminLogin = () => {
         });
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate(location.state || "/internal/management");
+        navigate(location.state || "/internal/case-studies");
       } else {
         toast.error(res.data.message);
       }

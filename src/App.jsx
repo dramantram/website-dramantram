@@ -9,6 +9,8 @@ import CaseStudy from "./pages/CaseStudy.jsx";
 import AdminLogin from "./pages/internal/AdminLogin.jsx";
 import Management from "./pages/internal/Management.jsx";
 import CaseStudies from "./pages/CaseStudies.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import UpdateCaseStudy from "./pages/internal/UpdateCaseStudy.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,9 +25,16 @@ function App() {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/portfolio" element={<PortfolioPage />}></Route>
         <Route path="/case-study/:slug" element={<CaseStudy />}></Route>
-        <Route path="/internal/login" element={<AdminLogin />}></Route>
-        <Route path="/internal/management" element={<Management />}></Route>
-        <Route path="/case-studies" element={<CaseStudies />}></Route>
+        <Route path="/login" element={<AdminLogin />}></Route>
+
+        <Route path="/internal" element={<PrivateRoute />}>
+          <Route path="create-case-study" element={<Management />}></Route>
+          <Route path="case-studies" element={<CaseStudies />}></Route>
+          <Route
+            path="update-case-study/:slug"
+            element={<UpdateCaseStudy />}
+          ></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,50 +1,85 @@
-import React, { use, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import data from "../data/CaseStudies.json";
+import axios from "axios";
 import "../styles/CaseStudyPage.css";
 import Layout from "../components/Layout/Layout";
 
-const metaRow = (label, value) => (
+// Helper component for meta fields
+const MetaRow = ({ label, value }) => (
   <div className="d-flex flex-column mb-2">
     <span className="cs-meta-label">{label}</span>
     <span className="cs-meta-value">{value || "—"}</span>
   </div>
 );
 
-// Collect any keys like "image-1", "image-2", ... into an ordered array
-const collectImages = (cs) =>
-  Object.keys(cs)
-    .filter((k) => k.startsWith("image-"))
-    .sort((a, b) => {
-      const ai = parseInt(a.split("-")[1], 10);
-      const bi = parseInt(b.split("-")[1], 10);
-      return ai - bi;
-    })
-    .map((k) => cs[k])
-    .filter(Boolean);
-
 const CaseStudy = () => {
   const { slug } = useParams();
-  const cs = useMemo(
-    () => data.caseStudies.find((x) => x.slug === slug),
-    [slug]
-  );
+  const [cs, setCs] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!cs) {
+  // API URL
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // Fetch Data
+  const getCaseStudy = async () => {
+    try {
+      const { data } = await axios.get(
+        `${apiUrl}/api/v1/management/get-case-study/${slug}`
+      );
+      if (data?.success) {
+        setCs(data.caseStudy);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCaseStudy();
+  }, [slug]);
+
+  // Loading State
+  if (loading) {
     return (
-      <section className="container py-5">
-        <h1>Case study not found</h1>
-        <p className="text-muted">Check the URL or go back to the list.</p>
-        <Link to="/">← Back home</Link>
-      </section>
+      <Layout>
+        <section
+          className="container py-5 text-white"
+          style={{ minHeight: "80vh" }}
+        >
+          <h1>Loading Case Study...</h1>
+        </section>
+      </Layout>
     );
   }
 
-  const images = collectImages(cs);
+  // Error State
+  if (error || !cs) {
+    return (
+      <Layout>
+        <section
+          className="container py-5 text-white"
+          style={{ minHeight: "80vh" }}
+        >
+          <h1>Case study not found</h1>
+          <p className="text-muted">Check the URL or go back to the list.</p>
+          <Link to="/" className="text-danger">
+            ← Back home
+          </Link>
+        </section>
+      </Layout>
+    );
+  }
 
-  useEffect(() => {
-    console.log(cs);
-  }, []);
+  // --- IMAGE URL CONSTRUCTION ---
+  const thumbnailSrc = `${apiUrl}/api/v1/management/get-thumbnail-image/${cs._id}`;
+  const heroImageSrc = `${apiUrl}/api/v1/management/get-image-1/${cs._id}`;
+  const galleryImageSrc = `${apiUrl}/api/v1/management/get-image-2/${cs._id}`;
 
   return (
     <Layout>
@@ -52,45 +87,42 @@ const CaseStudy = () => {
         {/* GRID LINES BACKDROP */}
         <div className="cs-grid-lines" />
 
-        {/* Top strip (arrows / breadcrumb optional) */}
         <div className="container-fluid cs-container">
-          {/* <div className="row g-0 cs-topbar align-items-center">
-            <div className="col-6 col-md-9 text-end">
-              <span className="cs-pill-muted">Case Study</span>
-            </div>
-          </div> */}
-
           {/* HEADER: 3 columns */}
           <div className="row g-0 cs-header">
-            {/* Col 1: Title + card image */}
+            {/* Col 1: Title + Thumbnail Card */}
             <div className="col-12 col-md-3 cs-col cs-col-left">
               <div className="cs-pad">
-                <h1 className="cs-title">{cs.vision_statement}</h1>
-                {cs["card_image"] && (
-                  <figure className="cs-card-figure">
-                    <img
-                      src={cs["card_image"]}
-                      className="img-fluid cs-card"
-                      alt={cs.title}
-                    />
-                    {cs["card_text"] && (
-                      <figcaption className="cs-card-overlay">
-                        {cs["card_text"]}
-                      </figcaption>
-                    )}
-                  </figure>
-                )}
+                {/* Main Heading */}
+                <h1 className="cs-title">{cs.case_study_name}</h1>
+
+                <figure className="cs-card-figure">
+                  <img
+                    src={thumbnailSrc}
+                    className="img-fluid cs-card"
+                    alt={cs.case_study_name}
+                    onError={(e) => {
+                      e.target.style.display = "none"; // Hide if broken
+                    }}
+                  />
+                  {/* Thumbnail Text Overlay */}
+                  {cs.thumbnail_text && (
+                    <figcaption className="cs-card-overlay">
+                      {cs.thumbnail_text}
+                    </figcaption>
+                  )}
+                </figure>
               </div>
             </div>
 
             {/* Col 2: Meta list */}
             <div className="col-12 col-md-3 cs-col">
               <div className="cs-pad">
-                {metaRow("Client", cs.client)}
-                {metaRow("Services", cs.services)}
-                {metaRow("Complexity", cs.complexity)}
-                {metaRow("Industry", cs.industry)}
-                {metaRow("Duration", cs.duration)}
+                <MetaRow label="Client" value={cs.client} />
+                <MetaRow label="Services" value={cs.services} />
+                <MetaRow label="Complexity" value={cs.complexity} />
+                <MetaRow label="Industry" value={cs.industry} />
+                <MetaRow label="Duration" value={cs.duration} />
               </div>
             </div>
 
@@ -98,68 +130,69 @@ const CaseStudy = () => {
             <div className="col-12 col-md-6 cs-col cs-col-right">
               <div className="cs-pad">
                 <h2 className="cs-h2">
-                  Bringing your brand vision to life <br /> through captivating
-                  video content.
+                  {cs.case_study_description ||
+                    "Bringing your brand vision to life."}
                 </h2>
                 <p className="cs-pill-muted">Case Study</p>
-                <p className="cs-body">
-                  {cs["problem"].split("\n").map((line, i) => (
-                    <>
-                      <div key={i} style={{ marginTop: "15px" }}>
-                        {line}
-                        <br />
-                      </div>
-                    </>
+
+                <div className="cs-body">
+                  {/* Safely split problem text by newlines */}
+                  {cs.problem?.split("\n").map((line, i) => (
+                    <p key={i} style={{ marginTop: "10px", marginBottom: "0" }}>
+                      {line}
+                    </p>
                   ))}
-                </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* HERO IMAGE + SOLUTION SIDE BY SIDE */}
-          {images[0] && (
-            <div className="row g-0 cs-hero-solution-row">
-              <div className="col-12 col-md-9 p-0">
-                <div className="cs-hero-wrap">
-                  <img src={images[0]} alt="Case main" className="cs-hero" />
-                </div>
+          {/* HERO IMAGE (Image 1) + SOLUTION SIDE BY SIDE */}
+          <div className="row g-0 cs-hero-solution-row">
+            <div className="col-12 col-md-9 p-0">
+              <div className="cs-hero-wrap">
+                <img
+                  src={heroImageSrc}
+                  alt="Case Study Hero"
+                  className="cs-hero"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
               </div>
+            </div>
 
-              {/* Solution column (3/12 width) */}
-              <div className="col-12 col-md-3 cs-solution-col">
-                <div className="cs-pad">
-                  <h3 className="cs-h3">Our Solution</h3>
-                  <p className="cs-body">
-                    {cs.solution.split("\n").map((line, i) => (
-                      <>
-                        <div key={i} style={{ marginTop: "15px" }}>
-                          {line}
-                          <br />
-                        </div>
-                      </>
-                    ))}
-                  </p>
+            {/* Solution column (Right Side) */}
+            <div className="col-12 col-md-3 cs-solution-col">
+              <div className="cs-pad">
+                <h3 className="cs-h3">Our Solution</h3>
+                <div className="cs-body">
+                  {/* Safely split solution text */}
+                  {cs.solution?.split("\n").map((line, i) => (
+                    <p key={i} style={{ marginTop: "10px", marginBottom: "0" }}>
+                      {line}
+                    </p>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
-          {/* THUMBNAIL GALLERY */}
-          {images.length > 1 && (
-            <div className="row g-0 cs-gallery">
-              {images.slice(1).map((src, i) => (
-                <div className="col-md-12" key={i}>
-                  <div className="cs-thumb-wrap">
-                    <img
-                      src={src}
-                      alt={`page ${i + 2}`}
-                      className="img-fluid cs-thumb"
-                    />
-                  </div>
-                </div>
-              ))}
+          {/* GALLERY IMAGE (Image 2) */}
+          <div className="row g-0 cs-gallery">
+            <div className="col-md-12">
+              <div className="cs-thumb-wrap">
+                <img
+                  src={galleryImageSrc}
+                  alt="Gallery view"
+                  className="img-fluid cs-thumb"
+                  onError={(e) => {
+                    e.target.closest(".cs-gallery").style.display = "none";
+                  }}
+                />
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
     </Layout>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../components/Layout/Layout";
+import AdminLayout from "../components/AdminLayout/AdminLayout";
 import axios from "axios";
-import "../styles/CaseStudiesPage.css"; // Make sure to import your CSS file
+import "../styles/CaseStudiesPage.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -25,10 +25,35 @@ const CaseStudies = () => {
       }
     } catch (error) {
       console.log(error);
-      // You might want to add a toast.error here
-      toast.error(res.data.message);
+      toast.error("Something went wrong while fetching data");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Handle Delete Functionality
+  const handleDelete = async (id) => {
+    try {
+      // Basic confirmation before deleting
+      let answer = window.confirm(
+        "Are you sure you want to delete this case study?"
+      );
+      if (!answer) return;
+
+      const { data } = await axios.delete(
+        `${apiUrl}/api/v1/management/delete-case-study/${id}`
+      );
+
+      if (data?.success) {
+        toast.success("Case study deleted successfully");
+        // Refresh the list locally without reloading page
+        setCaseStudies(caseStudies.filter((c) => c._id !== id));
+      } else {
+        toast.error(data?.message || "Error deleting item");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -37,7 +62,7 @@ const CaseStudies = () => {
   }, []);
 
   return (
-    <Layout>
+    <AdminLayout>
       <div className="case-studies-container">
         <div className="container">
           {/* Header Section */}
@@ -46,7 +71,7 @@ const CaseStudies = () => {
               Our <span className="gradient-text">Case Studies</span>
             </h1>
             <p className="text-secondary">
-              Explore our recent projects and success stories.
+              Manage your projects and success stories.
             </p>
           </div>
 
@@ -68,31 +93,62 @@ const CaseStudies = () => {
                       <img
                         src={`${apiUrl}/api/v1/management/get-thumbnail-image/${c._id}`}
                         alt={c.case_study_name}
+                        onError={(e) => {
+                          e.target.src =
+                            "https://via.placeholder.com/400x200?text=No+Image";
+                        }}
                       />
                     </div>
 
                     {/* Content */}
                     <div className="card-body">
-                      <h5 className="card-title">{c.case_study_name}</h5>
+                      <h5 className="card-title px-2">{c.case_study_name}</h5>
 
-                      {/* Display Industry or Thumbnail text as a small badge */}
+                      {/* Display Industry Badge */}
                       {c.industry && (
-                        <span className="badge bg-secondary mb-2">
-                          {c.industry}
-                        </span>
+                        <div>
+                          <span className="badge bg-secondary mb-3 mx-2">
+                            {c.industry}
+                          </span>
+                        </div>
                       )}
 
-                      {/* Description (Truncated to 100 chars) */}
-                      <p className="card-text">
-                        {c.case_study_description?.substring(0, 100)}...
+                      {/* Description (Truncated) */}
+                      <p className="card-text mx-2">
+                        {c.case_study_description?.length > 90
+                          ? c.case_study_description.substring(0, 90) + "..."
+                          : c.case_study_description}
                       </p>
 
-                      <button
-                        className="btn btn-gradient"
-                        onClick={() => navigate(`/case-study/${c.slug}`)} // Replace with navigate(`/case-study/${c.slug}`)
-                      >
-                        View Case Study
-                      </button>
+                      {/* ACTION BUTTONS */}
+                      <div className="card-actions">
+                        {/* Primary Action */}
+                        <button
+                          className="btn-view"
+                          onClick={() => navigate(`/case-study/${c.slug}`)}
+                        >
+                          View Case Study
+                        </button>
+
+                        {/* Admin Actions Row */}
+                        <div className="admin-actions">
+                          <button
+                            className="btn-action btn-edit"
+                            onClick={() =>
+                              navigate(`/internal/update-case-study/${c.slug}`)
+                            }
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            className="btn-action btn-delete"
+                            onClick={() => handleDelete(c._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -107,7 +163,7 @@ const CaseStudies = () => {
           )}
         </div>
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 

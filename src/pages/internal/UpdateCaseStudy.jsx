@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
-import "../../styles/Management.css";
+import "../../styles/Management.css"; // Reusing the same black/red theme
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useParams, useNavigate } from "react-router-dom";
+import { UseAuth } from "../../context/auth";
 
-export default function Management() {
+const UpdateCaseStudy = () => {
+  const navigate = useNavigate();
+  const { slug } = useParams();
+  const [id, setId] = useState(""); // To store the _id for the update API
+  const [loading, setLoading] = useState(true);
+
   const [form, setForm] = useState({
     case_study_name: "",
-    slug: "",
     case_study_description: "",
     client: "",
     services: "",
@@ -22,6 +28,49 @@ export default function Management() {
     image2: null,
   });
 
+  // API URL
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // 1. Fetch existing data
+  const getSingleCaseStudy = async () => {
+    try {
+      const { data } = await axios.get(
+        `${apiUrl}/api/v1/management/get-case-study/${slug}`
+      );
+      if (data?.success) {
+        const cs = data.caseStudy;
+        setId(cs._id);
+        setForm({
+          case_study_name: cs.case_study_name,
+          case_study_description: cs.case_study_description,
+          client: cs.client,
+          services: cs.services,
+          complexity: cs.complexity,
+          industry: cs.industry,
+          duration: cs.duration,
+          problem: cs.problem,
+          solution: cs.solution,
+          thumbnail_text: cs.thumbnail_text,
+          // We don't pre-fill file inputs for security reasons,
+          // user only uploads if they want to CHANGE the image.
+          thumbnail_image: null,
+          image1: null,
+          image2: null,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error fetching case study details");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSingleCaseStudy();
+  }, [slug]);
+
+  // 2. Handle Input Changes
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
     if (type === "file") {
@@ -31,7 +80,8 @@ export default function Management() {
     setForm((s) => ({ ...s, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  // 3. Handle Submit (Update)
+  const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const caseStudyData = new FormData();
@@ -47,51 +97,48 @@ export default function Management() {
       caseStudyData.append("duration", form.duration);
       caseStudyData.append("problem", form.problem);
       caseStudyData.append("solution", form.solution);
-      caseStudyData.append("thumbnail_image", form.thumbnail_image);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
-      caseStudyData.append("image1", form.image1);
-      caseStudyData.append("image2", form.image2);
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`,
+
+      // Only append images if a new one is selected
+      if (form.thumbnail_image)
+        caseStudyData.append("thumbnail_image", form.thumbnail_image);
+      if (form.image1) caseStudyData.append("image1", form.image1);
+      if (form.image2) caseStudyData.append("image2", form.image2);
+
+      const { data } = await axios.put(
+        `${apiUrl}/api/v1/management/update-case-study/${id}`,
         caseStudyData
       );
+
       if (data?.success) {
-        toast.success(data?.message);
-        handleReset();
+        toast.success("Case Study Updated Successfully");
+        navigate("/internal/case-studies");
       } else {
-        toast.error(data?.message);
+        toast.error(data?.message || "Update failed");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong in creating product");
+      toast.error("Something went wrong while updating");
     }
   };
 
-  const handleReset = () =>
-    setForm({
-      case_study_name: "",
-      slug: "",
-      case_study_description: "",
-      client: "",
-      services: "",
-      complexity: "",
-      industry: "",
-      duration: "",
-      problem: "",
-      solution: "",
-      thumbnail_image: null,
-      thumbnail_text: "",
-      image1: null,
-      image2: null,
-    });
-
-  // Helper style for the small info text
-  const infoStyle = {
-    fontSize: "0.8rem",
-    color: "#aaa", // Light gray for visibility on dark bg
-    fontWeight: "normal",
-    marginLeft: "6px",
-  };
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div
+          style={{
+            minHeight: "80vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+          }}
+        >
+          <h2>Loading...</h2>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -106,7 +153,7 @@ export default function Management() {
             }}
           >
             <h2 style={{ color: "#fff", fontSize: 20, margin: 0 }}>
-              Create Case Study
+              Update Case Study
             </h2>
             <div
               style={{
@@ -118,11 +165,11 @@ export default function Management() {
                 fontSize: 13,
               }}
             >
-              Admin
+              Editing
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="management-grid">
+          <form onSubmit={handleUpdate} className="management-grid">
             {/* CASE STUDY NAME */}
             <div>
               <label className="management-label">
@@ -163,7 +210,7 @@ export default function Management() {
               />
             </div>
 
-            {/* CASE STUDY DESCRIPTION (full width) */}
+            {/* DESCRIPTION */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Case Study Description</label>
               <textarea
@@ -172,7 +219,7 @@ export default function Management() {
                 onChange={handleChange}
                 className="management-textarea"
                 rows={2}
-                placeholder="Short description / overview of the case study"
+                placeholder="Short description"
               />
             </div>
 
@@ -184,7 +231,7 @@ export default function Management() {
                 value={form.thumbnail_text}
                 onChange={handleChange}
                 className="management-input"
-                placeholder="Text shown on the case study card"
+                placeholder="Text shown on card"
               />
             </div>
 
@@ -228,7 +275,7 @@ export default function Management() {
               />
             </div>
 
-            {/* PROBLEM (full width) */}
+            {/* PROBLEM */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Problem</label>
               <textarea
@@ -237,11 +284,11 @@ export default function Management() {
                 onChange={handleChange}
                 className="management-textarea"
                 rows={4}
-                placeholder="Describe the problem faced"
+                placeholder="Describe the problem"
               />
             </div>
 
-            {/* SOLUTION (full width) */}
+            {/* SOLUTION */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Solution</label>
               <textarea
@@ -258,8 +305,31 @@ export default function Management() {
             <div>
               <label className="management-label">
                 Thumbnail Image
-                <span style={infoStyle}>(Max 1MB, 377x458 px)</span>
+                <span
+                  style={{
+                    fontSize: "0.8em",
+                    color: "#888",
+                    marginLeft: "8px",
+                  }}
+                >
+                  (Leave empty to keep existing)
+                </span>
               </label>
+
+              {/* Preview existing if available (optional) */}
+              <div style={{ marginBottom: "10px" }}>
+                <img
+                  src={`${apiUrl}/api/v1/management/case-study-thumbnail/${id}`}
+                  alt="current"
+                  style={{
+                    height: "50px",
+                    borderRadius: "4px",
+                    border: "1px solid #444",
+                  }}
+                  onError={(e) => (e.target.style.display = "none")}
+                />
+              </div>
+
               <input
                 name="thumbnail_image"
                 onChange={handleChange}
@@ -272,7 +342,16 @@ export default function Management() {
             {/* IMAGE 1 */}
             <div>
               <label className="management-label">
-                Image 1<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+                Image 1
+                <span
+                  style={{
+                    fontSize: "0.8em",
+                    color: "#888",
+                    marginLeft: "8px",
+                  }}
+                >
+                  (Leave empty to keep existing)
+                </span>
               </label>
               <input
                 name="image1"
@@ -286,7 +365,16 @@ export default function Management() {
             {/* IMAGE 2 */}
             <div>
               <label className="management-label">
-                Image 2<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+                Image 2
+                <span
+                  style={{
+                    fontSize: "0.8em",
+                    color: "#888",
+                    marginLeft: "8px",
+                  }}
+                >
+                  (Leave empty to keep existing)
+                </span>
               </label>
               <input
                 name="image2"
@@ -297,7 +385,7 @@ export default function Management() {
               />
             </div>
 
-            {/* ACTIONS (full width) */}
+            {/* ACTIONS */}
             <div
               style={{
                 gridColumn: "1 / -1",
@@ -309,19 +397,19 @@ export default function Management() {
             >
               <button
                 type="button"
-                onClick={handleReset}
+                onClick={() => navigate("/case-studies")}
                 className="management-btn management-reset"
-                aria-label="Reset form"
+                aria-label="Cancel"
               >
-                Reset
+                Cancel
               </button>
 
               <button
                 type="submit"
                 className="management-btn management-save"
-                aria-label="Create Case-Study"
+                aria-label="Update Case-Study"
               >
-                Create Case-Study
+                Update Case-Study
               </button>
             </div>
           </form>
@@ -329,4 +417,6 @@ export default function Management() {
       </div>
     </AdminLayout>
   );
-}
+};
+
+export default UpdateCaseStudy;

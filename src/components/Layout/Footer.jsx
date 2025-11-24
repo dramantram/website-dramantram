@@ -143,11 +143,7 @@ const Footer = ({ className }) => {
                 <p className="mb-1 emp-access-text">Already working with us?</p>
               </div>
               <div className="col-md-3">
-                <Link
-                  size="sm"
-                  className="employee-login-btn"
-                  to="/internal/login"
-                >
+                <Link size="sm" className="employee-login-btn" to="/login">
                   Login as Admin
                 </Link>
               </div>
