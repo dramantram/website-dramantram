@@ -1,6 +1,6 @@
 import fs from "fs";
 import slugify from "slugify";
-import CaseStudyModel from "../models/CaseStudyModel.js";
+import CaseStudyModel from "../models/caseStudyModel.js";
 
 // Create Case Study
 export const createCaseStudyController = async (req, res) => {
