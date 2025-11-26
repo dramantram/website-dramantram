@@ -70,11 +70,11 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="/academy">
                 Academy
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <a className="nav-link" href="/services">
                 Services
@@ -90,11 +90,11 @@ const Header = () => {
                 About Us
               </a>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="/pricing">
                 Pricing
               </a>
-            </li>
+            </li> */}
           </ul>
           <Link className="btn" to="/contact">
             Contact Us

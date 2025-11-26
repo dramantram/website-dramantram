@@ -5,7 +5,7 @@ import Process from "../components/Process";
 import PortfolioSection from "../components/PortfolioSection";
 import ComesWith from "../components/ComesWith";
 
-const ServicesPage = () => {
+const BrandingPage = () => {
   const clients = [
     { alt: "Deloitte", src: "/logos/clients/deloitte.png" },
     { alt: "EY", src: "/logos/clients/Ey.png" },
@@ -108,4 +108,4 @@ const ServicesPage = () => {
   );
 };
 
-export default ServicesPage;
+export default BrandingPage;
