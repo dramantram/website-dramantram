@@ -150,7 +150,7 @@ const Home = () => {
               <div className="row g-0">
                 {/* LEFT: Visual (Takes 50% width -> col-lg-6) */}
                 <div className="col-lg-6 col-12 cap-col cap-left">
-                  <div className="content-wrapper">
+                  <div className="">
                     <img
                       src={packImg}
                       alt="Branding showcase"
