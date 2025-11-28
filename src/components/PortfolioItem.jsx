@@ -9,10 +9,10 @@ const PortfolioItem = ({ imageSrc, title, slug }) => {
   return (
     <div className="portfolio-item">
       <img src={imageSrc} alt="Portfolio" className="portfolio-img" />
-      <div className="overlay">
-        <Link to={`/case-study/${slug}`} className="case-link">
-          {title} <span>›</span>
-        </Link>
+      <div className="overlay case-link">
+        {/* <button className=""> */}
+        {title} <span>›</span>
+        {/* </button> */}
       </div>
     </div>
   );

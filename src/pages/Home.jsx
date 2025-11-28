@@ -1,25 +1,137 @@
 // src/pages/Home.jsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/Home.css";
 import "../styles/Animations.css";
-import HomePetalsSVG from "../components/HomePetalsSVG";
-import { Link } from "react-router-dom";
 import PortfolioSection from "../components/PortfolioSection";
 import ClientsSection from "../components/Clients";
 import GlitchButton from "../components/GlitchButton";
-import Spline from "@splinetool/react-spline";
 
-const packImg = "packaging.png";
+// Lazy load the 3D component
+const SplineContainer = lazy(() => import("../components/SplineContainer"));
 
-const menu = [
-  "Branding",
-  "Animated Videos",
-  "Live Action",
-  "UI/UX",
-  "Event Interactions",
-  "Others",
+// --- DATA STRUCTURE FOR INTERACTIVE SECTION ---
+// We move the images, titles, and bullets here so they can be switched dynamically
+const servicesData = [
+  {
+    id: 0,
+    menuTitle: "Branding",
+    image: "packaging.png", // Ensure this exists in public folder
+    heading: (
+      <>
+        With great design language comes
+        <br /> great Brand Recall.
+      </>
+    ),
+    bullets: [
+      "Brand Identity & Design",
+      "Creating Logo",
+      "Branding Strategy",
+      "Defining Brand Style Guide",
+      "Social Media Branding",
+      "Packaging Design",
+    ],
+    link: "/services/branding",
+  },
+  {
+    id: 1,
+    menuTitle: "Animated Videos",
+    image: "animation.png", // Replace with your actual image
+    heading: (
+      <>
+        Stories that move people
+        <br /> frame by frame.
+      </>
+    ),
+    bullets: [
+      "2D Vector Animation",
+      "Motion Graphics",
+      "Explainer Videos",
+      "Whiteboard Animation",
+      "Character Design",
+      "Logo Animation",
+    ],
+    link: "/services/animation",
+  },
+  {
+    id: 2,
+    menuTitle: "Live Action",
+    image: "live-action.png", // Replace with your actual image
+    heading: (
+      <>
+        Capturing reality with
+        <br /> cinematic excellence.
+      </>
+    ),
+    bullets: [
+      "Corporate Films",
+      "TV Commercials",
+      "Product Shoots",
+      "Interview Shoots",
+      "Documentaries",
+      "Event Coverage",
+    ],
+    link: "/services/live-action",
+  },
+  {
+    id: 3,
+    menuTitle: "UI/UX",
+    image: "uiux.png", // Replace with your actual image
+    heading: (
+      <>
+        Designing interfaces that
+        <br /> feel purely intuitive.
+      </>
+    ),
+    bullets: [
+      "User Research",
+      "Wireframing & Prototyping",
+      "Mobile App Design",
+      "Website Design",
+      "Dashboard Interfaces",
+      "User Testing",
+    ],
+    link: "/services/ui-ux",
+  },
+  {
+    id: 4,
+    menuTitle: "Event Interactions",
+    image: "events.png", // Replace with your actual image
+    heading: (
+      <>
+        immersive experiences
+        <br /> that leave a mark.
+      </>
+    ),
+    bullets: [
+      "AR/VR Installations",
+      "Interactive Projection",
+      "Holographic Displays",
+      "Event Tech Solutions",
+      "Virtual Events",
+    ],
+    link: "/services/events",
+  },
+  {
+    id: 5,
+    menuTitle: "Others",
+    image: "others.png", // Replace with your actual image
+    heading: (
+      <>
+        Everything else to
+        <br /> complete the puzzle.
+      </>
+    ),
+    bullets: [
+      "SEO & Marketing",
+      "Copywriting",
+      "Illustration",
+      "Sound Design",
+      "Consultation",
+    ],
+    link: "/services/others",
+  },
 ];
 
 const testimonials = [
@@ -47,40 +159,61 @@ const testimonials = [
 ];
 
 const Home = () => {
-  const activeIndex = 0; // "Branding"
-
+  // --- STATE CHANGE: Active Index is now dynamic ---
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
+    let timeoutId = null;
+
     const handleResize = () => {
-      if (window.innerWidth <= 600) {
-        setIsSmallScreen(true);
-      } else {
-        setIsSmallScreen(false);
-      }
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsSmallScreen(window.innerWidth <= 600);
+      }, 150);
     };
 
-    window.addEventListener("resize", handleResize);
     handleResize();
-
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
     };
   }, []);
+
+  // Helper to get current data based on index
+  const currentService = servicesData[activeIndex];
 
   return (
     <Layout>
       <div className="home-page-wrapper">
-        {/* 2. THE GRID OVERLAY: This draws the lines from top to bottom */}
         <div className="global-grid-overlay"></div>
 
         {/* Intro Section */}
         <section className="intro-section">
           <div className="spline-container">
-            <Spline scene="https://prod.spline.design/conlVET3ho6gKvDo/scene.splinecode" />
+            {!isSmallScreen && (
+              <Suspense
+                fallback={<div className="loading-3d">Loading 3D...</div>}
+              >
+                <SplineContainer />
+              </Suspense>
+            )}
+            {isSmallScreen && (
+              <div
+                className="mobile-fallback-bg"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: "#111",
+                }}
+              ></div>
+            )}
           </div>
 
-          {/* Content sits on top with z-index 1 */}
           <div
             className="main-content"
             style={{ position: "relative", zIndex: 2 }}
@@ -116,13 +249,9 @@ const Home = () => {
 
         {/* Specialization Section */}
         <section className="specialization-sec">
-          {/* UPPER Section */}
           <section className="svc-band px-5">
             <div className="svc-inner">
-              {/* LEFT: Big heading */}
               <h2 className="svc-title">SERVICES WE SPECIALIZE IN</h2>
-
-              {/* RIGHT: Copy + metrics */}
               <div className="svc-right">
                 <p className="svc-copy">
                   We are humbled by the trust shown to us by our client partners{" "}
@@ -144,35 +273,40 @@ const Home = () => {
             </div>
           </section>
 
-          {/* LOWER Section */}
           <section className="cap-wrap">
             <div className="container-fluid px-0">
               <div className="row g-0">
-                {/* LEFT: Visual (Takes 50% width -> col-lg-6) */}
+                {/* LEFT: Image (Dynamic based on state) */}
                 <div className="col-lg-6 col-12 cap-col cap-left">
                   <div className="">
+                    {/* OPTIONAL: Add a 'fade-in' class via CSS keyframes for smooth transitions */}
                     <img
-                      src={packImg}
-                      alt="Branding showcase"
+                      key={currentService.image} // Key prop forces React to re-render image when src changes (good for animation)
+                      src={currentService.image}
+                      alt={currentService.menuTitle}
                       className="cap-hero"
+                      loading="lazy"
                     />
                   </div>
                 </div>
 
-                {/* MIDDLE: Menu (Takes 25% width -> col-lg-3) */}
+                {/* MIDDLE: Menu (Hover triggers state update) */}
                 <div className="col-lg-3 col-12 cap-col cap-mid">
                   <div className="content-wrapper">
                     <nav className="cap-menu" aria-label="Service categories">
-                      {menu.map((item, i) => (
+                      {servicesData.map((item, index) => (
                         <button
-                          key={item}
+                          key={item.id}
                           className={`cap-menu-item ${
-                            i === activeIndex ? "is-active" : ""
+                            index === activeIndex ? "is-active" : ""
                           }`}
                           type="button"
+                          // INTERACTION HERE:
+                          onMouseEnter={() => setActiveIndex(index)}
+                          onClick={() => setActiveIndex(index)} // Fallback for mobile
                         >
-                          <span>{item}</span>
-                          {i === activeIndex && (
+                          <span>{item.menuTitle}</span>
+                          {index === activeIndex && (
                             <i className="cap-underline" aria-hidden />
                           )}
                         </button>
@@ -181,31 +315,24 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* RIGHT: Copy + bullets + CTA (Takes 25% width -> col-lg-3) */}
+                {/* RIGHT: Content (Dynamic based on state) */}
                 <div className="col-lg-3 col-12 cap-col cap-right">
                   <div className="content-wrapper">
                     <div className="cap-copy">
                       <h3>
                         <span className="cap-strong">
-                          With great design language comes
-                          <br /> great Brand Recall.
+                          {currentService.heading}
                         </span>
                       </h3>
 
                       <ul className="cap-bullets">
-                        <li>Brand Identity &amp; Design</li>
-                        <li>Creating Logo</li>
-                        <li>Branding Strategy</li>
-                        <li>Defining Brand Style Guide</li>
-                        <li>Social Media Branding</li>
-                        <li>Re-Branding</li>
-                        <li>Stationery Design</li>
-                        <li>Catalogues &amp; Brochure Design</li>
-                        <li>Packaging Design</li>
+                        {currentService.bullets.map((bullet, idx) => (
+                          <li key={idx}>{bullet}</li>
+                        ))}
                       </ul>
                     </div>
 
-                    <a href="/services/branding" className="cap-cta">
+                    <a href={currentService.link} className="cap-cta">
                       <span className="cap-cta-accent" />
                       <span className="explore-btn">Explore More</span>
                       <span className="cap-chev">›</span>
@@ -219,9 +346,9 @@ const Home = () => {
 
         {/* Agency Intro */}
         <section className="ai-wrap">
+          {/* ... Rest of your component (No changes needed below) ... */}
           <div className="container-fluid px-0">
             <div className="row g-0">
-              {/* COLUMN 1: Word stack */}
               <div className="col-lg-3 col-12 ai-col ai-left">
                 <div className="content-wrapper">
                   <p className="ai-kicker fw-semibold">Dramantram is</p>
@@ -235,12 +362,8 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* COLUMN 2: Empty Spacer (Hidden on mobile/tablet) */}
-              <div className="col-lg-3 d-none d-lg-block ai-col ai-spacer">
-                {/* This column is empty to maintain the 4-grid alignment */}
-              </div>
+              <div className="col-lg-3 d-none d-lg-block ai-col ai-spacer"></div>
 
-              {/* COLUMN 3: Heading + copy + CTA */}
               <div className="col-lg-3 col-12 ai-col ai-mid">
                 <div className="content-wrapper">
                   <h2 className="ai-head">
@@ -266,7 +389,6 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* COLUMN 4: Metrics */}
               <div className="col-lg-3 col-12 ai-col ai-right">
                 <div className="content-wrapper">
                   <div className="ai-metric">
@@ -299,10 +421,9 @@ const Home = () => {
         </section>
 
         {/* Testimonials */}
-        <section className={`testimonial-section ${!isSmallScreen ? "" : ""}`}>
+        <section className={`testimonial-section`}>
           <div className="container-fluid">
             <div className="row g-0">
-              {/* Left Section */}
               <div className="col-lg-3 col-md-6 col-12 left-section">
                 <div className="content-wrapper">
                   <h1 className="main-heading">
@@ -321,12 +442,11 @@ const Home = () => {
                     solutions with Dramanrtam
                   </p>
                   <div className="quote-marks">
-                    <img src="/Quote Symbol.png" alt="quotes" />
+                    <img src="/Quote Symbol.png" alt="quotes" loading="lazy" />
                   </div>
                 </div>
               </div>
 
-              {/* Testimonial Cards */}
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
@@ -337,10 +457,13 @@ const Home = () => {
                       {testimonial.name}
                     </h2>
                     <p className="card-role">{testimonial.role}</p>
-                    <p className="card-title">{testimonial.title}</p>
                     <div className="card-image-wrapper">
                       <div className="card-image">
-                        <img src={testimonial.image} alt={testimonial.name} />
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          loading="lazy"
+                        />
                       </div>
                     </div>
                     <p className="card-quote">{testimonial.quote}</p>
