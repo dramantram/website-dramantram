@@ -31,6 +31,10 @@
   /* Move navbar off-screen */
 }
 
+.navbar-nav {
+  padding-left: 200px !important;
+}
+
 /* Nav Buttons */
 .nav-link {
   color: white !important;
@@ -39,6 +43,7 @@
   font-style: normal;
   /* text-decoration: underline red !important; */
   transition: all 0.3s ease;
+  margin-left: 35px;
 }
 
 /* Hover effect for nav links */
@@ -54,6 +59,7 @@
   font-family: "Inter";
   font-weight: bolder;
   font-style: normal;
+  width: 150px;
 }
 
 /* Move the "Contact Us" button to the right */
@@ -116,4 +122,14 @@ body {
   text-underline-offset: 0.2em !important;
   text-decoration-thickness: 0.2em !important;
   text-decoration-color: red !important;
+}
+
+@media (max-width: 600px) {
+  .navbar-nav {
+    padding-left: 0px !important;
+  }
+
+  .nav-link {
+    margin-left: 0px !important;
+  }
 }

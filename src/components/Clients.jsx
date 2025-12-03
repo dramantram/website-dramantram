@@ -2,46 +2,115 @@
 import React from "react";
 import "../styles/Clients.css";
 
-// Replace these with real logo imports (SVG/PNG) or URLs.
-// For now, use your own imports like: import deloitte from "../assets/logos/deloitte.svg";
+// Updated Data with individual Width/Height
 const consulting = [
-  { alt: "Deloitte", src: "/logos/clients/deloitte.png" },
-  { alt: "EY", src: "/logos/clients/Ey.png" },
-  { alt: "PwC", src: "/logos/clients/PWC.png" },
+  {
+    alt: "Deloitte",
+    src: "/logos/clients/deloitte.png",
+    width: "140px",
+    height: "auto",
+  },
+  { alt: "EY", src: "/logos/clients/Ey.png", width: "100px", height: "auto" },
+  { alt: "PwC", src: "/logos/clients/PWC.png", width: "100px", height: "auto" },
 ];
 
 const international = [
-  { alt: "United Nations", src: "/logos/clients/United Nations.png" },
-  { alt: "Amazon", src: "/logos/clients/Amazon Logo.png" },
-  { alt: "Walmart", src: "/logos/clients/Walmart.png" },
+  {
+    alt: "United Nations",
+    src: "/logos/clients/United Nations.png",
+    width: "120px",
+    height: "auto",
+  },
+  {
+    alt: "Amazon",
+    src: "/logos/clients/Amazon Logo.png",
+    width: "110px",
+    height: "auto",
+  },
+  {
+    alt: "Walmart",
+    src: "/logos/clients/Walmart.png",
+    width: "130px",
+    height: "auto",
+  },
 ];
 
 const fintech = [
-  { alt: "NPCI", src: "/logos/clients/npci.png" },
-  { alt: "Pine Labs", src: "/logos/clients/pine-labs.png" },
-  { alt: "Razorpay", src: "/logos/clients/razorpay.png" },
+  {
+    alt: "NPCI",
+    src: "/logos/clients/npci.png",
+    width: "130px",
+    height: "auto",
+  },
+  {
+    alt: "Pine Labs",
+    src: "/logos/clients/pine-labs.png",
+    width: "140px",
+    height: "auto",
+  },
+  {
+    alt: "Razorpay",
+    src: "/logos/clients/razorpay.png",
+    width: "140px",
+    height: "auto",
+  },
 ];
 
 const corporate = [
-  { alt: "boAt", src: "/logos/clients/boat.png" },
-  { alt: "Maruti Suzuki", src: "/logos/clients/suzuki.png" },
-  { alt: "HCL", src: "/logos/clients/hcl.png" },
+  {
+    alt: "boAt",
+    src: "/logos/clients/boat.png",
+    width: "90px",
+    height: "auto",
+  },
+  {
+    alt: "Maruti Suzuki",
+    src: "/logos/clients/suzuki.png",
+    width: "200px",
+    height: "100px",
+  },
+  { alt: "HCL", src: "/logos/clients/hcl.png", width: "100px", height: "auto" },
 ];
 
 const government = [
-  { alt: "Invest India", src: "/logos/clients/invest-india.png" },
+  {
+    alt: "Invest India",
+    src: "/logos/clients/invest-india.png",
+    width: "150px",
+    height: "auto",
+  },
 ];
 
 const csr = [
-  { alt: "Sehgal Foundation", src: "/logos/clients/sehgal.png" },
-  { alt: "TRI", src: "/logos/clients/tri.png" },
-  { alt: "Toilet Board Coalition", src: "/logos/clients/toilet-board.png" },
+  {
+    alt: "Sehgal Foundation",
+    src: "/logos/clients/sehgal.png",
+    width: "120px",
+    height: "auto",
+  },
+  { alt: "TRI", src: "/logos/clients/tri.png", width: "120px", height: "auto" },
+  {
+    alt: "Toilet Board Coalition",
+    src: "/logos/clients/toilet-board.png",
+    width: "140px",
+    height: "auto",
+  },
 ];
 
+// UPDATED COMPONENT
 const LogoStack = ({ items }) => (
   <div className="logo-stack">
     {items.map((it, i) => (
-      <img key={i} src={it.src} alt={it.alt} className="logo" />
+      <img
+        key={i}
+        src={it.src}
+        alt={it.alt}
+        className="logo"
+        style={{
+          width: it.width || "auto",
+          height: it.height || "auto",
+        }}
+      />
     ))}
   </div>
 );
@@ -103,7 +172,7 @@ const ClientsSection = () => {
             <h3 className="cta-head">
               Check out the <br /> full client list
             </h3>
-            <a href="/clients" className="cta-link">
+            <a href="#clients" className="cta-link">
               <span>Complete List</span>
               <span className="chev">›</span>
             </a>

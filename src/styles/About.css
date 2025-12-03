@@ -4,12 +4,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 50px;
-  background: radial-gradient(
-      100% 200% at 50% 0%,
+  background: radial-gradient(100% 200% at 50% 0%,
       rgba(180, 0, 0, 0.6) 0%,
       rgba(120, 0, 0, 0.35) 25%,
-      rgba(0, 0, 0, 0) 55%
-    ),
+      rgba(0, 0, 0, 0) 55%),
     #000;
   color: white;
   position: relative;
@@ -19,14 +17,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      to right,
+  background: linear-gradient(to right,
       rgba(255, 255, 255, 0.06) 0,
       rgba(255, 255, 255, 0.06) 2px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to right,
+      transparent 1px),
+    linear-gradient(to right,
       transparent 0,
       transparent 25%,
       rgba(255, 255, 255, 0.06) 25%,
@@ -40,8 +35,7 @@
       rgba(255, 255, 255, 0.06) 75%,
       rgba(255, 255, 255, 0.06) calc(75% + 2px),
       transparent calc(75% + 1px),
-      transparent 100%
-    );
+      transparent 100%);
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: 1;
@@ -89,6 +83,7 @@
   cursor: pointer;
   border-radius: 5px;
   margin-left: 50px;
+  text-decoration: none;
 }
 
 .btn-connect-about:hover {
@@ -333,6 +328,7 @@
 
 /* Tablet and below (max-width: 991px) */
 @media (max-width: 991px) {
+
   /* Discussion Section */
   .discussion-container {
     padding: 30px 20px;
@@ -442,6 +438,7 @@
 
 /* Mobile (max-width: 767px) */
 @media (max-width: 767px) {
+
   /* Discussion Section */
   .discussion-container {
     padding: 20px 15px;
@@ -604,6 +601,7 @@
     width: 220px;
     height: 220px;
   }
+
   .discussion-container::after {
     background: none;
   }

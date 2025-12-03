@@ -14,12 +14,14 @@ import UpdateCaseStudy from "./pages/internal/UpdateCaseStudy.jsx";
 import AnimatedVideosPage from "./pages/Services/AnimatedVideosPage.jsx";
 import LiveActionPage from "./pages/Services/LiveActionPage.jsx";
 import UIUXPage from "./pages/Services/UIUXPage.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />

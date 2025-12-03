@@ -56,7 +56,7 @@ const LiveActionPage = () => {
               When we talk of an something that exists and works, nothing is
               more convincing than a <strong>live action video</strong>.
             </p>
-            <a className="connect-link" href="#contact">
+            <a className="connect-link" href="/contact">
               Let’s Connect <i>›</i>
             </a>
           </div>
@@ -79,9 +79,11 @@ const LiveActionPage = () => {
                   <li>Event Video</li>
                   <li>Demo Video</li>
                 </ul>
-                <button className=" btn-cta connect-btn">
-                  Let’s Connect <span>›</span>
-                </button>
+                <a href="/contact">
+                  <button className=" btn-cta connect-btn">
+                    Let’s Connect <span>›</span>
+                  </button>
+                </a>
               </div>
             </div>
           </div>

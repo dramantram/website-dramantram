@@ -146,13 +146,15 @@
 
 .employee-login-btn {
   display: inline-block;
-  background-color: #fffb00;
+  background-color: #ffe100;
   color: black;
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
   font-weight: 600;
   transition: 0.3s;
+  margin-bottom: 20px;
+  font-family: 'inter', sans-serif;
 }
 
 .employee-login-btn:hover {
@@ -165,4 +167,21 @@
   font-size: 1.2rem;
   color: #ccc;
   font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .have-a-project-text {
+    padding-left: 0px;
+  }
+
+  .footer-logo {
+    padding-left: 80px;
+    width: auto;
+    height: auto;
+    padding-bottom: 50px;
+  }
+
+  .content-wrapper {
+    padding: 0px;
+  }
 }

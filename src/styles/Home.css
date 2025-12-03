@@ -1005,9 +1005,9 @@ h1 {
 .cap-hero {
   width: auto;
 
-  max-width: 100%;
+  max-width: 120%;
 
-  height: auto;
+  height: 425px;
 
   max-width: 90%;
 
@@ -1195,6 +1195,14 @@ h1 {
 
 .explore-btn {
   display: inline;
+  color: #c5c5c5 !important;
+  text-decoration: none !important;
+}
+
+.explore-btn2 {
+  display: inline;
+  color: #353535 !important;
+  text-decoration: none !important;
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
@@ -1222,7 +1230,8 @@ h1 {
 
     /* On mobile, let image span full width */
 
-    width: 100%;
+    width: 95%;
+    height: 210px;
   }
 
   .cap-strong br {

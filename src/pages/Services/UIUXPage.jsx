@@ -54,7 +54,7 @@ const UIUXPage = () => {
               Branding is the right choice of visuals along with the
               differentiator… <strong>you, the X factor.</strong>
             </p>
-            <a className="connect-link" href="#contact">
+            <a className="connect-link" href="/contact">
               Let’s Connect <i>›</i>
             </a>
           </div>
@@ -75,9 +75,11 @@ const UIUXPage = () => {
                 <ul className="service-list">
                   <li>Web Development</li>
                 </ul>
-                <button className=" btn-cta connect-btn">
-                  Let’s Connect <span>›</span>
-                </button>
+                <a href="/contact">
+                  <button className=" btn-cta connect-btn">
+                    Let’s Connect <span>›</span>
+                  </button>
+                </a>
               </div>
             </div>
           </div>

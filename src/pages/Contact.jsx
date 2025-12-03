@@ -116,7 +116,7 @@ Gomti Nagar, Lucknow, Uttar Pradesh 226010`,
                     <li className="radio-row">
                       <span className="line" />
                       <label>
-                        <input type="radio" name="service" defaultChecked />
+                        <input type="checkbox" name="service" defaultChecked />
                         <span>Branding</span>
                       </label>
                       {/* <span className="dot" /> */}
@@ -125,7 +125,7 @@ Gomti Nagar, Lucknow, Uttar Pradesh 226010`,
                     <li className="radio-row">
                       <span className="line" />
                       <label>
-                        <input type="radio" name="service" />
+                        <input type="checkbox" name="service" />
                         <span>Animation</span>
                       </label>
                     </li>
@@ -133,7 +133,7 @@ Gomti Nagar, Lucknow, Uttar Pradesh 226010`,
                     <li className="radio-row">
                       <span className="line" />
                       <label>
-                        <input type="radio" name="service" />
+                        <input type="checkbox" name="service" />
                         <span>Live Action</span>
                       </label>
                     </li>
@@ -141,7 +141,7 @@ Gomti Nagar, Lucknow, Uttar Pradesh 226010`,
                     <li className="radio-row">
                       <span className="line" />
                       <label>
-                        <input type="radio" name="service" />
+                        <input type="checkbox" name="service" />
                         <span>UI/UX</span>
                       </label>
                     </li>
@@ -149,7 +149,7 @@ Gomti Nagar, Lucknow, Uttar Pradesh 226010`,
                     <li className="radio-row">
                       <span className="line" />
                       <label>
-                        <input type="radio" name="service" />
+                        <input type="checkbox" name="service" />
                         <span>Others</span>
                       </label>
                     </li>

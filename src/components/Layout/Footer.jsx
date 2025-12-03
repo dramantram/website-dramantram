@@ -85,7 +85,7 @@ const Footer = () => {
                       {service}
                     </label>
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="services"
                       id={service}
                       className="form-check-input"

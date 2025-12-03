@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/About.css";
+import GlitchButton from "../components/GlitchButton";
 
 const About = () => {
   const teamMembers = [
@@ -89,9 +90,9 @@ const About = () => {
               As smart one says, "a plan is only as <br /> good as its
               execution".
             </p>
-            <button className="btn-connect-about">
+            <a className="btn-connect-about" href="/contact">
               Let's Connect <span>›</span>
-            </button>
+            </a>
           </div>
 
           {/* Right part (Image) */}
