@@ -65,7 +65,7 @@ const fallbackStyle = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  color: "#888",
+  color: "#000000",
   background: "transparent",
   textAlign: "center",
   padding: "20px",
@@ -74,7 +74,7 @@ const fallbackStyle = {
 const btnStyle = {
   marginTop: "10px",
   padding: "8px 16px",
-  background: "#333",
+  background: "#333333",
   color: "#fff",
   border: "1px solid #555",
   cursor: "pointer",

@@ -5,50 +5,52 @@ import logo from "../../assets/images/header.png";
 
 const Header = () => {
   const [scrollY, setScrollY] = useState(0);
-  const lastScrollY = useRef(0); // Using useRef to store the last scroll position
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.pageYOffset; // Get the current scroll position
-      setScrollY(currentScrollY); // Store the current scroll position
+      const currentScrollY = window.pageYOffset;
+      setScrollY(currentScrollY);
+
+      const nav = document.querySelector("nav");
 
       if (currentScrollY <= 0) {
-        document.querySelector("nav").classList.remove("scroll-up");
+        nav.classList.remove("scroll-up");
       }
 
       if (
         currentScrollY > lastScrollY.current &&
-        !document.querySelector("nav").classList.contains("scroll-down")
+        !nav.classList.contains("scroll-down")
       ) {
         // Scrolling down
-        document.querySelector("nav").classList.add("scroll-down");
-        document.querySelector("nav").classList.remove("scroll-up");
+        nav.classList.add("scroll-down");
+        nav.classList.remove("scroll-up");
       }
 
       if (
         currentScrollY < lastScrollY.current &&
-        document.querySelector("nav").classList.contains("scroll-down")
+        nav.classList.contains("scroll-down")
       ) {
         // Scrolling up
-        document.querySelector("nav").classList.remove("scroll-down");
-        document.querySelector("nav").classList.add("scroll-up");
+        nav.classList.remove("scroll-down");
+        nav.classList.add("scroll-up");
       }
 
-      lastScrollY.current = currentScrollY; // Update last scroll position
+      lastScrollY.current = currentScrollY;
     };
 
-    // Adding the event listener for scroll
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup: Removing the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <nav className={`navbar navbar-expand-lg fixed-top py-3`}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <img
             src={logo}
             alt="Logo"
@@ -56,7 +58,7 @@ const Header = () => {
             height="22"
             className="d-inline-block align-text-top"
           />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -70,31 +72,58 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto mb-2 mb-lg-0">
-            {/* <li className="nav-item">
-              <a className="nav-link" href="/academy">
-                Academy
-              </a>
-            </li> */}
-            <li className="nav-item">
-              <a className="nav-link" href="/services">
+            {/* SERVICES DROPDOWN START */}
+            <li
+              className="nav-item dropdown"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
+              <Link
+                className="nav-link dropdown-toggle"
+                to="/branding"
+                role="none"
+                aria-expanded={isDropdownOpen}
+              >
                 Services
-              </a>
+              </Link>
+              <ul className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
+                <li>
+                  <Link className="dropdown-item" to="/services/branding">
+                    Branding
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/services/animated-videos"
+                  >
+                    Animated Videos
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/services/live-action">
+                    Live Action
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/services/ui-ux">
+                    UI/UX
+                  </Link>
+                </li>
+              </ul>
             </li>
+            {/* SERVICES DROPDOWN END */}
+
             <li className="nav-item">
-              <a className="nav-link" href="/portfolio">
+              <Link className="nav-link" to="/portfolio">
                 Portfolio
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/about">
+              <Link className="nav-link" to="/about">
                 About Us
-              </a>
+              </Link>
             </li>
-            {/* <li className="nav-item">
-              <a className="nav-link" href="/pricing">
-                Pricing
-              </a>
-            </li> */}
           </ul>
           <Link className="btn" to="/contact">
             Contact Us

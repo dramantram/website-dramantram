@@ -37,7 +37,7 @@ const servicesData = [
   {
     id: 1,
     menuTitle: "Animated Videos",
-    image: "animation.png", // Replace with your actual image
+    image: "Animation-Hero-Image.avif", // Replace with your actual image
     heading: (
       <>
         Stories that move people
@@ -52,12 +52,12 @@ const servicesData = [
       "Character Design",
       "Logo Animation",
     ],
-    link: "/services/animation",
+    link: "/services/animated-videos",
   },
   {
     id: 2,
     menuTitle: "Live Action",
-    image: "live-action.png", // Replace with your actual image
+    image: "Live-Action500px.avif", // Replace with your actual image
     heading: (
       <>
         Capturing reality with
@@ -77,7 +77,7 @@ const servicesData = [
   {
     id: 3,
     menuTitle: "UI/UX",
-    image: "uiux.png", // Replace with your actual image
+    image: "Ui_UX.avif", // Replace with your actual image
     heading: (
       <>
         Designing interfaces that
@@ -97,7 +97,7 @@ const servicesData = [
   {
     id: 4,
     menuTitle: "Event Interactions",
-    image: "events.png", // Replace with your actual image
+    image: "Event.avif", // Replace with your actual image
     heading: (
       <>
         immersive experiences
@@ -116,7 +116,7 @@ const servicesData = [
   {
     id: 5,
     menuTitle: "Others",
-    image: "others.png", // Replace with your actual image
+    image: "Others500px.avif", // Replace with your actual image
     heading: (
       <>
         Everything else to
@@ -129,6 +129,7 @@ const servicesData = [
       "Illustration",
       "Sound Design",
       "Consultation",
+      "Game Development",
     ],
     link: "/services/others",
   },
@@ -159,29 +160,30 @@ const testimonials = [
 ];
 
 const Home = () => {
-  // --- STATE CHANGE: Active Index is now dynamic ---
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Initialize state based on current window width immediately to prevent flash
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
 
   useEffect(() => {
-    let timeoutId = null;
+    // Use matchMedia for better performance than 'resize' event listener
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-    const handleResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsSmallScreen(window.innerWidth <= 600);
-      }, 150);
+    const handleChange = (e) => {
+      setIsMobile(e.matches);
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(timeoutId);
-    };
+    // Set initial value
+    setIsMobile(mediaQuery.matches);
+
+    // Add listener
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Helper to get current data based on index
   const currentService = servicesData[activeIndex];
 
   return (
@@ -191,34 +193,31 @@ const Home = () => {
 
         {/* Intro Section */}
         <section className="intro-section">
+          {/* 3D Container Layer */}
           <div className="spline-container">
-            {!isSmallScreen && (
-              <Suspense
-                fallback={<div className="loading-3d">Loading 3D...</div>}
-              >
-                <SplineContainer />
-              </Suspense>
-            )}
-            {isSmallScreen && (
+            {/* REMOVED THE !isMobile CHECK so it renders on all devices */}
+            <Suspense fallback={<div className="loading-3d">Loading...</div>}>
+              <SplineContainer />
+            </Suspense>
+
+            {/* Optional: Add a dark overlay on mobile only so text remains readable over the 3D model */}
+            {isMobile && (
               <div
-                className="mobile-fallback-bg"
                 style={{
                   position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: "#111",
+                  inset: 0,
+                  background: "rgba(0,0,0,0.4)", // Darkens the 3D model slightly
+                  pointerEvents: "none",
                 }}
               ></div>
             )}
           </div>
 
-          <div
-            className="main-content"
-            style={{ position: "relative", zIndex: 2 }}
-          >
+          {/* Text Content Layer */}
+          <div className="main-content">
+            {/* Left side empty for 3D model visibility on desktop */}
             <div className="left-side"></div>
+
             <div className="right-side">
               <p className="headText">
                 Your Creative, Media & <br /> Technology Transformation Partner

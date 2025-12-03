@@ -1,9 +1,10 @@
 import React from "react";
-import Layout from "../components/Layout/Layout";
-import "../styles/ServicesPage.css";
-import Process from "../components/Process";
-import PortfolioSection from "../components/PortfolioSection";
-import ComesWith from "../components/ComesWith";
+import Layout from "../../components/Layout/Layout";
+import "../../styles/ServicesPage.css";
+// import BrandingProcess from "../../components/BrandingProcess";
+import PortfolioSection from "../../components/PortfolioSection";
+import ComesWith from "../../components/ComesWith";
+import "../../styles/Process.css";
 
 const BrandingPage = () => {
   const clients = [
@@ -27,7 +28,17 @@ const BrandingPage = () => {
           {/* LEFT VISUAL */}
           <div className="col-lg-6 px-4 px-lg-5 brand-col d-flex flex-column align-items-start">
             <div className="mask-card w-100 mb-4">
-              <img src="/dramantram.png" alt="Dramantram" />
+              {/* <img src="/dramantram.png" alt="Dramantram" /> */}
+              <iframe
+                width="100%"
+                // ADDED: &autoplay=1&mute=1
+                src="https://www.youtube.com/embed/fYxOAHBih_o?rel=0&autoplay=1&mute=1"
+                title="Dramantram Showreel"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ aspectRatio: "16/9", borderRadius: "8px" }}
+              ></iframe>
             </div>
           </div>
 
@@ -93,7 +104,61 @@ const BrandingPage = () => {
         </section>
 
         {/* PROCESS */}
-        <Process />
+        <section className="process-wrap">
+          <div className="process-grid container-fluid">
+            {/* Title column */}
+            <div className="pcol title-col">
+              <h2 className="stack">
+                <span>OUR DESIGN</span>
+                <span>PROCESS &</span>
+                <span>DELIVERABLES</span>
+              </h2>
+            </div>
+
+            {/* Research */}
+            <div className="pcol step-col">
+              <div className="step-head">
+                <span className="step-bar" />
+                <h3>Research</h3>
+                <span className="arrow" aria-hidden />
+              </div>
+              <ul className="bullets">
+                <li>Background Research</li>
+                <li>Vision, Mission & Goals</li>
+                <li>Market Landscape</li>
+                <li>Target Audience</li>
+              </ul>
+            </div>
+
+            {/* Positioning */}
+            <div className="pcol step-col">
+              <div className="step-head">
+                <span className="step-bar" />
+                <h3>Positioning</h3>
+                <span className="arrow" aria-hidden />
+              </div>
+              <ul className="bullets">
+                <li>Brand Archetype</li>
+                <li>Brand Promise & Personality</li>
+                <li>USPs & Value Proposition</li>
+                <li>Brand Voice & Messaging</li>
+              </ul>
+            </div>
+
+            {/* Deliverables */}
+            <div className="pcol step-col">
+              <div className="step-head">
+                <span className="step-bar" />
+                <h3>Deliverables</h3>
+              </div>
+              <ul className="bullets">
+                <li>Quality Check</li>
+                <li>Feedback & Iterations</li>
+                <li>HD Files In All Formats</li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </section>
 
       {/* Portfolio Section */}

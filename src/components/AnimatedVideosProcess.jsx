@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Process.css";
-const Process = () => {
+const AnimatedVideosProcess = () => {
   return (
     <section className="process-wrap">
       <div className="process-grid container-fluid">
@@ -60,4 +60,4 @@ const Process = () => {
   );
 };
 
-export default Process;
+export default AnimatedVideosProcess;
