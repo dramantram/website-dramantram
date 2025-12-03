@@ -78,14 +78,14 @@ const Header = () => {
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <Link
+              <a
                 className="nav-link dropdown-toggle"
                 to="/branding"
                 role="none"
                 aria-expanded={isDropdownOpen}
               >
                 Services
-              </Link>
+              </a>
               <ul className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
                 <li>
                   <Link className="dropdown-item" to="/services/branding">
