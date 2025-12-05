@@ -10,7 +10,7 @@ const consulting = [
     width: "140px",
     height: "auto",
   },
-  { alt: "EY", src: "/logos/clients/Ey.png", width: "100px", height: "auto" },
+  { alt: "EY", src: "/logos/clients/Ey.png", width: "100px", height: "100px" },
   { alt: "PwC", src: "/logos/clients/PWC.png", width: "100px", height: "auto" },
 ];
 
@@ -25,7 +25,7 @@ const international = [
     alt: "Amazon",
     src: "/logos/clients/Amazon Logo.png",
     width: "110px",
-    height: "auto",
+    height: "120px",
   },
   {
     alt: "Walmart",
@@ -46,7 +46,7 @@ const fintech = [
     alt: "Pine Labs",
     src: "/logos/clients/pine-labs.png",
     width: "140px",
-    height: "auto",
+    height: "120px",
   },
   {
     alt: "Razorpay",
@@ -67,16 +67,21 @@ const corporate = [
     alt: "Maruti Suzuki",
     src: "/logos/clients/suzuki.png",
     width: "200px",
-    height: "100px",
+    height: "110px",
   },
-  { alt: "HCL", src: "/logos/clients/hcl.png", width: "100px", height: "auto" },
+  {
+    alt: "HCL",
+    src: "/logos/clients/hcl.png",
+    width: "120px",
+    height: "auto",
+  },
 ];
 
 const government = [
   {
     alt: "Invest India",
     src: "/logos/clients/invest-india.png",
-    width: "150px",
+    width: "180px",
     height: "auto",
   },
 ];
@@ -88,7 +93,12 @@ const csr = [
     width: "120px",
     height: "auto",
   },
-  { alt: "TRI", src: "/logos/clients/tri.png", width: "120px", height: "auto" },
+  {
+    alt: "TRI",
+    src: "/logos/clients/tri.png",
+    width: "120px",
+    height: "110px",
+  },
   {
     alt: "Toilet Board Coalition",
     src: "/logos/clients/toilet-board.png",
