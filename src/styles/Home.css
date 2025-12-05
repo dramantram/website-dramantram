@@ -1303,7 +1303,7 @@ h1 {
   color: #3c3c3c;
 
   font-family: "Raleway", sans-serif;
-  padding-left: 50px !important;
+  padding-left: 50px;
 }
 
 .ai-stack {
@@ -1461,6 +1461,12 @@ h1 {
 
 /* --- Responsive Adjustments --- */
 
+@media (max-width: 450px) {
+  .ai-kicker {
+    padding-left: 0px !important;
+  }
+}
+
 @media (max-width: 991px) {
   /* On tablets/mobile (Bootstrap < lg), reset padding and add spacing */
 
@@ -1482,6 +1488,15 @@ h1 {
     /* Remove flex centering on mobile */
   }
 
+
+  .ai-kicker {
+    padding-left: 0px !important;
+  }
+
+  .ai-stack {
+    padding-left: 0px !important;
+  }
+
   .ai-head br {
     display: none;
   }
@@ -1491,9 +1506,10 @@ h1 {
   .ai-right .content-wrapper {
     display: grid;
 
-    gap: 30px;
+    gap: 20px;
 
     height: auto;
+    justify-content: flex-start;
   }
 }
 
