@@ -4,13 +4,77 @@
 .portfolio-section {
   color: white;
   font-family: "Inter", sans-serif;
-  padding-top: 80px;
+  padding-top: 23px !important;
   padding-bottom: 60px;
   background: transparent;
   border-bottom: 1px solid #222;
-  /* border-top: 1px solid #222; */
-  /* border-left: 1px solid #222; */
-  /* border-right: 1px solid #222; */
+}
+
+/* --- FILTER ROW STYLING --- */
+.filter-row {
+  margin-bottom: 40px;
+  padding: 0 0px;
+  /* Match container gutter */
+  display: flex;
+  justify-content: center;
+  max-width: 110%;
+  /* Optional: constrain width to match container */
+  margin-left: auto;
+  margin-right: auto;
+  background: none !important;
+}
+
+/* Ensure columns inside filter row have padding for spacing */
+.filter-row>div {
+  padding: 0 10px;
+  /* Horizontal spacing between buttons */
+  margin-bottom: 10px;
+}
+
+.filter-pill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0);
+  /* Subtle transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+  padding: 12px 24px;
+  border-radius: 50px;
+  /* Full pill shape */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.filter-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fbff00;
+  /* Your theme's yellow accent */
+  color: #fff;
+  transform: translateY(-2px);
+  /* Subtle lift effect */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.filter-pill:active {
+  transform: translateY(0);
+}
+
+.filter-pill .caret {
+  font-family: monospace;
+  /* Ensures chevron looks correct */
+  font-size: 1.2em;
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.filter-pill:hover .caret {
+  color: #fbff00;
 }
 
 /* --- LEFT COLUMN --- */
@@ -28,7 +92,7 @@
   border-radius: 8px;
   width: 100%;
   max-width: 350px;
-  margin-right: 35px;
+  margin-right: 0px;
 }
 
 .intro-box h1 {
@@ -228,6 +292,17 @@
     border: none;
   }
 
+  /* Filter row adjustment for tablet */
+  .filter-row {
+    margin-bottom: 30px;
+    padding: 0 5px;
+  }
+
+  .filter-pill {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
   .left-col {
     margin-left: 0;
     margin-bottom: 30px;
@@ -300,6 +375,23 @@
 
 /* Mobile - CRITICAL FIX FOR IMAGE SIZING */
 @media (max-width: 575px) {
+
+  /* Filter Row Mobile */
+  .filter-row>div {
+    padding: 0 5px;
+    /* Tighter spacing on mobile */
+  }
+
+  .filter-pill {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .filter-pill .caret {
+    font-size: 0.9em;
+  }
 
   /* Remove the conflicting 100% width rule */
   .portfolio-section .row.g-4>.col,

@@ -25,7 +25,9 @@ const PortfolioPage = () => {
             <div className="col-12 col-md-3 portfolio-panel">
               <div className="portfolio-panel-inner">
                 <h2 className="hero-title">
-                  A locally set up <br /> global creative <br /> agency
+                  A locally set up
+                  <br />
+                  global creative <br /> agency
                 </h2>
               </div>
             </div>
@@ -34,8 +36,7 @@ const PortfolioPage = () => {
             <div className="col-12 col-md-3 portfolio-panel">
               <div className="portfolio-panel-inner">
                 <p className="body-copy">
-                  Our secret is not our services but our <br /> approach towards
-                  them.
+                  Our secret is not our services but our approach towards them.
                 </p>
                 <p className="body-strong">
                   Oops! Did we just disclose our secret?
@@ -55,34 +56,6 @@ const PortfolioPage = () => {
                   </GlitchButton>
                 </Link>
               </div>
-            </div>
-          </div>
-
-          {/* FILTER ROW */}
-          <div className="row g-0 p-0 filter-row col-md-12">
-            <div className="col-6 col-md-3">
-              <button className="filter-pill">
-                <span>Service</span>
-                <span className="caret">ˇ</span>
-              </button>
-            </div>
-            <div className="col-6 col-md-3">
-              <button className="filter-pill">
-                <span>Complexity</span>
-                <span className="caret">ˇ</span>
-              </button>
-            </div>
-            <div className="col-6 col-md-3">
-              <button className="filter-pill">
-                <span>Industry</span>
-                <span className="caret">ˇ</span>
-              </button>
-            </div>
-            <div className="col-6 col-md-3">
-              <button className="filter-pill">
-                <span>Duration</span>
-                <span className="caret">ˇ</span>
-              </button>
             </div>
           </div>
         </div>

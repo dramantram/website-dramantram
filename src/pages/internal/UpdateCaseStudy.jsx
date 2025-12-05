@@ -1,15 +1,65 @@
 import React, { useState, useEffect } from "react";
 import AdminLayout from "../../components/AdminLayout/AdminLayout";
-import "../../styles/Management.css"; // Reusing the same black/red theme
+import "../../styles/Management.css";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
-import { UseAuth } from "../../context/auth";
+
+// --- CONSTANTS FOR DROPDOWNS ---
+const INDUSTRY_OPTIONS = [
+  "Government",
+  "Fintech",
+  "Edtech",
+  "Hospitality",
+  "Consulting",
+  "Tech",
+  "NGO",
+  "School",
+  "Service",
+  "Product",
+];
+
+const DURATION_OPTIONS = [
+  "1 month",
+  "2 months",
+  "3 months",
+  "4 months",
+  "5 months",
+  "6 months or more",
+];
+
+const SERVICE_OPTIONS = [
+  "Brand Identity & Design",
+  "Creating Logo",
+  "Branding Strategy",
+  "Defining Brand Style Guide",
+  "Social Media Branding",
+  "Re-Branding",
+  "Stationery Design",
+  "Catalogues & Brochure Design",
+  "Packaging Design",
+  "Explainer Animated Video",
+  "Ad Film",
+  "Sales & Marketing Video",
+  "Demo Video",
+  "e-Learning Video",
+  "Animated Graphic/GIF",
+  "Corporate Videos",
+  "Testimonials",
+  "Event Video",
+  "Website Design",
+  "web development",
+  "app design",
+  "game development",
+  "Interactive Screens (Touch, Gesture, Motion)",
+  "Anamorphic",
+  "AR/VR",
+];
 
 const UpdateCaseStudy = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
-  const [id, setId] = useState(""); // To store the _id for the update API
+  const [id, setId] = useState("");
   const [loading, setLoading] = useState(true);
 
   const [form, setForm] = useState({
@@ -28,7 +78,6 @@ const UpdateCaseStudy = () => {
     image2: null,
   });
 
-  // API URL
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // 1. Fetch existing data
@@ -51,8 +100,6 @@ const UpdateCaseStudy = () => {
           problem: cs.problem,
           solution: cs.solution,
           thumbnail_text: cs.thumbnail_text,
-          // We don't pre-fill file inputs for security reasons,
-          // user only uploads if they want to CHANGE the image.
           thumbnail_image: null,
           image1: null,
           image2: null,
@@ -99,7 +146,6 @@ const UpdateCaseStudy = () => {
       caseStudyData.append("solution", form.solution);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
 
-      // Only append images if a new one is selected
       if (form.thumbnail_image)
         caseStudyData.append("thumbnail_image", form.thumbnail_image);
       if (form.image1) caseStudyData.append("image1", form.image1);
@@ -198,16 +244,22 @@ const UpdateCaseStudy = () => {
               />
             </div>
 
-            {/* SERVICES */}
+            {/* SERVICES (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Services</label>
-              <input
+              <select
                 name="services"
                 value={form.services}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. Design, Development"
-              />
+                className="management-select"
+              >
+                <option value="">Select Service</option>
+                {SERVICE_OPTIONS.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* DESCRIPTION */}
@@ -251,28 +303,40 @@ const UpdateCaseStudy = () => {
               </select>
             </div>
 
-            {/* INDUSTRY */}
+            {/* INDUSTRY (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Industry</label>
-              <input
+              <select
                 name="industry"
                 value={form.industry}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. Healthcare"
-              />
+                className="management-select"
+              >
+                <option value="">Select Industry</option>
+                {INDUSTRY_OPTIONS.map((ind) => (
+                  <option key={ind} value={ind}>
+                    {ind}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* DURATION */}
+            {/* DURATION (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Duration</label>
-              <input
+              <select
                 name="duration"
                 value={form.duration}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. 3 months"
-              />
+                className="management-select"
+              >
+                <option value="">Select Duration</option>
+                {DURATION_OPTIONS.map((dur) => (
+                  <option key={dur} value={dur}>
+                    {dur}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* PROBLEM */}
@@ -316,7 +380,7 @@ const UpdateCaseStudy = () => {
                 </span>
               </label>
 
-              {/* Preview existing if available (optional) */}
+              {/* Preview existing */}
               <div style={{ marginBottom: "10px" }}>
                 <img
                   src={`${apiUrl}/api/v1/management/case-study-thumbnail/${id}`}
@@ -397,7 +461,7 @@ const UpdateCaseStudy = () => {
             >
               <button
                 type="button"
-                onClick={() => navigate("/case-studies")}
+                onClick={() => navigate("/internal/case-studies")}
                 className="management-btn management-reset"
                 aria-label="Cancel"
               >

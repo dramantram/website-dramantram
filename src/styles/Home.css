@@ -1303,9 +1303,11 @@ h1 {
   color: #3c3c3c;
 
   font-family: "Raleway", sans-serif;
+  padding-left: 50px !important;
 }
 
 .ai-stack {
+  padding-left: 50px !important;
   list-style: none;
 
   padding: 0;
@@ -1325,7 +1327,7 @@ h1 {
 
   font-weight: 800;
 
-  letter-spacing: 0.5px;
+  letter-spacing: 3px;
 
   color: #d9d9d9;
 
@@ -1334,6 +1336,7 @@ h1 {
   line-height: 1;
 
   text-transform: uppercase;
+  width: 500px !important;
 }
 
 /* --- COLUMN 2 (Spacer) --- */
@@ -1345,7 +1348,7 @@ h1 {
 .ai-head {
   margin: 0 0 20px;
 
-  font-size: clamp(28px, 5vw, 42px);
+  font-size: clamp(28px, 5vw, 30px);
 
   line-height: 1.1;
 

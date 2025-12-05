@@ -368,3 +368,37 @@ export const getAllCaseStudiesController = async (req, res) => {
     });
   }
 };
+
+export const filterCaseStudyController = async (req, res) => {
+  try {
+    // Note: 'req.fields' typically requires 'express-formidable'.
+    // If you are using standard 'express.json()', change this to:
+    // const { service, industry, duration, complexity } = req.body;
+    const { service, industry, duration, complexity } = req.fields;
+
+    // Create a query object
+    const args = {};
+
+    // Only add to query if the value exists and is not empty
+    if (service && service.length > 0) args.services = service;
+    if (industry && industry.length > 0) args.industry = industry;
+    if (duration && duration.length > 0) args.duration = duration;
+    if (complexity && complexity.length > 0) args.complexity = complexity;
+
+    // Execute query
+    const caseStudies = await CaseStudyModel.find(args);
+    console.log(caseStudies);
+    res.status(200).send({
+      success: true,
+      count: caseStudies.length,
+      caseStudies,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while filtering Case Studies",
+      error,
+    });
+  }
+};

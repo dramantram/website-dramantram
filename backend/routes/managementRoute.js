@@ -8,6 +8,7 @@ import {
   getThumbnailImageController,
   getImage1Controller,
   getImage2Controller,
+  filterCaseStudyController,
 } from "../controllers/managementController.js";
 import formidable from "express-formidable";
 
@@ -39,5 +40,7 @@ router.get("/get-case-study/:slug", getCaseStudyController);
 
 // Get All Case Studies
 router.get("/get-case-studies", getAllCaseStudiesController);
+
+router.post("/filter-case-studies", filterCaseStudyController);
 
 export default router;

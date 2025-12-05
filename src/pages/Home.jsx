@@ -239,7 +239,7 @@ const Home = () => {
         </section>
 
         {/* Portfolio Section */}
-        <section className="portfolio px-5">
+        <section className="portfolio px-2">
           <PortfolioSection />
         </section>
 
@@ -356,7 +356,7 @@ const Home = () => {
           {/* ... Rest of your component (No changes needed below) ... */}
           <div className="container-fluid px-0">
             <div className="row g-0">
-              <div className="col-lg-3 col-12 ai-col ai-left">
+              <div className="col-lg-6 col-12 ai-col ai-left">
                 <div className="content-wrapper">
                   <p className="ai-kicker fw-semibold">Dramantram is</p>
                   <ul className="ai-stack">
@@ -369,7 +369,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-3 d-none d-lg-block ai-col ai-spacer"></div>
+              {/* <div className="col-lg-3 d-none d-lg-block ai-col ai-spacer"></div> */}
 
               <div className="col-lg-3 col-12 ai-col ai-mid">
                 <div className="content-wrapper">

@@ -4,6 +4,56 @@ import "../../styles/Management.css";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
+const INDUSTRY_OPTIONS = [
+  "Government",
+  "Fintech",
+  "Edtech",
+  "Hospitality",
+  "Consulting",
+  "Tech",
+  "NGO",
+  "School",
+  "Service",
+  "Product",
+];
+
+const DURATION_OPTIONS = [
+  "1 month",
+  "2 months",
+  "3 months",
+  "4 months",
+  "5 months",
+  "6 months or more",
+];
+
+const SERVICE_OPTIONS = [
+  "Brand Identity & Design",
+  "Creating Logo",
+  "Branding Strategy",
+  "Defining Brand Style Guide",
+  "Social Media Branding",
+  "Re-Branding",
+  "Stationery Design",
+  "Catalogues & Brochure Design",
+  "Packaging Design",
+  "Explainer Animated Video",
+  "Ad Film",
+  "Sales & Marketing Video",
+  "Demo Video",
+  "e-Learning Video",
+  "Animated Graphic/GIF",
+  "Corporate Videos",
+  "Testimonials",
+  "Event Video",
+  "Website Design",
+  "web development",
+  "app design",
+  "game development",
+  "Interactive Screens (Touch, Gesture, Motion)",
+  "Anamorphic",
+  "AR/VR",
+];
+
 export default function Management() {
   const [form, setForm] = useState({
     case_study_name: "",
@@ -151,16 +201,22 @@ export default function Management() {
               />
             </div>
 
-            {/* SERVICES */}
+            {/* SERVICES (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Services</label>
-              <input
+              <select
                 name="services"
                 value={form.services}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. Design, Development"
-              />
+                className="management-select"
+              >
+                <option value="">Select Service</option>
+                {SERVICE_OPTIONS.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* CASE STUDY DESCRIPTION (full width) */}
@@ -204,28 +260,40 @@ export default function Management() {
               </select>
             </div>
 
-            {/* INDUSTRY */}
+            {/* INDUSTRY (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Industry</label>
-              <input
+              <select
                 name="industry"
                 value={form.industry}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. Healthcare"
-              />
+                className="management-select"
+              >
+                <option value="">Select Industry</option>
+                {INDUSTRY_OPTIONS.map((ind) => (
+                  <option key={ind} value={ind}>
+                    {ind}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* DURATION */}
+            {/* DURATION (UPDATED TO DROPDOWN) */}
             <div>
               <label className="management-label">Duration</label>
-              <input
+              <select
                 name="duration"
                 value={form.duration}
                 onChange={handleChange}
-                className="management-input"
-                placeholder="e.g. 3 months"
-              />
+                className="management-select"
+              >
+                <option value="">Select Duration</option>
+                {DURATION_OPTIONS.map((dur) => (
+                  <option key={dur} value={dur}>
+                    {dur}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* PROBLEM (full width) */}
