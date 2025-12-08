@@ -240,7 +240,7 @@ const Home = () => {
 
         {/* Portfolio Section */}
         <section className="portfolio px-2">
-          <PortfolioSection showFilters={false} />
+          <PortfolioSection showFilters={false} isHomePage={true} />
         </section>
 
         {/* Clients Section */}

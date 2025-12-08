@@ -2,6 +2,7 @@
 
 /* base */
 .case-study-wrap {
+  padding-top: 100px !important;
   position: relative;
   background: #eceff1;
   color: #0f0f0f;

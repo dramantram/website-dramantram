@@ -4,7 +4,6 @@ import "../styles/PortfolioSection.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import PortfolioFilters from "./PortfolioFilters";
 
 // --- CONSTANTS ---
 const INDUSTRY_OPTIONS = [
@@ -59,7 +58,7 @@ const SERVICE_OPTIONS = [
 
 const COMPLEXITY_OPTIONS = ["High", "Medium", "Low"];
 
-const PortfolioSection = ({ showFilters = true }) => {
+const PortfolioSection = ({ showFilters = true, isHomePage = false }) => {
   const [caseStudies, setCaseStudies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -75,12 +74,18 @@ const PortfolioSection = ({ showFilters = true }) => {
   // API URL helper
   const apiUrl = import.meta.env.VITE_API_URL;
 
-  // 1. Get All Data (Initial Load)
-  const getAllCaseStudies = async () => {
+  // --- 1. Main Fetch Function (Handles both Home & All) ---
+  const getCaseStudies = async () => {
     try {
-      const { data } = await axios.get(
-        `${apiUrl}/api/v1/management/get-case-studies`
-      );
+      setLoading(true);
+
+      // Select endpoint based on isHomePage prop
+      const endpoint = isHomePage
+        ? `${apiUrl}/api/v1/management/get-homepage-case-studies` // The new controller you made
+        : `${apiUrl}/api/v1/management/get-case-studies`; // The original controller
+
+      const { data } = await axios.get(endpoint);
+
       if (data?.success) {
         setCaseStudies(data.caseStudies);
       }
@@ -92,14 +97,13 @@ const PortfolioSection = ({ showFilters = true }) => {
     }
   };
 
-  // 2. Filter Data (Called when filters change)
+  // --- 2. Filter Data (Only used on Portfolio Page) ---
   const filterResults = async () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        // `http://localhost:5000/api/v1/management/filter-case-studies`,
         `${apiUrl}/api/v1/management/filter-case-studies`,
-        filters // Sends { service, complexity, industry, duration }
+        filters
       );
 
       if (data?.success) {
@@ -107,32 +111,31 @@ const PortfolioSection = ({ showFilters = true }) => {
       }
     } catch (error) {
       console.log(error);
-      // Optional: Only show error toast if it's a real failure, not just 0 results
       toast.error("Error filtering results");
     } finally {
       setLoading(false);
     }
   };
 
-  // 3. Initial Load Lifecycle
+  // --- 3. Unified Lifecycle Hook ---
   useEffect(() => {
-    getAllCaseStudies();
-  }, []);
+    // A. If on Homepage, ignore filters and just fetch featured items
+    if (isHomePage) {
+      getCaseStudies();
+      return;
+    }
 
-  // 4. Filter Lifecycle: Triggers whenever 'filters' state changes
-  useEffect(() => {
-    // Check if any filter actually has a value
+    // B. If on Portfolio Page, check if filters are active
     const hasActiveFilters = Object.values(filters).some((val) => val !== "");
 
     if (hasActiveFilters) {
       filterResults();
     } else {
-      // If user cleared all filters, revert to the "Get All" API to be safe
-      // (Or you can just call filterResults() if your backend handles empty objects)
-      getAllCaseStudies();
+      // If no filters are active, fetch all
+      getCaseStudies();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [filters, isHomePage]);
 
   // Toggle Dropdown Handler
   const toggleDropdown = (name) => {
@@ -208,8 +211,8 @@ const PortfolioSection = ({ showFilters = true }) => {
 
   return (
     <div className="portfolio-section">
-      {/* FILTER ROW */}
-      {showFilters && (
+      {/* FILTER ROW - Only show if showFilters is true AND not on Homepage */}
+      {showFilters && !isHomePage && (
         <div className="row g-0 p-0 filter-row col-md-12">
           {/* SERVICE FILTER */}
           <div className="col-6 col-md-3 position-relative">
@@ -219,7 +222,6 @@ const PortfolioSection = ({ showFilters = true }) => {
               }`}
               onClick={() => toggleDropdown("service")}
             >
-              {/* Show selected value or default label */}
               <span className="text-truncate">
                 {filters.service || "Service"}
               </span>
@@ -300,7 +302,7 @@ const PortfolioSection = ({ showFilters = true }) => {
               {loading ? (
                 // Simple Loading State
                 <div className="col-12 text-center text-white py-5">
-                  <h5>Loading Case Studies...</h5>
+                  <h5>Loading...</h5>
                 </div>
               ) : row1Data.length > 0 ? (
                 row1Data.map((item) => (
@@ -323,7 +325,7 @@ const PortfolioSection = ({ showFilters = true }) => {
           </div>
         </div>
 
-        {/* BOTTOM ROW (Next 4 items) - Spanning full width */}
+        {/* BOTTOM ROW (Next 4+ items) - Spanning full width */}
         <div className="row g-4 mt-1 right-lower col-md-12 row-cols-md-4">
           {!loading &&
             row2Data.map((item) => (

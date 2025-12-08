@@ -11,11 +11,10 @@ const CaseStudySchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      // lowercase: true,
     },
     case_study_description: {
       type: String,
-      required: true, // marked as required based on your validation
+      required: true,
       trim: true,
     },
     client: {
@@ -77,6 +76,12 @@ const CaseStudySchema = new mongoose.Schema(
     image3: { data: Buffer, contentType: String },
     image4: { data: Buffer, contentType: String },
     image5: { data: Buffer, contentType: String },
+
+    // --- NEW FIELD ADDED BELOW ---
+    showOnHomepage: {
+      type: Boolean,
+      default: false, // Set to true if you want it on the homepage
+    },
   },
   { timestamps: true }
 );

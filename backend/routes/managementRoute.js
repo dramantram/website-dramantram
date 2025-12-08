@@ -12,6 +12,7 @@ import {
   getImage3Controller,
   getImage4Controller,
   getImage5Controller,
+  getHomepageCaseStudiesController,
 } from "../controllers/managementController.js";
 import formidable from "express-formidable";
 
@@ -49,5 +50,8 @@ router.get("/get-case-study/:slug", getCaseStudyController);
 router.get("/get-case-studies", getAllCaseStudiesController);
 
 router.post("/filter-case-studies", filterCaseStudyController);
+
+// Route to get homepage specific case studies
+router.get("/get-homepage-case-studies", getHomepageCaseStudiesController);
 
 export default router;

@@ -64,7 +64,7 @@ const PortfolioPage = () => {
 
       <section className="portfolio px-5">
         {/* <PortfolioFilters /> */}
-        <PortfolioSection showFilters={true} />
+        <PortfolioSection showFilters={true} isHomePage={false} />
       </section>
 
       <ComesWith />

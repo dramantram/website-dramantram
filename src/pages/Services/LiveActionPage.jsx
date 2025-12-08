@@ -32,7 +32,7 @@ const LiveActionPage = () => {
               <iframe
                 width="100%"
                 // ADDED: &autoplay=1&mute=1
-                src="https://www.youtube.com/embed/2ZiQfzsNa2Y?si=-81bvVdwBetbOPx2?rel=0&autoplay=1&mute=1"
+                src="https://www.youtube.com/embed/2ZiQfzsNa2Y?si=-81bvVdwBetbOPx2?rel=0&autoplay=1&mute=1&loop=1"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"

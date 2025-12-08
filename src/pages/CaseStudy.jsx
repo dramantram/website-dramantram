@@ -15,6 +15,7 @@ const MetaRow = ({ label, value }) => (
 // Helper component for Video Embeds
 const VideoEmbed = ({ src }) => {
   if (!src) return null;
+  const videoSrc = `${src}?rel=0&autoplay=1&mute=1&loop=1`;
   return (
     <div className="cs-video-wrap mb-4" style={{ width: "100%" }}>
       {/* Youtube embeds require a defined height or aspect ratio to display.
@@ -23,7 +24,7 @@ const VideoEmbed = ({ src }) => {
       */}
       <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
         <iframe
-          src={src}
+          src={videoSrc}
           title="Case Study Video"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -33,8 +34,10 @@ const VideoEmbed = ({ src }) => {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            width: "80%",
+            height: "80%",
+            marginLeft: "100px",
+            borderRadius: "10px",
           }}
         />
       </div>

@@ -21,6 +21,7 @@ export const createCaseStudyController = async (req, res) => {
       thumbnail_text,
       video_link_1,
       video_link_2,
+      showOnHomepage, // <--- ADDED HERE
     } = req.fields;
 
     const { thumbnail_image, image1, image2, image3, image4, image5 } =
@@ -60,7 +61,7 @@ export const createCaseStudyController = async (req, res) => {
 
     // --- Create Instance ---
     const caseStudy = new CaseStudyModel({
-      ...req.fields,
+      ...req.fields, // This automatically includes showOnHomepage
       slug: slugify(case_study_name, { lower: true, strict: true }),
     });
 
@@ -280,8 +281,9 @@ export const updateCaseStudyController = async (req, res) => {
       problem,
       solution,
       thumbnail_text,
-      video_link_1, // Added
-      video_link_2, // Added
+      video_link_1,
+      video_link_2,
+      showOnHomepage, // <--- ADDED HERE
     } = req.fields;
 
     // 3. Extract files
@@ -319,6 +321,12 @@ export const updateCaseStudyController = async (req, res) => {
     if (problem) caseStudy.problem = problem;
     if (solution) caseStudy.solution = solution;
     if (thumbnail_text) caseStudy.thumbnail_text = thumbnail_text;
+
+    // Update Boolean Field
+    // We check !== undefined because false is a valid value we want to save
+    if (showOnHomepage !== undefined) {
+      caseStudy.showOnHomepage = showOnHomepage;
+    }
 
     // Update Video Links (Allow empty strings to clear them if needed)
     if (video_link_1 !== undefined) caseStudy.video_link_1 = video_link_1;
@@ -360,7 +368,7 @@ export const updateCaseStudyController = async (req, res) => {
       caseStudy.image2.contentType = image2.type;
     }
 
-    // Image 3 (New)
+    // Image 3
     if (image3 && image3.size > 0) {
       if (image3.size > 1000000) {
         return res
@@ -371,7 +379,7 @@ export const updateCaseStudyController = async (req, res) => {
       caseStudy.image3.contentType = image3.type;
     }
 
-    // Image 4 (New)
+    // Image 4
     if (image4 && image4.size > 0) {
       if (image4.size > 1000000) {
         return res
@@ -382,7 +390,7 @@ export const updateCaseStudyController = async (req, res) => {
       caseStudy.image4.contentType = image4.type;
     }
 
-    // Image 5 (New)
+    // Image 5
     if (image5 && image5.size > 0) {
       if (image5.size > 1000000) {
         return res
@@ -410,7 +418,6 @@ export const updateCaseStudyController = async (req, res) => {
     });
   }
 };
-
 // Delete Case Study
 export const deleteCaseStudyController = async (req, res) => {
   try {
@@ -534,6 +541,29 @@ export const filterCaseStudyController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error while filtering Case Studies",
+      error,
+    });
+  }
+};
+
+// Get ONLY case studies marked as showOnHomepage: true
+export const getHomepageCaseStudiesController = async (req, res) => {
+  try {
+    const caseStudies = await CaseStudyModel.find({
+      showOnHomepage: true,
+    }).sort({ createdAt: -1 }); // Optional: Show newest first
+
+    res.status(200).send({
+      success: true,
+      count: caseStudies.length,
+      message: "Homepage Case Studies Fetched",
+      caseStudies,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching homepage case studies",
       error,
     });
   }

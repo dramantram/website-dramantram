@@ -32,7 +32,7 @@ const AnimatedVideosPage = () => {
               <iframe
                 width="100%"
                 // ADDED: &autoplay=1&mute=1
-                src="https://www.youtube.com/embed/zNbkGMULAFw?si=KH20EzJOh69zY5KK?rel=0&autoplay=1&mute=1"
+                src="https://www.youtube.com/embed/zNbkGMULAFw?si=KH20EzJOh69zY5KK?rel=0&autoplay=1&mute=1&loop=1"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"

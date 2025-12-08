@@ -77,14 +77,27 @@ export default function Management() {
     // Updated: 2 Optional Video Links
     video_link_1: "",
     video_link_2: "",
+    // --- 1. NEW STATE FIELD ---
+    showOnHomepage: false,
   });
 
+  // --- 2. UPDATED HANDLE CHANGE ---
   const handleChange = (e) => {
-    const { name, value, files, type } = e.target;
+    const { name, value, files, type, checked } = e.target;
+
+    // Handle File Inputs
     if (type === "file") {
       setForm((s) => ({ ...s, [name]: files[0] || null }));
       return;
     }
+
+    // Handle Checkbox Inputs
+    if (type === "checkbox") {
+      setForm((s) => ({ ...s, [name]: checked }));
+      return;
+    }
+
+    // Handle Standard Inputs
     setForm((s) => ({ ...s, [name]: value }));
   };
 
@@ -106,6 +119,10 @@ export default function Management() {
       caseStudyData.append("solution", form.solution);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
 
+      // --- 3. APPEND NEW FIELD TO FORMDATA ---
+      // FormData converts booleans to strings ("true"/"false"), which Mongoose handles correctly
+      caseStudyData.append("showOnHomepage", form.showOnHomepage);
+
       // Append Thumbnail (if exists)
       if (form.thumbnail_image) {
         caseStudyData.append("thumbnail_image", form.thumbnail_image);
@@ -125,7 +142,7 @@ export default function Management() {
         caseStudyData.append("video_link_2", form.video_link_2);
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`, //
+        `http://localhost:5000/api/v1/management/create-case-study`, //${import.meta.env.VITE_API_URL}
         caseStudyData
       );
       if (data?.success) {
@@ -140,6 +157,7 @@ export default function Management() {
     }
   };
 
+  // --- 4. UPDATE RESET FUNCTION ---
   const handleReset = () =>
     setForm({
       case_study_name: "",
@@ -161,6 +179,7 @@ export default function Management() {
       image5: null,
       video_link_1: "",
       video_link_2: "",
+      showOnHomepage: false,
     });
 
   // Helper style for the small info text
@@ -485,6 +504,45 @@ export default function Management() {
                 accept="image/*"
                 className="management-file"
               />
+            </div>
+
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- 5. NEW CHECKBOX INPUT --- */}
+            <div
+              style={{
+                gridColumn: "1 / -1",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginTop: "10px",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="showOnHomepage"
+                id="showOnHomepage"
+                checked={form.showOnHomepage}
+                onChange={handleChange}
+                style={{ width: "20px", height: "20px", cursor: "pointer" }}
+              />
+              <label
+                htmlFor="showOnHomepage"
+                style={{
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  userSelect: "none",
+                }}
+              >
+                Feature this Case Study on the Homepage?
+              </label>
             </div>
 
             {/* ACTIONS */}

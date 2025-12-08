@@ -83,6 +83,8 @@ const UpdateCaseStudy = () => {
     // Video Links
     video_link_1: "",
     video_link_2: "",
+    // --- 1. NEW STATE FIELD ---
+    showOnHomepage: false,
   });
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -110,6 +112,9 @@ const UpdateCaseStudy = () => {
           // Load existing video links
           video_link_1: cs.video_link_1 || "",
           video_link_2: cs.video_link_2 || "",
+          // --- 2. POPULATE STATE FROM DB ---
+          showOnHomepage: cs.showOnHomepage || false,
+
           // Images remain null (we don't prefill file inputs)
           thumbnail_image: null,
           image1: null,
@@ -132,17 +137,27 @@ const UpdateCaseStudy = () => {
     // eslint-disable-next-line
   }, [slug]);
 
-  // 2. Handle Input Changes
+  // --- 3. UPDATED HANDLE CHANGE ---
   const handleChange = (e) => {
-    const { name, value, files, type } = e.target;
+    const { name, value, files, type, checked } = e.target;
+
+    // Handle File Inputs
     if (type === "file") {
       setForm((s) => ({ ...s, [name]: files[0] || null }));
       return;
     }
+
+    // Handle Checkbox Inputs
+    if (type === "checkbox") {
+      setForm((s) => ({ ...s, [name]: checked }));
+      return;
+    }
+
+    // Handle Standard Inputs
     setForm((s) => ({ ...s, [name]: value }));
   };
 
-  // 3. Handle Submit (Update)
+  // 4. Handle Submit (Update)
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -161,6 +176,9 @@ const UpdateCaseStudy = () => {
       caseStudyData.append("solution", form.solution);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
 
+      // --- 4. APPEND NEW FIELD TO FORMDATA ---
+      caseStudyData.append("showOnHomepage", form.showOnHomepage);
+
       // Append Video Links (Always send the current state string, whether empty or filled)
       caseStudyData.append("video_link_1", form.video_link_1);
       caseStudyData.append("video_link_2", form.video_link_2);
@@ -175,7 +193,7 @@ const UpdateCaseStudy = () => {
       if (form.image5) caseStudyData.append("image5", form.image5);
 
       const { data } = await axios.put(
-        `${apiUrl}/api/v1/management/update-case-study/${id}`,
+        `${apiUrl}/api/v1/management/update-case-study/${id}`, //
         caseStudyData
       );
 
@@ -546,6 +564,45 @@ const UpdateCaseStudy = () => {
                 accept="image/*"
                 className="management-file"
               />
+            </div>
+
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- 5. NEW CHECKBOX INPUT --- */}
+            <div
+              style={{
+                gridColumn: "1 / -1",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginTop: "10px",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="showOnHomepage"
+                id="showOnHomepage"
+                checked={form.showOnHomepage}
+                onChange={handleChange}
+                style={{ width: "20px", height: "20px", cursor: "pointer" }}
+              />
+              <label
+                htmlFor="showOnHomepage"
+                style={{
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  userSelect: "none",
+                }}
+              >
+                Feature this Case Study on the Homepage?
+              </label>
             </div>
 
             {/* ACTIONS */}
