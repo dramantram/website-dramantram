@@ -142,7 +142,7 @@ export default function Management() {
         caseStudyData.append("video_link_2", form.video_link_2);
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/management/create-case-study`, //${import.meta.env.VITE_API_URL}
+        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`, //
         caseStudyData
       );
       if (data?.success) {
