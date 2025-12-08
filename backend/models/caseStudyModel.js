@@ -11,7 +11,7 @@ const CaseStudySchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      lowercase: true,
+      // lowercase: true,
     },
     case_study_description: {
       type: String,
