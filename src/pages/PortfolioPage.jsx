@@ -5,6 +5,7 @@ import PortfolioSection from "../components/PortfolioSection";
 import { Link } from "react-router-dom";
 import ComesWith from "../components/ComesWith";
 import GlitchButton from "../components/GlitchButton";
+import PortfolioFilters from "../components/PortfolioFilters";
 
 const PortfolioPage = () => {
   return (
@@ -62,7 +63,8 @@ const PortfolioPage = () => {
       </section>
 
       <section className="portfolio px-5">
-        <PortfolioSection />
+        {/* <PortfolioFilters /> */}
+        <PortfolioSection showFilters={true} />
       </section>
 
       <ComesWith />

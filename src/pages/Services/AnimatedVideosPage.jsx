@@ -32,12 +32,16 @@ const AnimatedVideosPage = () => {
               <iframe
                 width="100%"
                 // ADDED: &autoplay=1&mute=1
-                src="https://www.youtube.com/embed/zNbkGMULAFw?list=TLGGvgGRhBlJ7NIwMzEyMjAyNQ&autoplay=1&mute=1"
+                src="https://www.youtube.com/embed/zNbkGMULAFw?si=KH20EzJOh69zY5KK?rel=0&autoplay=1&mute=1"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
                 title="Dramantram Showreel"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 style={{ aspectRatio: "16/9", borderRadius: "8px" }}
+                referrerPolicy="strict-origin-when-cross-origin"
               ></iframe>
             </div>
           </div>

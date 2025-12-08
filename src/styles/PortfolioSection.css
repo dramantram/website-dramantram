@@ -8,11 +8,13 @@
   padding-bottom: 60px;
   background: transparent;
   border-bottom: 1px solid #222;
+  z-index: -1;
 }
 
 /* --- FILTER ROW STYLING --- */
 .filter-row {
-  margin-bottom: 40px;
+  padding-top: 20px !important;
+  margin-bottom: 20px;
   padding: 0 0px;
   /* Match container gutter */
   display: flex;
@@ -22,6 +24,7 @@
   margin-left: auto;
   margin-right: auto;
   background: none !important;
+  /* z-index: 5645; */
 }
 
 /* Ensure columns inside filter row have padding for spacing */
@@ -49,6 +52,7 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
+  /* z-index: 5645; */
 }
 
 .filter-pill:hover {

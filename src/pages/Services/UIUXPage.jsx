@@ -32,10 +32,14 @@ const UIUXPage = () => {
               <iframe
                 width="100%"
                 // ADDED: &autoplay=1&mute=1
-                src="https://youtube.com/embed/fYxOAHBih_o?list=TLGG0I45ofIlSwEwMzEyMjAyNQ&autoplay=1&mute=1"
+                src="https://www.youtube.com/embed/fYxOAHBih_o?si=MypWGf2-bU7wVWL-?rel=0&autoplay=1&mute=1"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
                 title="Dramantram Showreel"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 style={{ aspectRatio: "16/9", borderRadius: "8px" }}
               ></iframe>

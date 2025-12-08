@@ -9,6 +9,9 @@ import {
   getImage1Controller,
   getImage2Controller,
   filterCaseStudyController,
+  getImage3Controller,
+  getImage4Controller,
+  getImage5Controller,
 } from "../controllers/managementController.js";
 import formidable from "express-formidable";
 
@@ -18,7 +21,7 @@ const router = express.Router();
 // Routing
 
 // Create Case Study
-router.post("/create-case-study", createCaseStudyController);
+router.post("/create-case-study", formidable(), createCaseStudyController);
 
 // Get Thumbnail Image
 router.get("/get-thumbnail-image/:pid", getThumbnailImageController);
@@ -28,6 +31,10 @@ router.get("/get-image-1/:pid", getImage1Controller);
 
 // Get Image 2
 router.get("/get-image-2/:pid", getImage2Controller);
+
+router.get("/get-image-3/:pid", getImage3Controller);
+router.get("/get-image-4/:pid", getImage4Controller);
+router.get("/get-image-5/:pid", getImage5Controller);
 
 // Update Case Study
 router.put("/update-case-study/:id", formidable(), updateCaseStudyController);

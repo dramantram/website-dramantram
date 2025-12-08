@@ -68,8 +68,15 @@ export default function Management() {
     solution: "",
     thumbnail_image: null,
     thumbnail_text: "",
+    // Updated: 5 Optional Images
     image1: null,
     image2: null,
+    image3: null,
+    image4: null,
+    image5: null,
+    // Updated: 2 Optional Video Links
+    video_link_1: "",
+    video_link_2: "",
   });
 
   const handleChange = (e) => {
@@ -97,12 +104,28 @@ export default function Management() {
       caseStudyData.append("duration", form.duration);
       caseStudyData.append("problem", form.problem);
       caseStudyData.append("solution", form.solution);
-      caseStudyData.append("thumbnail_image", form.thumbnail_image);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
-      caseStudyData.append("image1", form.image1);
-      caseStudyData.append("image2", form.image2);
+
+      // Append Thumbnail (if exists)
+      if (form.thumbnail_image) {
+        caseStudyData.append("thumbnail_image", form.thumbnail_image);
+      }
+
+      // Append Optional Images (only if they exist)
+      if (form.image1) caseStudyData.append("image1", form.image1);
+      if (form.image2) caseStudyData.append("image2", form.image2);
+      if (form.image3) caseStudyData.append("image3", form.image3);
+      if (form.image4) caseStudyData.append("image4", form.image4);
+      if (form.image5) caseStudyData.append("image5", form.image5);
+
+      // Append Optional Video Links (only if they exist)
+      if (form.video_link_1)
+        caseStudyData.append("video_link_1", form.video_link_1);
+      if (form.video_link_2)
+        caseStudyData.append("video_link_2", form.video_link_2);
+
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`,
+        `${import.meta.env.VITE_API_URL}/api/v1/management/create-case-study`, //
         caseStudyData
       );
       if (data?.success) {
@@ -133,12 +156,17 @@ export default function Management() {
       thumbnail_text: "",
       image1: null,
       image2: null,
+      image3: null,
+      image4: null,
+      image5: null,
+      video_link_1: "",
+      video_link_2: "",
     });
 
   // Helper style for the small info text
   const infoStyle = {
     fontSize: "0.8rem",
-    color: "#aaa", // Light gray for visibility on dark bg
+    color: "#aaa",
     fontWeight: "normal",
     marginLeft: "6px",
   };
@@ -201,7 +229,7 @@ export default function Management() {
               />
             </div>
 
-            {/* SERVICES (UPDATED TO DROPDOWN) */}
+            {/* SERVICES */}
             <div>
               <label className="management-label">Services</label>
               <select
@@ -219,7 +247,7 @@ export default function Management() {
               </select>
             </div>
 
-            {/* CASE STUDY DESCRIPTION (full width) */}
+            {/* CASE STUDY DESCRIPTION */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Case Study Description</label>
               <textarea
@@ -260,7 +288,7 @@ export default function Management() {
               </select>
             </div>
 
-            {/* INDUSTRY (UPDATED TO DROPDOWN) */}
+            {/* INDUSTRY */}
             <div>
               <label className="management-label">Industry</label>
               <select
@@ -278,7 +306,7 @@ export default function Management() {
               </select>
             </div>
 
-            {/* DURATION (UPDATED TO DROPDOWN) */}
+            {/* DURATION */}
             <div>
               <label className="management-label">Duration</label>
               <select
@@ -296,7 +324,7 @@ export default function Management() {
               </select>
             </div>
 
-            {/* PROBLEM (full width) */}
+            {/* PROBLEM */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Problem</label>
               <textarea
@@ -309,7 +337,7 @@ export default function Management() {
               />
             </div>
 
-            {/* SOLUTION (full width) */}
+            {/* SOLUTION */}
             <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">Solution</label>
               <textarea
@@ -322,8 +350,8 @@ export default function Management() {
               />
             </div>
 
-            {/* THUMBNAIL IMAGE */}
-            <div>
+            {/* THUMBNAIL IMAGE (Required usually) */}
+            <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">
                 Thumbnail Image
                 <span style={infoStyle}>(Max 1MB, 377x458 px)</span>
@@ -337,7 +365,59 @@ export default function Management() {
               />
             </div>
 
-            {/* IMAGE 1 */}
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- VIDEO LINKS SECTION --- */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h4 style={{ color: "#fff", marginBottom: "10px" }}>
+                Video Embed Links (Optional)
+              </h4>
+            </div>
+
+            <div>
+              <label className="management-label">Video Link 1</label>
+              <input
+                name="video_link_1"
+                value={form.video_link_1}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Paste Youtube Embed Link"
+              />
+            </div>
+
+            <div>
+              <label className="management-label">Video Link 2</label>
+              <input
+                name="video_link_2"
+                value={form.video_link_2}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Paste Youtube Embed Link"
+              />
+            </div>
+
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- OPTIONAL IMAGES SECTION (5 IMAGES) --- */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h4 style={{ color: "#fff", marginBottom: "10px" }}>
+                Project Images (Optional)
+              </h4>
+            </div>
+
+            {/* Image 1 */}
             <div>
               <label className="management-label">
                 Image 1<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
@@ -351,7 +431,7 @@ export default function Management() {
               />
             </div>
 
-            {/* IMAGE 2 */}
+            {/* Image 2 */}
             <div>
               <label className="management-label">
                 Image 2<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
@@ -365,14 +445,56 @@ export default function Management() {
               />
             </div>
 
-            {/* ACTIONS (full width) */}
+            {/* Image 3 */}
+            <div>
+              <label className="management-label">
+                Image 3<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image3"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* Image 4 */}
+            <div>
+              <label className="management-label">
+                Image 4<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image4"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* Image 5 */}
+            <div>
+              <label className="management-label">
+                Image 5<span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image5"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* ACTIONS */}
             <div
               style={{
                 gridColumn: "1 / -1",
                 display: "flex",
                 justifyContent: "flex-end",
                 gap: 12,
-                marginTop: 8,
+                marginTop: 20,
               }}
             >
               <button

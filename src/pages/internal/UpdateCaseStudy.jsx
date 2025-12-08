@@ -72,10 +72,17 @@ const UpdateCaseStudy = () => {
     duration: "",
     problem: "",
     solution: "",
-    thumbnail_image: null,
     thumbnail_text: "",
+    thumbnail_image: null,
+    // Images (Initialized to null, only set if user uploads NEW file)
     image1: null,
     image2: null,
+    image3: null,
+    image4: null,
+    image5: null,
+    // Video Links
+    video_link_1: "",
+    video_link_2: "",
   });
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -90,19 +97,26 @@ const UpdateCaseStudy = () => {
         const cs = data.caseStudy;
         setId(cs._id);
         setForm({
-          case_study_name: cs.case_study_name,
-          case_study_description: cs.case_study_description,
-          client: cs.client,
-          services: cs.services,
-          complexity: cs.complexity,
-          industry: cs.industry,
-          duration: cs.duration,
-          problem: cs.problem,
-          solution: cs.solution,
-          thumbnail_text: cs.thumbnail_text,
+          case_study_name: cs.case_study_name || "",
+          case_study_description: cs.case_study_description || "",
+          client: cs.client || "",
+          services: cs.services || "",
+          complexity: cs.complexity || "",
+          industry: cs.industry || "",
+          duration: cs.duration || "",
+          problem: cs.problem || "",
+          solution: cs.solution || "",
+          thumbnail_text: cs.thumbnail_text || "",
+          // Load existing video links
+          video_link_1: cs.video_link_1 || "",
+          video_link_2: cs.video_link_2 || "",
+          // Images remain null (we don't prefill file inputs)
           thumbnail_image: null,
           image1: null,
           image2: null,
+          image3: null,
+          image4: null,
+          image5: null,
         });
       }
     } catch (error) {
@@ -115,6 +129,7 @@ const UpdateCaseStudy = () => {
 
   useEffect(() => {
     getSingleCaseStudy();
+    // eslint-disable-next-line
   }, [slug]);
 
   // 2. Handle Input Changes
@@ -146,10 +161,18 @@ const UpdateCaseStudy = () => {
       caseStudyData.append("solution", form.solution);
       caseStudyData.append("thumbnail_text", form.thumbnail_text);
 
+      // Append Video Links (Always send the current state string, whether empty or filled)
+      caseStudyData.append("video_link_1", form.video_link_1);
+      caseStudyData.append("video_link_2", form.video_link_2);
+
+      // Append Images ONLY if a new file is selected
       if (form.thumbnail_image)
         caseStudyData.append("thumbnail_image", form.thumbnail_image);
       if (form.image1) caseStudyData.append("image1", form.image1);
       if (form.image2) caseStudyData.append("image2", form.image2);
+      if (form.image3) caseStudyData.append("image3", form.image3);
+      if (form.image4) caseStudyData.append("image4", form.image4);
+      if (form.image5) caseStudyData.append("image5", form.image5);
 
       const { data } = await axios.put(
         `${apiUrl}/api/v1/management/update-case-study/${id}`,
@@ -166,6 +189,14 @@ const UpdateCaseStudy = () => {
       console.log(error);
       toast.error("Something went wrong while updating");
     }
+  };
+
+  // Helper style for the small info text
+  const infoStyle = {
+    fontSize: "0.8rem",
+    color: "#aaa",
+    fontWeight: "normal",
+    marginLeft: "6px",
   };
 
   if (loading) {
@@ -244,7 +275,7 @@ const UpdateCaseStudy = () => {
               />
             </div>
 
-            {/* SERVICES (UPDATED TO DROPDOWN) */}
+            {/* SERVICES */}
             <div>
               <label className="management-label">Services</label>
               <select
@@ -303,7 +334,7 @@ const UpdateCaseStudy = () => {
               </select>
             </div>
 
-            {/* INDUSTRY (UPDATED TO DROPDOWN) */}
+            {/* INDUSTRY */}
             <div>
               <label className="management-label">Industry</label>
               <select
@@ -321,7 +352,7 @@ const UpdateCaseStudy = () => {
               </select>
             </div>
 
-            {/* DURATION (UPDATED TO DROPDOWN) */}
+            {/* DURATION */}
             <div>
               <label className="management-label">Duration</label>
               <select
@@ -366,21 +397,13 @@ const UpdateCaseStudy = () => {
             </div>
 
             {/* THUMBNAIL IMAGE */}
-            <div>
+            <div style={{ gridColumn: "1 / -1" }}>
               <label className="management-label">
                 Thumbnail Image
-                <span
-                  style={{
-                    fontSize: "0.8em",
-                    color: "#888",
-                    marginLeft: "8px",
-                  }}
-                >
-                  (Leave empty to keep existing)
-                </span>
+                <span style={infoStyle}>(Max 1MB, 377x458 px)</span>
               </label>
 
-              {/* Preview existing */}
+              {/* Preview existing thumbnail */}
               <div style={{ marginBottom: "10px" }}>
                 <img
                   src={`${apiUrl}/api/v1/management/case-study-thumbnail/${id}`}
@@ -403,19 +426,62 @@ const UpdateCaseStudy = () => {
               />
             </div>
 
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- VIDEO LINKS SECTION --- */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h4 style={{ color: "#fff", marginBottom: "10px" }}>
+                Video Embed Links (Optional)
+              </h4>
+            </div>
+
+            <div>
+              <label className="management-label">Video Link 1</label>
+              <input
+                name="video_link_1"
+                value={form.video_link_1}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Paste Youtube Embed Link"
+              />
+            </div>
+
+            <div>
+              <label className="management-label">Video Link 2</label>
+              <input
+                name="video_link_2"
+                value={form.video_link_2}
+                onChange={handleChange}
+                className="management-input"
+                placeholder="Paste Youtube Embed Link"
+              />
+            </div>
+
+            <hr
+              style={{
+                gridColumn: "1 / -1",
+                border: "1px solid #333",
+                margin: "10px 0",
+              }}
+            />
+
+            {/* --- PROJECT IMAGES SECTION (5 IMAGES) --- */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <h4 style={{ color: "#fff", marginBottom: "10px" }}>
+                Project Images (Optional)
+              </h4>
+            </div>
+
             {/* IMAGE 1 */}
             <div>
               <label className="management-label">
-                Image 1
-                <span
-                  style={{
-                    fontSize: "0.8em",
-                    color: "#888",
-                    marginLeft: "8px",
-                  }}
-                >
-                  (Leave empty to keep existing)
-                </span>
+                Image 1 <span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
               </label>
               <input
                 name="image1"
@@ -429,19 +495,52 @@ const UpdateCaseStudy = () => {
             {/* IMAGE 2 */}
             <div>
               <label className="management-label">
-                Image 2
-                <span
-                  style={{
-                    fontSize: "0.8em",
-                    color: "#888",
-                    marginLeft: "8px",
-                  }}
-                >
-                  (Leave empty to keep existing)
-                </span>
+                Image 2 <span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
               </label>
               <input
                 name="image2"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* IMAGE 3 */}
+            <div>
+              <label className="management-label">
+                Image 3 <span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image3"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* IMAGE 4 */}
+            <div>
+              <label className="management-label">
+                Image 4 <span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image4"
+                onChange={handleChange}
+                type="file"
+                accept="image/*"
+                className="management-file"
+              />
+            </div>
+
+            {/* IMAGE 5 */}
+            <div>
+              <label className="management-label">
+                Image 5 <span style={infoStyle}>(Max 1MB, 1280x750 px)</span>
+              </label>
+              <input
+                name="image5"
                 onChange={handleChange}
                 type="file"
                 accept="image/*"
@@ -456,7 +555,7 @@ const UpdateCaseStudy = () => {
                 display: "flex",
                 justifyContent: "flex-end",
                 gap: 12,
-                marginTop: 8,
+                marginTop: 20,
               }}
             >
               <button

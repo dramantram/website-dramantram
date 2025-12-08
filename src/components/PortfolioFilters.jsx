@@ -4,7 +4,6 @@ import "../styles/PortfolioSection.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import PortfolioFilters from "./PortfolioFilters";
 
 // --- CONSTANTS ---
 const INDUSTRY_OPTIONS = [
@@ -59,7 +58,7 @@ const SERVICE_OPTIONS = [
 
 const COMPLEXITY_OPTIONS = ["High", "Medium", "Low"];
 
-const PortfolioSection = ({ showFilters = true }) => {
+const PortfolioFilters = () => {
   const [caseStudies, setCaseStudies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -207,139 +206,69 @@ const PortfolioSection = ({ showFilters = true }) => {
   const row2Data = caseStudies.slice(3);
 
   return (
-    <div className="portfolio-section">
-      {/* FILTER ROW */}
-      {showFilters && (
-        <div className="row g-0 p-0 filter-row col-md-12">
-          {/* SERVICE FILTER */}
-          <div className="col-6 col-md-3 position-relative">
-            <button
-              className={`filter-pill ${
-                activeDropdown === "service" ? "active" : ""
-              }`}
-              onClick={() => toggleDropdown("service")}
-            >
-              {/* Show selected value or default label */}
-              <span className="text-truncate">
-                {filters.service || "Service"}
-              </span>
-              <span className="caret">ˇ</span>
-            </button>
-            {activeDropdown === "service" &&
-              renderDropdownList(SERVICE_OPTIONS, "service")}
-          </div>
+    <div className="row g-0 p-0 filter-row col-md-12">
+      {/* SERVICE FILTER */}
+      <div className="col-6 col-md-3 position-relative">
+        <button
+          className={`filter-pill ${
+            activeDropdown === "service" ? "active" : ""
+          }`}
+          onClick={() => toggleDropdown("service")}
+        >
+          {/* Show selected value or default label */}
+          <span className="text-truncate">{filters.service || "Service"}</span>
+          <span className="caret">ˇ</span>
+        </button>
+        {activeDropdown === "service" &&
+          renderDropdownList(SERVICE_OPTIONS, "service")}
+      </div>
 
-          {/* COMPLEXITY FILTER */}
-          <div className="col-6 col-md-3 position-relative">
-            <button
-              className={`filter-pill ${
-                activeDropdown === "complexity" ? "active" : ""
-              }`}
-              onClick={() => toggleDropdown("complexity")}
-            >
-              <span>{filters.complexity || "Complexity"}</span>
-              <span className="caret">ˇ</span>
-            </button>
-            {activeDropdown === "complexity" &&
-              renderDropdownList(COMPLEXITY_OPTIONS, "complexity")}
-          </div>
+      {/* COMPLEXITY FILTER */}
+      <div className="col-6 col-md-3 position-relative">
+        <button
+          className={`filter-pill ${
+            activeDropdown === "complexity" ? "active" : ""
+          }`}
+          onClick={() => toggleDropdown("complexity")}
+        >
+          <span>{filters.complexity || "Complexity"}</span>
+          <span className="caret">ˇ</span>
+        </button>
+        {activeDropdown === "complexity" &&
+          renderDropdownList(COMPLEXITY_OPTIONS, "complexity")}
+      </div>
 
-          {/* INDUSTRY FILTER */}
-          <div className="col-6 col-md-3 position-relative">
-            <button
-              className={`filter-pill ${
-                activeDropdown === "industry" ? "active" : ""
-              }`}
-              onClick={() => toggleDropdown("industry")}
-            >
-              <span>{filters.industry || "Industry"}</span>
-              <span className="caret">ˇ</span>
-            </button>
-            {activeDropdown === "industry" &&
-              renderDropdownList(INDUSTRY_OPTIONS, "industry")}
-          </div>
+      {/* INDUSTRY FILTER */}
+      <div className="col-6 col-md-3 position-relative">
+        <button
+          className={`filter-pill ${
+            activeDropdown === "industry" ? "active" : ""
+          }`}
+          onClick={() => toggleDropdown("industry")}
+        >
+          <span>{filters.industry || "Industry"}</span>
+          <span className="caret">ˇ</span>
+        </button>
+        {activeDropdown === "industry" &&
+          renderDropdownList(INDUSTRY_OPTIONS, "industry")}
+      </div>
 
-          {/* DURATION FILTER */}
-          <div className="col-6 col-md-3 position-relative">
-            <button
-              className={`filter-pill ${
-                activeDropdown === "duration" ? "active" : ""
-              }`}
-              onClick={() => toggleDropdown("duration")}
-            >
-              <span>{filters.duration || "Duration"}</span>
-              <span className="caret">ˇ</span>
-            </button>
-            {activeDropdown === "duration" &&
-              renderDropdownList(DURATION_OPTIONS, "duration")}
-          </div>
-        </div>
-      )}
-
-      <div className="container-fluid">
-        <div className="row g-4 align-items-start col-md-12">
-          {/* LEFT COLUMN (static text) */}
-          <div className="col-md-3 left-col">
-            <div className="intro-box">
-              <h1>
-                Portfolio &<br /> Case Studies
-              </h1>
-              <p>
-                We're brand builders at heart, creators by design, tech
-                enthusiasts in practice, and integrated at our core.
-              </p>
-              <Link to="/contact" className="connect-link">
-                Let's Connect <span>›</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN - UPPER ROW (First 3 items) */}
-          <div className="col-md-9 right-col">
-            <div className="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
-              {loading ? (
-                // Simple Loading State
-                <div className="col-12 text-center text-white py-5">
-                  <h5>Loading Case Studies...</h5>
-                </div>
-              ) : row1Data.length > 0 ? (
-                row1Data.map((item) => (
-                  <div key={item._id} className="col">
-                    <Link to={`/case-study/${item.slug}`}>
-                      <PortfolioItem
-                        imageSrc={`${apiUrl}/api/v1/management/get-thumbnail-image/${item._id}`}
-                        title={item.case_study_name}
-                        slug={item.slug}
-                      />
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <div className="col-12 text-center text-white py-5">
-                  <p>No case studies found matching these filters.</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* BOTTOM ROW (Next 4 items) - Spanning full width */}
-        <div className="row g-4 mt-1 right-lower col-md-12 row-cols-md-4">
-          {!loading &&
-            row2Data.map((item) => (
-              <div key={item._id} className="col">
-                <Link to={`/case-study/${item.slug}`}>
-                  <PortfolioItem
-                    imageSrc={`${apiUrl}/api/v1/management/get-thumbnail-image/${item._id}`}
-                    title={item.case_study_name}
-                  />
-                </Link>
-              </div>
-            ))}
-        </div>
+      {/* DURATION FILTER */}
+      <div className="col-6 col-md-3 position-relative">
+        <button
+          className={`filter-pill ${
+            activeDropdown === "duration" ? "active" : ""
+          }`}
+          onClick={() => toggleDropdown("duration")}
+        >
+          <span>{filters.duration || "Duration"}</span>
+          <span className="caret">ˇ</span>
+        </button>
+        {activeDropdown === "duration" &&
+          renderDropdownList(DURATION_OPTIONS, "duration")}
       </div>
     </div>
   );
 };
 
-export default PortfolioSection;
+export default PortfolioFilters;
